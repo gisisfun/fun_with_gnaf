@@ -1,0 +1,9 @@
+sed -e 's/|/;/g' ../G-NAF_unzipped_Feb_2019/G-NAF/G-NAF_FEBRUARY_2019/Standard/changeme1.psv >  ../G-NAF_unzipped_Feb_2019/G-NAF/G-NAF_FEBRUARY_2019/Standard/changeme1.csv 
+rm ../spatialite_db/temp.sql
+echo "creating sql for changeme1 ..."
+ogr2ogr -f "SQLite" ../spatialite_db/temp.sqlite ../G-NAF_unzipped_Feb_2019/G-NAF/G-NAF_FEBRUARY_2019/Standard/changeme1.csv 
+echo "exporting sql for changeme1 ..."
+echo ".dump changeme1" | spatialite ../spatialite_db/temp.sqlite > ../spatialite_db/temp.sql
+echo "importing sql for changeme1 ..."
+echo 'DROP TABLE "changeme1";' | spatialite ../spatialite_db/changeme2.sqlite
+echo ".read ../spatialite_db/temp.sql utf-8" | spatialite ../spatialite_db/changeme2.sqlite
