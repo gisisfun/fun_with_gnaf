@@ -1477,6 +1477,22 @@ INSERT INTO LOCALITY_ALIAS  SELECT
 FROM 
  LOCALITY_ALIAS_SRC;
 
+
+DROP TABLE if exists "FLAT_TYPE_AUT";
+
+CREATE TABLE FLAT_TYPE_AUT (
+ ogc_fid integer,
+ code varchar(7) NOT NULL,
+ name varchar(50) NOT NULL,
+ description varchar(30)
+);
+
+INSERT INTO FLAT_TYPE_AUT  SELECT
+ ogc_fid,code,name,description
+FROM 
+ authority_code_flat_type_aut_psv;
+
+
 DROP TABLE if exists "ADDRESS_FEATURE_SRC";
 DROP TABLE if exists "ADDRESS_DETAIL_SRC";
 DROP TABLE if exists "ADDRESS_DETAIL_SRC";
@@ -1485,6 +1501,8 @@ DROP TABLE if exists "ADDRESS_MESH_BLOCK_2016_SRC";
 DROP TABLE if exists "ADDRESS_DFAULT_GEOCODE_SRC";
 DROP TABLE if exists "ADDRESS_DEFAULT_ALIAS_SRC";
 DROP TABLE if exists "ADDRESS_SITE_GEOCODE_SRC";
+DROP TABLE if exists "ADDRESS_DEFAULT_GEOCODE_SRC";
+DROP TABLE if exists "ADDRESS_ALIAS_SRC";
 DROP TABLE if exists "LOCALITY_ALIAS_SRC";
 DROP TABLE if exists "LOCALITY_SRC";
 DROP TABLE if exists "LOCALITY_NEIGHBOUR_SRC";
@@ -1496,3 +1514,21 @@ DROP TABLE if exists "STATE_SRC";
 DROP TABLE if exists "STREET_LOCALITY_SRC";
 DROP TABLE if exists "STREET_LOCALITY_ALIAS_SRC";
 DROP TABLE if exists "STREET_LOCALITY_POINT_SRC";
+
+DROP TABLE if exists "Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_STREET_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_GEOCODE_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_ADDRESS_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_MB_MATCH_CODE_AUT_psv";
+DROP TABLE if exists "Authority_Code_FLAT_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_GEOCODE_RELIABILITY_AUT_psv";
+DROP TABLE if exists "Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_LEVEL_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_STREET_SUFFIX_AUT_psv";
+DROP TABLE if exists "Authority_Code_LOCALITY_CLASS_AUT_psv";
+DROP TABLE if exists "Authority_Code_LOCALITY_CLASS_AUT_psv";
+DROP TABLE if exists "Authority_Code_PS_JOIN_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv";
+DROP TABLE if exists "Authority_Code_STREET_CLASS_AUT_psv";
