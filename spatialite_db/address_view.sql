@@ -3,12 +3,7 @@ CREATE VIEW ADDRESS_VIEW
 AS
 
 SELECT
-(Building_Name || " " || 
- Number_First || " " || 
- Street_Name || " " || 
- Locality_Name || " " ||
- State_Abbreviation || " " || 
- Postcode  ) as AddressText
+
 AD.address_detail_pid as Address_Detail_PID,
 AD.street_locality_pid as Street_Locality_PID,
 AD.locality_pid as Locality_PID,
@@ -60,6 +55,13 @@ AD.primary_secondary as Primary_Secondary,
 AD.legal_parcel_id as Legal_Parcel_ID,
 
 AD.date_created as Date_Created
+
+(Building_Name || " " || 
+ Number_First || " " || 
+ Street_Name || " " || 
+ Locality_Name || " " ||
+ State_Abbreviation || " " || 
+ Postcode  ) as AddressText
 
 FROM
 [ADDRESS_DETAIL] as AD 
