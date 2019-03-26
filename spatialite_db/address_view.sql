@@ -3,6 +3,12 @@ CREATE VIEW ADDRESS_VIEW
 AS
 
 SELECT
+(BUILDING_NAME || " " || 
+ NUMBER_FIRST || " " || 
+ STREET_NAME || " " || 
+ LOCALITY_NAME || " " ||
+ STATE_ABBREVIATION || " " || 
+ POSTCODE  ) as AddressText
 AD.address_detail_pid as ADDRESS_DETAIL_PID,
 AD.street_locality_pid as STREET_LOCALITY_PID,
 AD.locality_pid as LOCALITY_PID,
