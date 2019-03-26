@@ -53,12 +53,15 @@ AD.alias_principal as Alias_Principal,
 AD.primary_secondary as Primary_Secondary,
 
 AD.legal_parcel_id as Legal_Parcel_ID,
+FTA.name as Flat_Type,
+AD.date_created as Date_Created,
 
-AD.date_created as Date_Created
-
-(Building_Name || " " || 
+(Flat_Type_Code || " " || 
+ Flat_Number || " " || 
+ Building_Name || " " || 
  Number_First || " " || 
  Street_Name || " " || 
+ Street_Type_Code || " " || 
  Locality_Name || " " ||
  State_Abbreviation || " " || 
  Postcode  ) as AddressText
