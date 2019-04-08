@@ -108,4 +108,22 @@ FROM locality
 JOIN locality_point
 ON locality.locality_pid = locality_point.locality_pid
 JOIN state
-ON locality.state_pid = state.state_pid
+ON locality.state_pid = state.state_pid;
+
+
+CREATE VIEW STREET_LOCALITY_VIEW AS
+street_locality.street_name as street_name,
+street_locality.street_class_code as street_class_code,
+locality.locality_name as locality_name,
+locality.primary_postcode as primary_postcode,
+state.state_abbreviation as state_abbreviation,
+street_locality_point.latitude as latitude
+street_locality_point.longitude as longitude,
+from
+locality 
+join street_locality_point
+on locality.locality_pid = street_locality_point.locality_pid
+join street_locality
+on street_locality.locality_pid = locality.locality_pid
+join state
+on locality.state_pid = state.state_pid;
