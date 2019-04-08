@@ -99,16 +99,16 @@ WHERE
 AD.confidence > -1;
 
 CREATE VIEW LOCALITY_VIEW AS
-SELECT locality.locality_name as locality_name,
-locality.primary_postcode as primary_postcode,
-state.state_abbreviation as state_abbreviation,
-locality_point.latitude as latitude
-locality_point.longitude as longitude,
-FROM locality 
-JOIN locality_point
-ON locality.locality_pid = locality_point.locality_pid
-JOIN state
-ON locality.state_pid = state.state_pid;
+SELECT Loc.locality_name as locality_name,
+Loc.primary_postcode as primary_postcode,
+State.state_abbreviation as state_abbreviation,
+Loc_Point.latitude as latitude,
+Loc_Point.longitude as longitude
+FROM [LOCALITY] as Loc
+LEFT JOIN [LOCALITY_POINT] as Loc_Point
+ON Loc.locality_pid = Loc_Point.locality_pid
+LEFT JOIN [STATE] as State
+ON Loc.state_pid = State.state_pid;
 
 
 CREATE VIEW STREET_LOCALITY_VIEW AS
@@ -117,13 +117,12 @@ street_locality.street_class_code as street_class_code,
 locality.locality_name as locality_name,
 locality.primary_postcode as primary_postcode,
 state.state_abbreviation as state_abbreviation,
-street_locality_point.latitude as latitude
-street_locality_point.longitude as longitude,
-from
-locality 
-join street_locality_point
+street_locality_point.latitude as latitude,
+street_locality_point.longitude as longitude
+from [locality] 
+join [street_locality_point]
 on locality.locality_pid = street_locality_point.locality_pid
-join street_locality
+join [street_locality]
 on street_locality.locality_pid = locality.locality_pid
-join state
+join [state]
 on locality.state_pid = state.state_pid;
