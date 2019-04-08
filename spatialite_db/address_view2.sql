@@ -1,44 +1,25 @@
-
-CREATE VIEW ADDRESS_VIEW
-
-AS
-
-SELECT
-
-AD.address_detail_pid as Address_Detail_PID,
+CREATE VIEW ADDRESS_VIEW AS
+SELECT AD.address_detail_pid as Address_Detail_PID,
 AD.street_locality_pid as Street_Locality_PID,
 AD.locality_pid as Locality_PID,
 AD.building_name as Building_Name,
-
 AD.lot_number_prefix as Lot_Number_Prefix,
 AD.lot_number as Lot_Number,
 AD.lot_number_suffix as Lot_Number_Suffix,
-
 FTA.name as Flat_Type,
 AD.flat_number_prefix as Flat_Number_Prefix,
 AD.flat_number as Flat_Number,
 AD.flat_number_suffix as Flat_Number_Suffix,
-
 LTA.name as Level_Type,
-
 AD.level_number as Level_Number,
-
-
 AD.number_first_prefix as Number_First_Prefix,
 AD.number_first as Number_First,
-
 SL.street_name as Street_Name,
 SL.street_type_code as Street_Type_Code,
-
 L.locality_name as Locality_Name,
-
 ST.state_abbreviation as State_Abbreviation,
-
 AD.postcode as Postcode,
-
-
 AD.confidence as Confidence,
-
 (Flat_Type_Code || " " || 
  Flat_Number || " " || 
  Building_Name || " " || 
@@ -51,7 +32,6 @@ AD.confidence as Confidence,
  ADG.latitude as Latitude,
 ADG.longitude as Longitude,
 GTA.name as Geocode_Type
-
 FROM
 [ADDRESS_DETAIL] as AD 
 LEFT JOIN [FLAT_TYPE_AUT] as FTA ON AD.flat_type_code=FTA.code
@@ -65,48 +45,32 @@ JOIN [ADDRESS_DEFAULT_GEOCODE] as ADG ON AD.address_detail_pid=ADG.address_detai
 LEFT JOIN [GEOCODE_TYPE_AUT] as GTA ON ADG.geocode_type_code=GTA.code
 LEFT JOIN [GEOCODED_LEVEL_TYPE_AUT] as GLTA ON AD.level_geocoded_code=GLTA.code
 JOIN [STATE] as ST ON L.state_pid=ST.state_pid
-
 WHERE 
 AD.confidence > -1
 
 UNION
 
-SELECT
-
-AD.address_detail_pid as Address_Detail_PID,
+SELECT AD.address_detail_pid as Address_Detail_PID,
 AD.street_locality_pid as Street_Locality_PID,
 AD.locality_pid as Locality_PID,
 AD.building_name as Building_Name,
-
 AD.lot_number_prefix as Lot_Number_Prefix,
 AD.lot_number as Lot_Number,
 AD.lot_number_suffix as Lot_Number_Suffix,
-
 FTA.name as Flat_Type,
 AD.flat_number_prefix as Flat_Number_Prefix,
 AD.flat_number as Flat_Number,
 AD.flat_number_suffix as Flat_Number_Suffix,
-
 LTA.name as Level_Type,
-
 AD.level_number as Level_Number,
-
-
 AD.number_first_prefix as Number_First_Prefix,
 AD.number_first as Number_First,
-
 SL.street_name as Street_Name,
 SL.street_type_code as Street_Type_Code,
-
 L.name as Locality_Name,
-
 ST.state_abbreviation as State_Abbreviation,
-
 AD.postcode as Postcode,
-
-
 AD.confidence as Confidence,
-
 (Flat_Type_Code || " " || 
  Flat_Number || " " || 
  Building_Name || " " || 
@@ -119,7 +83,6 @@ AD.confidence as Confidence,
  ADG.latitude as Latitude,
 ADG.longitude as Longitude,
 GTA.name as Geocode_Type
-
 FROM
 [ADDRESS_DETAIL] as AD 
 LEFT JOIN [FLAT_TYPE_AUT] as FTA ON AD.flat_type_code=FTA.code
@@ -132,10 +95,8 @@ JOIN [ADDRESS_DEFAULT_GEOCODE] as ADG ON AD.address_detail_pid=ADG.address_detai
 LEFT JOIN [GEOCODE_TYPE_AUT] as GTA ON ADG.geocode_type_code=GTA.code
 LEFT JOIN [GEOCODED_LEVEL_TYPE_AUT] as GLTA ON AD.level_geocoded_code=GLTA.code
 JOIN [STATE] as ST ON L.state_pid=ST.state_pid
-
 WHERE 
-AD.confidence > -1
-;
+AD.confidence > -1;
 
 CREATE VIEW LOCALITY_VIEW AS
 SELECT locality.locality_name as locality_name,
