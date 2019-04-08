@@ -1,5 +1,5 @@
 
-CREATE VIEW ADDRESS_VIEW2
+CREATE VIEW ADDRESS_VIEW
 
 AS
 
@@ -136,3 +136,15 @@ JOIN [STATE] as ST ON L.state_pid=ST.state_pid
 WHERE 
 AD.confidence > -1
 ;
+
+CREATE VIEW LOCALITY_VIEW AS
+SELECT locality.locality_name as locality_name,
+locality.primary_postcode as primary_postcode,
+state.state_abbreviation as state_abbreviation,
+locality_point.latitude as latitude
+locality_point.longitude as longitude,
+FROM locality 
+JOIN locality_point
+ON locality.locality_pid = locality_point.locality_pid
+JOIN state
+ON locality.state_pid = state.state_pid
