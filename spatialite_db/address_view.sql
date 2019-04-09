@@ -114,12 +114,13 @@ ON Loc.locality_pid = AD.locality_pid
 LEFT JOIN [LOCALITY_POINT] as Loc_Point
 ON Loc.locality_pid = Loc_Point.locality_pid
 LEFT JOIN [STATE] as State
-ON Loc.state_pid = State.state_pid;
+ON Loc.state_pid = State.state_pid
+GROUP BY localty_name,state_abbreviation,postcode,latitude,longitude;
 
 DROP VIEW if exists "STREET_LOCALITY_VIEW";
 
 CREATE VIEW STREET_LOCALITY_VIEW AS
-St_Loc.street_name as street_name,
+SELECT St_Loc.street_name as street_name,
 St_Loc.street_class_code as street_class_code,
 Loc.locality_name as locality_name,
 AD.postcode as postcode,
@@ -135,3 +136,4 @@ join [STREET_LOCALITY] as St_Loc
 on St_Loc.locality_pid = Loc.locality_pid
 join [STATE] as State
 on Loc.state_pid = State.state_pid;
+GROUP BY street_name,localty_name,state_abbreviation,postcode,latitude,longitude;
