@@ -145,7 +145,7 @@ from [LOCALITY] as Loc
 JOIN [ADDRESS_DETAIL] as AD 
 ON Loc.locality_pid = AD.locality_pid
 join [STREET_LOCALITY_POINT] as St_Loc_Point
-on Loc.locality_pid = St_Loc_Point.locality_pid
+on St_Loc.street_locality_pid = St_Loc_Point.street_locality_pid
 join [STREET_LOCALITY] as St_Loc
 on St_Loc.locality_pid = Loc.locality_pid
 join [STATE] as State
