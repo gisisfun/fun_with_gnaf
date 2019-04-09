@@ -103,19 +103,33 @@ AD.confidence > -1;
 DROP VIEW if exists "LOCALITY_VIEW";
 
 CREATE VIEW LOCALITY_VIEW AS
-SELECT Loc.locality_name as locality_name,
+SELECT DISTINCT Loc.locality_name as locality_name,
 State.state_abbreviation as state_abbreviation,
 AD.postcode as postcode,
 Loc_Point.latitude as latitude,
 Loc_Point.longitude as longitude
 FROM [LOCALITY] as Loc
-LEFT JOIN [ADDRESS_DETAIL] as AD 
+JOIN [ADDRESS_DETAIL] as AD 
 ON Loc.locality_pid = AD.locality_pid
-LEFT JOIN [LOCALITY_POINT] as Loc_Point
+JOIN [LOCALITY_POINT] as Loc_Point
 ON Loc.locality_pid = Loc_Point.locality_pid
-LEFT JOIN [STATE] as State
+JOIN [STATE] as State
 ON Loc.state_pid = State.state_pid
-GROUP BY localty_name,state_abbreviation,postcode,latitude,longitude;
+
+UNION
+
+SELECT DISTINCT Loc.name as locality_name,
+State.state_abbreviation as state_abbreviation,
+AD.postcode as postcode,
+Loc_Point.latitude as latitude,
+Loc_Point.longitude as longitude
+FROM [LOCALITY_ALIAS] as Loc
+JOIN [ADDRESS_DETAIL] as AD 
+ON Loc.locality_alias_pid = AD.locality_pid
+JOIN [LOCALITY_POINT] as Loc_Point
+ON Loc.locality_alias_pid = Loc_Point.locality_pid
+JOIN [STATE] as State
+ON Loc.state_pid = State.state_pid;
 
 DROP VIEW if exists "STREET_LOCALITY_VIEW";
 
