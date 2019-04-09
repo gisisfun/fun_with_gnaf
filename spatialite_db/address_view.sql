@@ -112,17 +112,17 @@ ON Loc.state_pid = State.state_pid;
 
 
 CREATE VIEW STREET_LOCALITY_VIEW AS
-street_locality.street_name as street_name,
-street_locality.street_class_code as street_class_code,
-locality.locality_name as locality_name,
-locality.primary_postcode as primary_postcode,
-state.state_abbreviation as state_abbreviation,
-street_locality_point.latitude as latitude,
-street_locality_point.longitude as longitude
-from [locality] 
-join [street_locality_point]
-on locality.locality_pid = street_locality_point.locality_pid
-join [street_locality]
-on street_locality.locality_pid = locality.locality_pid
-join [state]
-on locality.state_pid = state.state_pid;
+St_Loc.street_name as street_name,
+St_Loc.street_class_code as street_class_code,
+Loc.locality_name as locality_name,
+Loc.primary_postcode as primary_postcode,
+State.state_abbreviation as state_abbreviation,
+St_Loc_Point.latitude as latitude,
+St_Loc_Point.longitude as longitude
+from [LOCALITY] as Loc
+join [STREET_LOCALITY_POINT] as St_Loc_Point
+on Loc.locality_pid = St_Loc_Point.locality_pid
+join [STREET_LOCALITY] as St_Loc
+on St_Loc.locality_pid = Loc.locality_pid
+join [STATE] as State
+on Loc.state_pid = State.state_pid;
