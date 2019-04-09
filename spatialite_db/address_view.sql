@@ -100,11 +100,13 @@ AD.confidence > -1;
 
 CREATE VIEW LOCALITY_VIEW AS
 SELECT Loc.locality_name as locality_name,
-Loc.primary_postcode as primary_postcode,
 State.state_abbreviation as state_abbreviation,
+AD.postcode as postcode,
 Loc_Point.latitude as latitude,
 Loc_Point.longitude as longitude
 FROM [LOCALITY] as Loc
+LEFT JOIN [ADDRESS_DETAIL] as AD 
+ON Loc.locality_pid = AD.locality_pid
 LEFT JOIN [LOCALITY_POINT] as Loc_Point
 ON Loc.locality_pid = Loc_Point.locality_pid
 LEFT JOIN [STATE] as State
