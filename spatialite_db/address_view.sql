@@ -137,8 +137,8 @@ CREATE VIEW STREET_LOCALITY_VIEW AS
 SELECT DISTINCT St_Loc.street_name as street_name,
 St_Loc.street_type_code as street_type_code,
 Loc.locality_name as locality_name,
-AD.postcode as postcode,
 State.state_abbreviation as state_abbreviation,
+AD.postcode as postcode,
 St_Loc_Point.latitude as latitude,
 St_Loc_Point.longitude as longitude
 from [LOCALITY] as Loc
@@ -148,5 +148,24 @@ join [STREET_LOCALITY_POINT] as St_Loc_Point
 on St_Loc.street_locality_pid = St_Loc_Point.street_locality_pid
 join [STREET_LOCALITY] as St_Loc
 on St_Loc.locality_pid = Loc.locality_pid
+join [STATE] as State
+on Loc.state_pid = State.state_pid
+
+UNION
+
+SELECT DISTINCT St_Loc.street_name as street_name,
+St_Loc.street_type_code as street_type_code,
+Loc.name as locality_name,
+State.state_abbreviation as state_abbreviation,
+AD.postcode as postcode,
+St_Loc_Point.latitude as latitude,
+St_Loc_Point.longitude as longitude
+from [LOCALITY_ALIAS] as Loc
+JOIN [ADDRESS_DETAIL] as AD 
+ON Loc.locality_alias_pid = AD.locality_pid
+join [STREET_LOCALITY_POINT] as St_Loc_Point
+on St_Loc.street_locality_pid = St_Loc_Point.street_locality_pid
+join [STREET_LOCALITY_ALIAS] as St_Loc
+on St_Loc.Street_locality_pid = Loc.locality_alias_pid
 join [STATE] as State
 on Loc.state_pid = State.state_pid;
