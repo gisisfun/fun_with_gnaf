@@ -135,7 +135,7 @@ DROP VIEW if exists "STREET_LOCALITY_VIEW";
 
 CREATE VIEW STREET_LOCALITY_VIEW AS
 SELECT DISTINCT St_Loc.street_name as street_name,
-St_Loc.street_class_code as street_class_code,
+St_Loc.street_type_code as street_type_code,
 Loc.locality_name as locality_name,
 AD.postcode as postcode,
 State.state_abbreviation as state_abbreviation,
