@@ -134,7 +134,7 @@ ON Loc.state_pid = State.state_pid;
 DROP VIEW if exists "STREET_LOCALITY_VIEW";
 
 CREATE VIEW STREET_LOCALITY_VIEW AS
-SELECT St_Loc.street_name as street_name,
+SELECT DISTINCT St_Loc.street_name as street_name,
 St_Loc.street_class_code as street_class_code,
 Loc.locality_name as locality_name,
 AD.postcode as postcode,
@@ -150,4 +150,3 @@ join [STREET_LOCALITY] as St_Loc
 on St_Loc.locality_pid = Loc.locality_pid
 join [STATE] as State
 on Loc.state_pid = State.state_pid;
-GROUP BY street_name,localty_name,state_abbreviation,postcode,latitude,longitude;
