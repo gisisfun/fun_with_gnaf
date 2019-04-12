@@ -1,7 +1,7 @@
 # fun_with_gnaf
 Lets Build an SQLite3 database with the PSMA G-NAF data set
 
-When Documentation completed and three files are created:
+[When documentation completed and] three files are created:
 - res_street_locality.csv,
 - street_locality.csv,
 - locality.csv
