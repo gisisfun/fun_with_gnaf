@@ -22,6 +22,7 @@ cat street_locality.csv | grep "CAPITAL HILL"
 cat locality.csv | grep "CAPITAL HILL"
 ```
 in R
+
 ...
 library(readr)
 res_street_locality <- read_csv("res_street_locality.csv")
