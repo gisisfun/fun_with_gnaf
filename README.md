@@ -33,4 +33,4 @@ street_locality[grep('CAPTIAL HILL',street_locality$AddressText),]
 
 locality <- read_csv("locality.csv")
 locality[grep('CAPTIAL HILL',locality$AddressText),]
-...
+```
