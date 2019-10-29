@@ -9,7 +9,7 @@ Lets Build an SQLite3 database with the PSMA G-NAF data set
 in powershell
 
 ```
-get-content res_street_locality.csv | select-string "PARLIAMENT HOUSE | search-string "ACT"
+get-content res_street_locality.csv | select-string "PARLIAMENT HOUSE" | select-string "ACT"
 get-content street_locality.csv | select-string "CAPITAL HILL"
 get-content locality.csv | select-string "CAPITAL HILL"
 ```
