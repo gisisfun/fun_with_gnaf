@@ -12,7 +12,13 @@ in powershell
 get-content res_street_locality.csv | select-string "PARLIAMENT HOUSE" | select-string "ACT"
 get-content street_locality.csv | select-string "CAPITAL HILL"
 get-content locality.csv | select-string "CAPITAL HILL"
+
 ```
+
+DIY Geocoder
+...
+ foreach($line in [System.IO.File]::ReadLines("myaddresses.txt")){ echo $line; get-content res_street_locality.csv | select-string $line}
+ ...
 
 in linux shell
 
