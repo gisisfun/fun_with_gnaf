@@ -15,7 +15,7 @@ get-content locality.csv | select-string "CAPITAL HILL"
 
 ```
 
-A DIY Powershell Geocoder
+A DIY Powershell Address Geocoder
 
 Let's clean the input file
 ```
