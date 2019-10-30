@@ -18,7 +18,7 @@ get-content locality.csv | select-string "CAPITAL HILL"
 DIY Geocoder
 
 ...
-foreach($line in [System.IO.File]::ReadLines("C:\Users\damie\Desktop\test2.txt")){ echo $line; get-content C:\Users\damie\Desktop\aug_2019\res_street_locality.csv | select-string $line }
+foreach($line in [System.IO.File]::ReadLines("myaddresses.txt")){ echo $line; get-content res_street_locality.csv | select-string $line }
 ...
 
 in linux shell
