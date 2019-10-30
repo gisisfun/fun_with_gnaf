@@ -17,10 +17,14 @@ get-content locality.csv | select-string "CAPITAL HILL"
 
 A DIY Powershell Geocoder
 
-
-get-content rawaddresses.txt | % {$_.replace("/"," ")} |% {$_.replace("cres ","crescent ")} | % {$_.replace(",","")} |% {$_.replace("st "," street ")} | out-file myaddresses.txt
-
+Let's clean the imput file
+```
+get-content rawaddresses.txt | % {$_.replace("/"," ")} |% {$_.replace("cres ","crescent ")} | % {$_.replace(","," ")} |% {$_.replace("st ","street ")} |% {$_.replace("  " , " ")} | out-file myaddresses.txt
+```
+Let's Geocode addresses
+```
 echo "" | Out-File -FilePath Process.txt;foreach($line in [System.IO.File]::ReadLines("myaddresses.txt")){ echo $line| Out-File -FilePath Process.txt -Append; get-content res_street_locality.csv | select-string $line| select -first 1 | Out-File -FilePath Process.txt -Append}
+```
 
 
 https://stackoverflow.com/questions/33511772/read-file-line-by-line-in-powershell
