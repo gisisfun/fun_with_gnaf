@@ -21,6 +21,8 @@ DIY Geocoder
 foreach($line in [System.IO.File]::ReadLines("myaddresses.txt")){ echo $line; get-content res_street_locality.csv | select-string $line }
 ...
 
+https://stackoverflow.com/questions/33511772/read-file-line-by-line-in-powershell
+
 in linux shell
 
 ```
