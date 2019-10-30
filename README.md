@@ -17,7 +17,7 @@ get-content locality.csv | select-string "CAPITAL HILL"
 
 DIY Geocoder
 
-foreach($line in [System.IO.File]::ReadLines("myaddresses.txt")){ echo $line; get-content res_street_locality.csv | select-string $line }
+foreach($line in [System.IO.File]::ReadLines("myaddresses.txt")){ echo $line; get-content res_street_locality.csv | select-string $line | select -first 1 }
 
 
 https://stackoverflow.com/questions/33511772/read-file-line-by-line-in-powershell
