@@ -17,7 +17,7 @@ get-content locality.csv | select-string "CAPITAL HILL"
 
 A DIY Powershell Geocoder
 
-Let's clean the imput file
+Let's clean the input file
 ```
 get-content rawaddresses.txt | % {$_.replace("/"," ")} |% {$_.replace("cres ","crescent ")} | % {$_.replace(","," ")} |% {$_.replace("st ","street ")} |% {$_.replace("  " , " ")} | out-file myaddresses.txt
 ```
