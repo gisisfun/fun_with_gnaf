@@ -169,7 +169,7 @@ INSERT INTO ADDRESS_DEFAULT_GEOCODE SELECT
 FROM
  ADDRESS_DEFAULT_GEOCODE_SRC;
  
-DROP TABLE IF EXISTS "DEFAULT_GEOCODE_SRC";
+DROP TABLE IF EXISTS "ADDRESS_DEFAULT_GEOCODE_SRC";
 
 CREATE TABLE if not exists "ADDRESS_DETAIL_SRC" AS
 SELECT ogc_fid,address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
@@ -805,7 +805,9 @@ INSERT INTO LOCALITY_ALIAS_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
  authority_code_locality_alias_type_aut_psv;
- 
+
+DROP TABLE if exists "authority_code_locality_alias_type_aut_psv";
+
 DROP TABLE if exists "LOCALITY_CLASS_AUT";
 
 CREATE TABLE LOCALITY_CLASS_AUT (
