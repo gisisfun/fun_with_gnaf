@@ -34,6 +34,10 @@ UNION
 SELECT ogc_fid,address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment 
 FROM 
 TAS_ADDRESS_ALIAS_psv
+UNION
+SELECT ogc_fid,address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment 
+FROM 
+OT_ADDRESS_ALIAS_psv
 ;
 
 DROP TABLE if exists "ACT_ADDRESS_ALIAS_psv";
@@ -44,6 +48,7 @@ DROP TABLE if exists "QLD_ADDRESS_ALIAS_psv";
 DROP TABLE if exists "NT_ADDRESS_ALIAS_psv";
 DROP TABLE if exists "TAS_ADDRESS_ALIAS_psv";
 DROP TABLE if exists "WA_ADDRESS_ALIAS_psv";
+DROP TABLE if exists "OT_ADDRESS_ALIAS_psv";
 DROP TABLE if exists "ADDRESS_ALIAS";
 
 CREATE TABLE ADDRESS_ALIAS (
@@ -89,8 +94,10 @@ INSERT INTO ADDRESS_CHANGE_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
  authority_code_address_change_type_aut_psv;
+
+DROP TABLE IF EXISTS "authority_code_address_change_type_aut_psv";
  
- CREATE TABLE if not exists "ADDRESS_DEFAULT_GEOCODE_SRC" AS
+CREATE TABLE if not exists "ADDRESS_DEFAULT_GEOCODE_SRC" AS
 SELECT ogc_fid,address_default_geocode_pid,date_created,date_retired,address_detail_pid,geocode_type_code,longitude,latitude
 FROM 
 NSW_ADDRESS_DEFAULT_GEOCODE_psv
@@ -126,6 +133,10 @@ UNION
 SELECT ogc_fid,address_default_geocode_pid,date_created,date_retired,address_detail_pid,geocode_type_code,longitude,latitude 
 FROM 
 TAS_ADDRESS_DEFAULT_GEOCODE_psv
+UNION
+SELECT ogc_fid,address_default_geocode_pid,date_created,date_retired,address_detail_pid,geocode_type_code,longitude,latitude 
+FROM 
+OT_ADDRESS_DEFAULT_GEOCODE_psv
 ;
  
 DROP TABLE if exists "ACT_ADDRESS_DEFAULT_GEOCODE_psv";
@@ -136,6 +147,7 @@ DROP TABLE if exists "QLD_ADDRESS_DEFAULT_GEOCODE_psv";
 DROP TABLE if exists "NT_ADDRESS_DEFAULT_GEOCODE_psv";
 DROP TABLE if exists "TAS_ADDRESS_DEFAULT_GEOCODE_psv";
 DROP TABLE if exists "WA_ADDRESS_DEFAULT_GEOCODE_psv";
+DROP TABLE if exists "OT_ADDRESS_DEFAULT_GEOCODE_psv";
 DROP TABLE if exists "ADDRESS_DEFAULT_GEOCODE";
 
 CREATE TABLE ADDRESS_DEFAULT_GEOCODE (
@@ -154,7 +166,7 @@ INSERT INTO ADDRESS_DEFAULT_GEOCODE SELECT
 FROM
  ADDRESS_DEFAULT_GEOCODE_SRC;
  
- 
+DROP TABLE IF EXISTS "ADDRESS_DFAULT_GEOCODE_SRC";
 
 CREATE TABLE if not exists "ADDRESS_DETAIL_SRC" AS
 SELECT ogc_fid,address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
@@ -192,6 +204,10 @@ UNION
 SELECT ogc_fid,address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
 FROM 
 TAS_ADDRESS_DETAIL_psv
+UNION
+SELECT ogc_fid,address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
+FROM 
+OT_ADDRESS_DETAIL_psv
 ;
 DROP TABLE if exists "ACT_ADDRESS_DETAIL_psv";
 DROP TABLE if exists "NSW_ADDRESS_DETAIL_psv";
@@ -201,6 +217,7 @@ DROP TABLE if exists "QLD_ADDRESS_DETAIL_psv";
 DROP TABLE if exists "NT_ADDRESS_DETAIL_psv";
 DROP TABLE if exists "TAS_ADDRESS_DETAIL_psv"; 
 DROP TABLE if exists "WA_ADDRESS_DETAIL_psv"; 
+DROP TABLE if exists "OT_ADDRESS_DETAIL_psv"; 
 DROP TABLE if exists "ADDRESS_DETAIL";
 
 CREATE TABLE ADDRESS_DETAIL (
@@ -247,6 +264,8 @@ INSERT INTO ADDRESS_DETAIL SELECT
 FROM
  ADDRESS_DETAIL_SRC;
 
+DROP TABLE if exists "ADDRESS_DETAIL_SRC";
+
 CREATE TABLE if not exists "ADDRESS_FEATURE_SRC" AS
 SELECT address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code 
 FROM 
@@ -283,6 +302,10 @@ UNION
 SELECT  address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code 
 FROM 
 TAS_ADDRESS_FEATURE_psv
+UNION
+SELECT  address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code 
+FROM 
+OT_ADDRESS_FEATURE_psv
 ;
 
 DROP TABLE if exists "ACT_ADDRESS_FEATURE_psv";
@@ -293,6 +316,7 @@ DROP TABLE if exists "QLD_ADDRESS_FEATURE_psv";
 DROP TABLE if exists "NT_ADDRESS_FEATURE_psv";
 DROP TABLE if exists "TAS_ADDRESS_FEATURE_psv"; 
 DROP TABLE if exists "WA_ADDRESS_FEATURE_psv";
+DROP TABLE if exists "OT_ADDRESS_FEATURE_psv";
 DROP TABLE if exists "ADDRESS_FEATURE";
 
 CREATE TABLE ADDRESS_FEATURE (
@@ -309,6 +333,7 @@ INSERT INTO ADDRESS_FEATURE SELECT
 FROM 
  ADDRESS_FEATURE_SRC;
 
+DROP TABLE if exists "ADDRESS_FEATURE_SRC";
 
 CREATE TABLE if not exists "ADDRESS_MESH_BLOCK_2011_SRC" AS
 SELECT ogc_fid,address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
@@ -346,6 +371,10 @@ UNION
 SELECT ogc_fid,address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
 FROM 
 TAS_ADDRESS_MESH_BLOCK_2011_psv
+UNION
+SELECT ogc_fid,address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
+FROM 
+OT_ADDRESS_MESH_BLOCK_2011_psv
 ;
 
 
@@ -357,6 +386,7 @@ DROP TABLE if exists "QLD_ADDRESS_MESH_BLOCK_2011_psv";
 DROP TABLE if exists "NT_ADDRESS_MESH_BLOCK_2011_psv";
 DROP TABLE if exists "TAS_ADDRESS_MESH_BLOCK_2011_psv"; 
 DROP TABLE if exists "WA_ADDRESS_MESH_BLOCK_2011_psv"; 
+DROP TABLE if exists "OT_ADDRESS_MESH_BLOCK_2011_psv"; 
 DROP TABLE if exists "ADDRESS_MESH_BLOCK_2011";
 
 CREATE TABLE ADDRESS_MESH_BLOCK_2011 (
@@ -373,6 +403,8 @@ INSERT INTO ADDRESS_MESH_BLOCK_2011 SELECT
   ogc_fid,address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
 FROM 
  ADDRESS_MESH_BLOCK_2011_SRC;
+
+DROP TABLE if exists "ADDRESS_MESH_BLOCK_2011_SRC";
 
 CREATE TABLE if not exists "ADDRESS_MESH_BLOCK_2016_SRC" AS
 SELECT ogc_fid,address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
@@ -410,6 +442,11 @@ UNION
 SELECT ogc_fid,address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
 FROM 
 TAS_ADDRESS_MESH_BLOCK_2016_psv
+UNION
+SELECT ogc_fid,address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
+FROM 
+OT_ADDRESS_MESH_BLOCK_2016_psv
+
 ;
 
 DROP TABLE if exists "ACT_ADDRESS_MESH_BLOCK_2016_psv";
@@ -420,6 +457,7 @@ DROP TABLE if exists "QLD_ADDRESS_MESH_BLOCK_2016_psv";
 DROP TABLE if exists "NT_ADDRESS_MESH_BLOCK_2016_psv";
 DROP TABLE if exists "TAS_ADDRESS_MESH_BLOCK_2016_psv"; 
 DROP TABLE if exists "WA_ADDRESS_MESH_BLOCK_2016_psv"; 
+DROP TABLE if exists "OT_ADDRESS_MESH_BLOCK_2016_psv"; 
 DROP TABLE if exists "ADDRESS_MESH_BLOCK_2016";
 
 CREATE TABLE ADDRESS_MESH_BLOCK_2016 (
@@ -437,6 +475,7 @@ INSERT INTO ADDRESS_MESH_BLOCK_2016 SELECT
 FROM 
  ADDRESS_MESH_BLOCK_2016_SRC;
 
+DROP TABLE IF EXISTS "ADDRESS_MESH_BLOCK_2016_SRC";
 
 CREATE TABLE if not exists "ADDRESS_SITE_SRC" AS
 SELECT ogc_fid,address_site_pid,date_created,date_retired,address_type,address_site_name 
@@ -474,6 +513,10 @@ UNION
 SELECT ogc_fid,address_site_pid,date_created,date_retired,address_type,address_site_name 
 FROM 
 TAS_ADDRESS_SITE_psv
+UNION
+SELECT ogc_fid,address_site_pid,date_created,date_retired,address_type,address_site_name 
+FROM 
+OT_ADDRESS_SITE_psv
 ;
 
 DROP TABLE if exists "ACT_ADDRESS_SITE_psv";
@@ -484,6 +527,7 @@ DROP TABLE if exists "QLD_ADDRESS_SITE_psv";
 DROP TABLE if exists "NT_ADDRESS_SITE_psv";
 DROP TABLE if exists "TAS_ADDRESS_SITE_psv"; 
 DROP TABLE if exists "WA_ADDRESS_SITE_psv"; 
+DROP TABLE if exists "OT_ADDRESS_SITE_psv"; 
 DROP TABLE if exists "ADDRESS_SITE";
 
 CREATE TABLE ADDRESS_SITE (
@@ -499,6 +543,8 @@ INSERT INTO ADDRESS_SITE SELECT
   ogc_fid,address_site_pid,date_created,date_retired,address_type,address_site_name 
 FROM 
  ADDRESS_SITE_SRC;
+
+DROP TABLE IF EXISTS "ADDRESS_SITE_SRC";
 
 CREATE TABLE if not exists "ADDRESS_SITE_GEOCODE_SRC" AS
 SELECT ogc_fid,address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
@@ -536,6 +582,10 @@ UNION
 SELECT ogc_fid,address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
 FROM 
 TAS_ADDRESS_SITE_GEOCODE_psv
+UNION
+SELECT ogc_fid,address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
+FROM 
+OT_ADDRESS_SITE_GEOCODE_psv
 ;
 
 DROP TABLE if exists "ACT_ADDRESS_SITE_GEOCODE_psv";
@@ -546,6 +596,7 @@ DROP TABLE if exists "QLD_ADDRESS_SITE_GEOCODE_psv";
 DROP TABLE if exists "NT_ADDRESS_SITE_GEOCODE_psv";
 DROP TABLE if exists "TAS_ADDRESS_SITE_GEOCODE_psv"; 
 DROP TABLE if exists "WA_ADDRESS_SITE_GEOCODE_psv"; 
+DROP TABLE if exists "OT_ADDRESS_SITE_GEOCODE_psv"; 
 DROP TABLE if exists "ADDRESS_SITE_GEOCODE";
 
 CREATE TABLE ADDRESS_SITE_GEOCODE (
@@ -653,6 +704,7 @@ INSERT INTO LEVEL_TYPE_AUT  SELECT
 FROM
  authority_code_level_type_aut_psv;
  
+DROP TABLE IF EXISTS "authority_code_level_type_aut_psv";
  
 CREATE TABLE if not exists "LOCALITY_SRC" AS
 SELECT ogc_fid,locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
@@ -690,6 +742,10 @@ UNION
 SELECT ogc_fid,locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
 FROM 
 TAS_LOCALITY_PSV
+UNION
+SELECT ogc_fid,locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
+FROM 
+OT_LOCALITY_PSV
 ;
 
 DROP TABLE if exists "ACT_LOCALITY_psv";
@@ -700,6 +756,7 @@ DROP TABLE if exists "QLD_LOCALITY_psv";
 DROP TABLE if exists "NT_LOCALITY_psv";
 DROP TABLE if exists "TAS_LOCALITY_psv"; 
 DROP TABLE if exists "WA_LOCALITY_psv"; 
+DROP TABLE if exists "OT_LOCALITY_psv"; 
 DROP TABLE if exists "LOCALITY";
 
 CREATE TABLE LOCALITY (
@@ -720,6 +777,7 @@ INSERT INTO LOCALITY SELECT
 FROM 
  LOCALITY_SRC;
  
+DROP TABLE if exists "LOCALITY_SRC";
 
 DROP TABLE if exists "LOCALITY_ALIAS_TYPE_AUT";
 
@@ -749,6 +807,7 @@ INSERT INTO LOCALITY_CLASS_AUT  SELECT
 FROM
  authority_code_locality_class_aut_psv;
  
+DROP TABLE IF EXISTS "authority_code_locality_class_aut_psv";
  
 CREATE TABLE if not exists "LOCALITY_NEIGHBOUR_SRC" AS
 SELECT  ogc_fid,locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
@@ -786,6 +845,10 @@ UNION
 SELECT  ogc_fid,locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
 FROM
 TAS_LOCALITY_NEIGHBOUR_PSV
+UNION
+SELECT  ogc_fid,locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
+FROM
+OT_LOCALITY_NEIGHBOUR_PSV
 ;
 
 DROP TABLE if exists "ACT_LOCALITY_NEIGHBOUR_psv";
@@ -796,6 +859,7 @@ DROP TABLE if exists "QLD_LOCALITY_NEIGHBOUR_psv";
 DROP TABLE if exists "NT_LOCALITY_NEIGHBOUR_psv";
 DROP TABLE if exists "TAS_LOCALITY_NEIGHBOUR_psv"; 
 DROP TABLE if exists "WA_LOCALITY_NEIGHBOUR_psv"; 
+DROP TABLE if exists "OT_LOCALITY_NEIGHBOUR_psv"; 
 DROP TABLE if exists "LOCALITY_NEIGHBOUR";
 
 CREATE TABLE LOCALITY_NEIGHBOUR (
@@ -811,6 +875,8 @@ INSERT INTO LOCALITY_NEIGHBOUR  SELECT
  ogc_fid,locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
 FROM
  LOCALITY_NEIGHBOUR_SRC;
+
+DROP TABLE if exists "LOCALITY_NEIGHBOUR_SRC"
 
 CREATE TABLE if not exists "LOCALITY_POINT_SRC" AS
 SELECT ogc_fid,locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
@@ -848,7 +914,12 @@ UNION
 SELECT ogc_fid,locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
 FROM
 TAS_LOCALITY_POINT_PSV
+UNION
+SELECT ogc_fid,locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
+FROM
+OT_LOCALITY_POINT_PSV
 ;
+
 DROP TABLE if exists "ACT_LOCALITY_POINT_psv";
 DROP TABLE if exists "NSW_LOCALITY_POINT_psv";
 DROP TABLE if exists "VIC_LOCALITY_POINT_psv";
@@ -857,6 +928,7 @@ DROP TABLE if exists "QLD_LOCALITY_POINT_psv";
 DROP TABLE if exists "NT_LOCALITY_POINT_psv";
 DROP TABLE if exists "TAS_LOCALITY_POINT_psv"; 
 DROP TABLE if exists "WA_LOCALITY_POINT_psv"; 
+DROP TABLE if exists "OT_LOCALITY_POINT_psv"; 
 DROP TABLE if exists "LOCALITY_POINT";
 
 CREATE TABLE LOCALITY_POINT (
@@ -875,6 +947,7 @@ INSERT INTO LOCALITY_POINT  SELECT
 FROM
  LOCALITY_POINT_SRC;
  
+DROP TABLE IF EXISTS "LOCALITY_POINT_SRC"
 
 CREATE TABLE if not exists "MB_2011_SRC" AS
 SELECT ogc_fid,mb_2011_pid,date_created,date_retired,mb_2011_code
@@ -912,6 +985,10 @@ UNION
 SELECT ogc_fid,mb_2011_pid,date_created,date_retired,mb_2011_code
 FROM
 TAS_MB_2011_PSV
+UNION
+SELECT ogc_fid,mb_2011_pid,date_created,date_retired,mb_2011_code
+FROM
+OT_MB_2011_PSV
 ;
 
 DROP TABLE if exists "ACT_MB_2011_psv";
@@ -922,6 +999,7 @@ DROP TABLE if exists "QLD_MB_2011_psv";
 DROP TABLE if exists "NT_MB_2011_psv";
 DROP TABLE if exists "TAS_MB_2011_psv"; 
 DROP TABLE if exists "WA_MB_2011_psv"; 
+DROP TABLE if exists "OT_MB_2011_psv"; 
 DROP TABLE if exists "MB_2011";
 
 CREATE TABLE MB_2011 (
@@ -937,6 +1015,7 @@ INSERT INTO MB_2011 SELECT
 FROM
  MB_2011_SRC;
  
+DROP TABLE IF EXISTS "MB_2011_SRC";
  
 CREATE TABLE if not exists "MB_2016_SRC" AS
 SELECT ogc_fid,mb_2016_pid,date_created,date_retired,mb_2016_code
@@ -974,7 +1053,12 @@ UNION
 SELECT ogc_fid,mb_2016_pid,date_created,date_retired,mb_2016_code
 FROM
 TAS_MB_2016_PSV
+UNION
+SELECT ogc_fid,mb_2016_pid,date_created,date_retired,mb_2016_code
+FROM
+OT_MB_2016_PSV
 ;
+
 DROP TABLE if exists "ACT_MB_2016_psv";
 DROP TABLE if exists "NSW_MB_2016_psv";
 DROP TABLE if exists "VIC_MB_2016_psv";
@@ -983,6 +1067,7 @@ DROP TABLE if exists "QLD_MB_2016_psv";
 DROP TABLE if exists "NT_MB_2016_psv";
 DROP TABLE if exists "TAS_MB_2016_psv"; 
 DROP TABLE if exists "WA_MB_2016_psv"; 
+DROP TABLE if exists "OT_MB_2016_psv"; 
 DROP TABLE if exists "MB_2016";
 
 CREATE TABLE MB_2016 (
@@ -997,6 +1082,8 @@ INSERT INTO MB_2016 SELECT
  ogc_fid,mb_2016_pid,date_created,date_retired,mb_2016_code
 FROM
  MB_2016_SRC;
+
+DROP TABLE if exists "MB_2016_SRC";
 
 DROP TABLE if exists "MB_MATCH_CODE_AUT";
 
@@ -1026,7 +1113,7 @@ INSERT INTO PS_JOIN_TYPE_AUT  SELECT
 FROM
  authority_code_ps_join_type_aut_psv;
 
-
+DROP TABLE IF EXISTS "authority_code_ps_join_type_aut_psv";
 
 CREATE TABLE if not exists "PRIMARY_SECONDARY_SRC" AS
 SELECT  ogc_fid,primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
@@ -1064,6 +1151,10 @@ UNION
 SELECT  ogc_fid,primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
 FROM
 TAS_PRIMARY_SECONDARY_PSV
+UNION
+SELECT  ogc_fid,primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
+FROM
+OT_PRIMARY_SECONDARY_PSV
 ;
 
 DROP TABLE if exists "ACT_PRIMARY_SECONDARY_psv";
@@ -1074,6 +1165,7 @@ DROP TABLE if exists "QLD_PRIMARY_SECONDARY_psv";
 DROP TABLE if exists "NT_PRIMARY_SECONDARY_psv";
 DROP TABLE if exists "TAS_PRIMARY_SECONDARY_psv"; 
 DROP TABLE if exists "WA_PRIMARY_SECONDARY_psv"; 
+DROP TABLE if exists "OT_PRIMARY_SECONDARY_psv"; 
 DROP TABLE if exists "PRIMARY_SECONDARY";
 
 CREATE TABLE PRIMARY_SECONDARY (
@@ -1092,6 +1184,7 @@ INSERT INTO PRIMARY_SECONDARY SELECT
 FROM
  PRIMARY_SECONDARY_SRC;
 
+DROP TABLE IF EXISTS "PRIMARY_SECONDARY_SRC";
 
 CREATE TABLE if not exists "STATE_SRC" AS
 SELECT  ogc_fid,state_pid,date_created,date_retired,state_name,state_abbreviation
@@ -1129,6 +1222,10 @@ UNION
 SELECT ogc_fid,state_pid,date_created,date_retired,state_name,state_abbreviation
 FROM
 TAS_STATE_PSV
+UNION
+SELECT ogc_fid,state_pid,date_created,date_retired,state_name,state_abbreviation
+FROM
+OT_STATE_PSV
 ;
 
 DROP TABLE if exists "ACT_STATE_psv";
@@ -1139,6 +1236,7 @@ DROP TABLE if exists "QLD_STATE_psv";
 DROP TABLE if exists "NT_STATE_psv";
 DROP TABLE if exists "TAS_STATE_psv"; 
 DROP TABLE if exists "WA_STATE_psv";
+DROP TABLE if exists "OT_STATE_psv";
 DROP TABLE if exists "STATE";
 
 CREATE TABLE STATE (
@@ -1154,6 +1252,8 @@ INSERT INTO STATE SELECT
  ogc_fid,state_pid,date_created,date_retired,state_name,state_abbreviation
 FROM
  STATE_SRC;
+
+DROP TABLE if exists "STATE_SRC";
 
 DROP TABLE if exists "STREET_CLASS_AUT";
 
@@ -1213,6 +1313,7 @@ INSERT INTO STREET_LOCALITY_ALIAS_TYPE_AUT  SELECT
 FROM
  authority_code_street_locality_alias_type_aut_psv;
 
+DROP TABLE IF EXISTS "authority_code_street_locality_alias_type_aut_psv;
 
 CREATE TABLE if not exists "STREET_LOCALITY_SRC" AS
 SELECT ogc_fid,street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
@@ -1250,6 +1351,10 @@ UNION
 SELECT ogc_fid,street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
 FROM
 TAS_STREET_LOCALITY_PSV
+UNION
+SELECT ogc_fid,street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
+FROM
+OT_STREET_LOCALITY_PSV
 ;
 
 DROP TABLE if exists "ACT_STREET_LOCALITY_psv";
@@ -1260,6 +1365,7 @@ DROP TABLE if exists "QLD_STREET_LOCALITY_psv";
 DROP TABLE if exists "NT_STREET_LOCALITY_psv";
 DROP TABLE if exists "TAS_STREET_LOCALITY_psv"; 
 DROP TABLE if exists "WA_STREET_LOCALITY_psv";
+DROP TABLE if exists "OT_STREET_LOCALITY_psv";
 DROP TABLE if exists "STREET_LOCALITY";
 
 CREATE TABLE STREET_LOCALITY (
@@ -1280,7 +1386,9 @@ CREATE TABLE STREET_LOCALITY (
 INSERT INTO STREET_LOCALITY  SELECT
  ogc_fid,street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
 FROM
- STREET_LOCALITY_src;
+ STREET_LOCALITY_SRC;
+
+DROP TABLE IF EXISTS "STREET_LOCALITY_SRC";
 
 CREATE TABLE if not exists "STREET_LOCALITY_ALIAS_SRC" AS
 SELECT ogc_fid,street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
@@ -1318,6 +1426,10 @@ UNION
 SELECT  ogc_fid,street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
 FROM
 TAS_STREET_LOCALITY_ALIAS_PSV
+UNION
+SELECT  ogc_fid,street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
+FROM
+OT_STREET_LOCALITY_ALIAS_PSV
 ;
 
 DROP TABLE if exists "ACT_STREET_LOCALITY_ALIAS_psv";
@@ -1328,6 +1440,7 @@ DROP TABLE if exists "QLD_STREET_LOCALITY_ALIAS_psv";
 DROP TABLE if exists "NT_STREET_LOCALITY_ALIAS_psv";
 DROP TABLE if exists "TAS_STREET_LOCALITY_ALIAS_psv"; 
 DROP TABLE if exists "WA_STREET_LOCALITY_ALIAS_psv"; 
+DROP TABLE if exists "OT_STREET_LOCALITY_ALIAS_psv"; 
 DROP TABLE if exists "STREET_LOCALITY_ALIAS";
 
 CREATE TABLE STREET_LOCALITY_ALIAS (
@@ -1343,10 +1456,11 @@ CREATE TABLE STREET_LOCALITY_ALIAS (
 );
  
 INSERT INTO STREET_LOCALITY_ALIAS  SELECT
- ogc_fid,street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
+ ogc_fid, street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
 FROM
- STREET_LOCALITY_ALIAS_src;
- 
+ STREET_LOCALITY_ALIAS_SRC;
+
+DROP TABLE IF EXISTS "LOCALITY_ALIAS_SRC";
  
 CREATE TABLE if not exists "STREET_LOCALITY_POINT_SRC" AS
 SELECT ogc_fid, street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
@@ -1384,6 +1498,10 @@ UNION
 SELECT ogc_fid, street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
 FROM 
 TAS_STREET_LOCALITY_POINT_PSV
+UNION
+SELECT ogc_fid, street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
+FROM 
+OT_STREET_LOCALITY_POINT_PSV
 ;
 
 DROP TABLE if exists "ACT_STREET_LOCALITY_POINT_psv";
@@ -1394,8 +1512,8 @@ DROP TABLE if exists "QLD_STREET_LOCALITY_POINT_psv";
 DROP TABLE if exists "NT_STREET_LOCALITY_POINT_psv";
 DROP TABLE if exists "TAS_STREET_LOCALITY_POINT_psv"; 
 DROP TABLE if exists "WA_STREET_LOCALITY_POINT_psv"; 
+DROP TABLE if exists "OT_STREET_LOCALITY_POINT_psv"; 
 DROP TABLE if exists "STREET_LOCALITY_POINT";
-
 CREATE TABLE STREET_LOCALITY_POINT (
  ogc_fid integer,
  street_locality_point_pid varchar(15) NOT NULL,
@@ -1411,7 +1529,10 @@ CREATE TABLE STREET_LOCALITY_POINT (
 INSERT INTO STREET_LOCALITY_POINT  SELECT
  ogc_fid, street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
 FROM 
- STREET_LOCALITY_POINT_src;
+ STREET_LOCALITY_POINT_SRC;
+
+DROP TABLE IF EXISTS "STREET_LOCALITY_POINT_SRC";
+
 CREATE TABLE if not exists "LOCALITY_ALIAS_SRC" AS
 SELECT ogc_fid,locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
 FROM  
@@ -1448,6 +1569,10 @@ UNION
 SELECT ogc_fid,locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
 FROM  
 TAS_LOCALITY_ALIAS_psv
+UNION
+SELECT ogc_fid,locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
+FROM  
+OT_LOCALITY_ALIAS_psv
 ;
 
 DROP TABLE if exists "ACT_LOCALITY_ALIAS_psv";
@@ -1458,6 +1583,7 @@ DROP TABLE if exists "QLD_LOCALITY_ALIAS_psv";
 DROP TABLE if exists "NT_LOCALITY_ALIAS_psv";
 DROP TABLE if exists "TAS_LOCALITY_ALIAS_psv"; 
 DROP TABLE if exists "WA_LOCALITY_ALIAS_psv"; 
+DROP TABLE if exists "OT_LOCALITY_ALIAS_psv"; 
 DROP TABLE if exists "LOCALITY_ALIAS";
 
 CREATE TABLE LOCALITY_ALIAS (
@@ -1477,6 +1603,7 @@ INSERT INTO LOCALITY_ALIAS  SELECT
 FROM 
  LOCALITY_ALIAS_SRC;
 
+DROP TABLE if exists "LOCALITY_ALIAS_SRC";
 
 DROP TABLE if exists "FLAT_TYPE_AUT";
 
@@ -1492,43 +1619,5 @@ INSERT INTO FLAT_TYPE_AUT  SELECT
 FROM 
  authority_code_flat_type_aut_psv;
 
+DROP TABLE if exists "authority_code_flat_type_aut_psv";
 
-DROP TABLE if exists "ADDRESS_FEATURE_SRC";
-DROP TABLE if exists "ADDRESS_DETAIL_SRC";
-DROP TABLE if exists "ADDRESS_DETAIL_SRC";
-DROP TABLE if exists "ADDRESS_MESH_BLOCK_2011_SRC";
-DROP TABLE if exists "ADDRESS_MESH_BLOCK_2016_SRC";
-DROP TABLE if exists "ADDRESS_DFAULT_GEOCODE_SRC";
-DROP TABLE if exists "ADDRESS_DEFAULT_ALIAS_SRC";
-DROP TABLE if exists "ADDRESS_SITE_GEOCODE_SRC";
-DROP TABLE if exists "ADDRESS_DEFAULT_GEOCODE_SRC";
-DROP TABLE if exists "ADDRESS_ALIAS_SRC";
-DROP TABLE if exists "LOCALITY_ALIAS_SRC";
-DROP TABLE if exists "LOCALITY_SRC";
-DROP TABLE if exists "LOCALITY_NEIGHBOUR_SRC";
-DROP TABLE if exists "LOCALITY_POINT_SRC";
-DROP TABLE if exists "MB_2011_SRC";
-DROP TABLE if exists "MB_2016_SRC";
-DROP TABLE if exists "PRIMARY_SECONDARY_SRC";
-DROP TABLE if exists "STATE_SRC";
-DROP TABLE if exists "STREET_LOCALITY_SRC";
-DROP TABLE if exists "STREET_LOCALITY_ALIAS_SRC";
-DROP TABLE if exists "STREET_LOCALITY_POINT_SRC";
-
-DROP TABLE if exists "Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_STREET_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_GEOCODE_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_ADDRESS_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_MB_MATCH_CODE_AUT_psv";
-DROP TABLE if exists "Authority_Code_FLAT_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_GEOCODE_RELIABILITY_AUT_psv";
-DROP TABLE if exists "Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_LEVEL_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_STREET_SUFFIX_AUT_psv";
-DROP TABLE if exists "Authority_Code_LOCALITY_CLASS_AUT_psv";
-DROP TABLE if exists "Authority_Code_LOCALITY_CLASS_AUT_psv";
-DROP TABLE if exists "Authority_Code_PS_JOIN_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv";
-DROP TABLE if exists "Authority_Code_STREET_CLASS_AUT_psv";
