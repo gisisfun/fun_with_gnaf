@@ -667,7 +667,9 @@ INSERT INTO GEOCODED_LEVEL_TYPE_AUT  SELECT
 FROM
  authority_code_geocoded_level_type_aut_psv;
  
- DROP TABLE if exists "GEOCODE_RELIABILITY_AUT";
+DROP TABLE if exists "authority_code_geocoded_level_type_aut_psv";
+
+DROP TABLE if exists "GEOCODE_RELIABILITY_AUT";
 
 CREATE TABLE GEOCODE_RELIABILITY_AUT (
  ogc_fid integer,
@@ -1286,6 +1288,7 @@ INSERT INTO STREET_CLASS_AUT  SELECT
 FROM
  authority_code_street_class_aut_psv;
 
+DROP TABLE if exists "authority_code_street_class_aut_psv";
 
 DROP TABLE if exists "STREET_SUFFIX_AUT";
 
@@ -1316,6 +1319,8 @@ INSERT INTO STREET_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
  authority_code_street_type_aut_psv;
+
+DROP TABLE if exists "authority_code_street_type_aut_psv";
  
 DROP TABLE if exists "STREET_LOCALITY_ALIAS_TYPE_AUT";
 
@@ -1623,19 +1628,7 @@ FROM
 
 DROP TABLE if exists "LOCALITY_ALIAS_SRC";
 
-DROP TABLE if exists "FLAT_TYPE_AUT";
 
-CREATE TABLE FLAT_TYPE_AUT (
- ogc_fid integer,
- code varchar(7) NOT NULL,
- name varchar(50) NOT NULL,
- description varchar(30)
-);
-
-INSERT INTO FLAT_TYPE_AUT  SELECT
- ogc_fid,code,name,description
-FROM 
- authority_code_flat_type_aut_psv;
 
 
 
