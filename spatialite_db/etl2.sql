@@ -1510,7 +1510,7 @@ INSERT INTO STREET_LOCALITY_ALIAS  SELECT
 FROM
  STREET_LOCALITY_ALIAS_SRC;
 
-DROP TABLE IF EXISTS "LOCALITY_LOCAILITY_SRC";
+DROP TABLE IF EXISTS "STREET_LOCALITY_ALIAS_SRC";
  
 CREATE TABLE "STREET_LOCALITY_POINT_SRC" AS
 SELECT ogc_fid, street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
