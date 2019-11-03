@@ -307,6 +307,10 @@ UNION
 SELECT  address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code 
 FROM 
 TAS_ADDRESS_FEATURE_psv
+UNION
+SELECT  address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code 
+FROM 
+OT_ADDRESS_FEATURE_psv
 ;
 
 DROP TABLE if exists "ACT_ADDRESS_FEATURE_psv";
@@ -317,6 +321,7 @@ DROP TABLE if exists "QLD_ADDRESS_FEATURE_psv";
 DROP TABLE if exists "NT_ADDRESS_FEATURE_psv";
 DROP TABLE if exists "TAS_ADDRESS_FEATURE_psv"; 
 DROP TABLE if exists "WA_ADDRESS_FEATURE_psv";
+DROP TABLE if exists "OT_ADDRESS_FEATURE_psv";
 DROP TABLE if exists "ADDRESS_FEATURE";
 
 CREATE TABLE ADDRESS_FEATURE (
@@ -1414,6 +1419,8 @@ FROM
  STREET_LOCALITY_SRC;
 
 DROP TABLE IF EXISTS "STREET_LOCALITY_SRC";
+
+DROP TABLE IF EXISTS "STREET_LOCALITY_ALIAS_SRC";
 
 CREATE TABLE "STREET_LOCALITY_ALIAS_SRC" AS
 SELECT ogc_fid,street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
