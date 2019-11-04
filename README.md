@@ -1,18 +1,18 @@
 # fun_with_gnaf
 Lets Build an SQLite3 database with the PSMA G-NAF data set
 
-...
+```
 cd batch_files
 sh load_basefiles.sh
 sqlite3 ../spatialite_db/db.sqlite < ../spatialite_db/etl2.sql
-...
+```
 
 
 - res_street_locality.csv,
 - street_locality.csv,
 - locality.csv
 
-...
+```
 sqlite3 ../spatialite_db/db.sqlite
 .mode csv
 .headers on
@@ -22,7 +22,7 @@ output ../street_locality.csv
 select * from STREET_LOCALITY_VIEW;
 output ../locality.csv
 select * from LOCALITY_VIEW;
-...
+```
 
 
 in powershell
