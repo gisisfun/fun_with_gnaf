@@ -26,7 +26,22 @@ class Process:
                     outfile.write(newline)
 
             outfile.close()
-    
+
+        def load_sql(self, defs, db):
+            #d = Defaults()
+            
+            print(defs.sqlLoad)
+            for thestate in states_list:
+                print(defs.sqlLoad.format(tables = thestate, subdir = self.subDir, filespath = self.GNAFPath))
+
+
+        def load_states_sql(self, states_list, defs, db):
+            #d = Defaults()
+            
+            print(defs.sqlLoad)
+            for thestate in states_list:
+                print(defs.sqlLoad.format(tables = thestate, subdir = self.subDir, filespath = self.GNAFPath))
+                
     class Collate:
 
         def create_sql(d,t):
