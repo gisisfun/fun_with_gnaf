@@ -111,7 +111,7 @@ CREATE TABLE ADDRESS_ALIAS_TYPE_AUT (
 INSERT INTO ADDRESS_ALIAS_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_address_alias_type_aut_psv;
+ Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv;
 
 DROP TABLE if exists "Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv";
 
@@ -923,9 +923,9 @@ CREATE TABLE GEOCODE_RELIABILITY_AUT (
 INSERT INTO GEOCODE_RELIABILITY_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_geocode_reliability_aut_psv;
+ Authority_Code_GEOCODE_RELIABILITY_AUT_psv;
 
-DROP TABLE if exists "authority_code_geocode_reliability_aut_psv";
+DROP TABLE if exists "Authority_Code_GEOCODE_RELIABILITY_AUT_psv";
 
 DROP TABLE if exists "GEOCODE_TYPE_AUT";
 
@@ -942,7 +942,7 @@ CREATE TABLE GEOCODE_TYPE_AUT (
 INSERT INTO GEOCODE_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_geocode_type_aut_psv;
+ Authority_Code_GEOCODE_TYPE_AUT_psv;
 
 DROP TABLE if exists "Authority_Code_GEOCODE_TYPE_AUT_psv";
 
@@ -1082,9 +1082,9 @@ CREATE TABLE LOCALITY_ALIAS_TYPE_AUT (
 INSERT INTO LOCALITY_ALIAS_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_locality_alias_type_aut_psv;
+ Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv;
 
-DROP TABLE if exists "authority_code_locality_alias_type_aut_psv";
+DROP TABLE if exists "Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv";
 
 DROP TABLE if exists "LOCALITY_CLASS_AUT";
 
@@ -1098,9 +1098,9 @@ CREATE TABLE LOCALITY_CLASS_AUT (
 INSERT INTO LOCALITY_CLASS_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_locality_class_aut_psv;
+ Authority_Code_LOCALITY_CLASS_AUT_psv;
  
-DROP TABLE IF EXISTS "authority_code_locality_class_aut_psv";
+DROP TABLE IF EXISTS "Authority_Code_LOCALITY_CLASS_AUT_psv";
 
 DROP TABLE IF EXISTS "LOCALITY_NEIGHBOUR_SRC";
 
@@ -1745,7 +1745,7 @@ CREATE TABLE STREET_CLASS_AUT (
 INSERT INTO STREET_CLASS_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_street_class_aut_psv;
+ Authority_Code_STREET_CLASS_AUT_psv;
 
 DROP TABLE if exists "Authority_Code_STREET_CLASS_AUT_psv";
 
@@ -1764,7 +1764,7 @@ CREATE TABLE STREET_SUFFIX_AUT (
 INSERT INTO STREET_SUFFIX_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_street_suffix_aut_psv;
+ Authority_Code_STREET_SUFFIX_AUT_psv;
 
 DROP TABLE if exists "Authority_Code_STREET_SUFFIX_AUT_psv";
 
@@ -1799,7 +1799,7 @@ CREATE TABLE STREET_LOCALITY_ALIAS_TYPE_AUT (
 INSERT INTO STREET_LOCALITY_ALIAS_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_street_locality_alias_type_aut_psv;
+ Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv;
 
 DROP TABLE IF EXISTS "Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv";
 
