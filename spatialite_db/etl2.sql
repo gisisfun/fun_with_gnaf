@@ -1,3 +1,30 @@
+.mode csv NSW_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_ALIAS_psv.csv NSW_ADDRESS_ALIAS_psv
+
+.mode csv VIC_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_ADDRESS_ALIAS_psv.csv VIC_ADDRESS_ALIAS_psv
+
+.mode csv QLD_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_ADDRESS_ALIAS_psv.csv QLD_ADDRESS_ALIAS_psv
+
+.mode csv SA_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_ADDRESS_ALIAS_psv.csv SA_ADDRESS_ALIAS_psv
+
+.mode csv WA_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_ADDRESS_ALIAS_psv.csv WA_ADDRESS_ALIAS_psv
+
+.mode csv TAS_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_ADDRESS_ALIAS_psv.csv TAS_ADDRESS_ALIAS_psv
+
+.mode csv NT_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_ADDRESS_ALIAS_psv.csv NT_ADDRESS_ALIAS_psv
+
+.mode csv ACT_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_ADDRESS_ALIAS_psv.csv ACT_ADDRESS_ALIAS_psv
+
+.mode csv OT_ADDRESS_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_ADDRESS_ALIAS_psv.csv OT_ADDRESS_ALIAS_psv
+
 DROP TABLE IF EXISTS "ADDRESS_ALIAS_SRC";
 CREATE TABLE "ADDRESS_ALIAS_SRC" AS
 SELECT ogc_fid,address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment 
@@ -69,6 +96,9 @@ FROM ADDRESS_ALIAS_SRC;
 
 DROP TABLE IF EXISTS "ADDRESS_ALIAS_SRC";
 
+.mode csv Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv.csv Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv
+
 DROP TABLE if exists "ADDRESS_ALIAS_TYPE_AUT";
 
 CREATE TABLE ADDRESS_ALIAS_TYPE_AUT (
@@ -83,9 +113,12 @@ INSERT INTO ADDRESS_ALIAS_TYPE_AUT  SELECT
 FROM
  authority_code_address_alias_type_aut_psv;
 
-DROP TABLE if exists "authority_code_address_alias_type_aut_psv";
+DROP TABLE if exists "Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv";
 
 DROP TABLE if exists "ADDRESS_CHANGE_TYPE_AUT";
+
+.mode csv Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv.csv Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv
 
 CREATE TABLE ADDRESS_CHANGE_TYPE_AUT (
  ogc_fid integer,
@@ -97,9 +130,37 @@ CREATE TABLE ADDRESS_CHANGE_TYPE_AUT (
 INSERT INTO ADDRESS_CHANGE_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_address_change_type_aut_psv;
+ Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv;
 
-DROP TABLE IF EXISTS "authority_code_address_change_type_aut_psv";
+DROP TABLE IF EXISTS "Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv";
+
+.mode csv NSW_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_DEFAULT_GEOCODE_psv.csv NSW_ADDRESS_DEFAULT_GEOCODE_psv
+
+.mode csv VIC_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_ADDRESS_DEFAULT_GEOCODE_psv.csv VIC_ADDRESS_DEFAULT_GEOCODE_psv
+
+.mode csv QLD_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_ADDRESS_DEFAULT_GEOCODE_psv.csv QLD_ADDRESS_DEFAULT_GEOCODE_psv
+
+.mode csv SA_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_ADDRESS_DEFAULT_GEOCODE_psv.csv SA_ADDRESS_DEFAULT_GEOCODE_psv
+
+.mode csv WA_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_ADDRESS_DEFAULT_GEOCODE_psv.csv WA_ADDRESS_DEFAULT_GEOCODE_psv
+
+.mode csv TAS_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_ADDRESS_DEFAULT_GEOCODE_psv.csv TAS_ADDRESS_DEFAULT_GEOCODE_psv
+
+.mode csv NT_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_ADDRESS_DEFAULT_GEOCODE_psv.csv NT_ADDRESS_DEFAULT_GEOCODE_psv
+
+.mode csv ACT_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_ADDRESS_DEFAULT_GEOCODE_psv.csv ACT_ADDRESS_DEFAULT_GEOCODE_psv
+
+.mode csv OT_ADDRESS_DEFAULT_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_ADDRESS_DEFAULT_GEOCODE_psv.csv OT_ADDRESS_DEFAULT_GEOCODE_psv
+
  
 DROP TABLE IF EXISTS "ADDRESS_DEFAULT_GEOCODE_SRC";
 
@@ -175,6 +236,33 @@ FROM
 DROP TABLE IF EXISTS "ADDRESS_DEFAULT_GEOCODE_SRC";
 
 DROP TABLE IF EXISTS "ADDRESS_DETAIL_SRC";
+
+.mode csv NSW_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_DETAIL_psv.csv NSW_ADDRESS_DETAIL_psv
+
+.mode csv VIC_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_ADDRESS_DETAIL_psv.csv VIC_ADDRESS_DETAIL_psv
+
+.mode csv QLD_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_ADDRESS_DETAIL_psv.csv QLD_ADDRESS_DETAIL_psv
+
+.mode csv SA_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_ADDRESS_DETAIL_psv.csv SA_ADDRESS_DETAIL_psv
+
+.mode csv WA_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_ADDRESS_DETAIL_psv.csv WA_ADDRESS_DETAIL_psv
+
+.mode csv TAS_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_ADDRESS_DETAIL_psv.csv TAS_ADDRESS_DETAIL_psv
+
+.mode csv NT_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_ADDRESS_DETAIL_psv.csv NT_ADDRESS_DETAIL_psv
+
+.mode csv ACT_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_ADDRESS_DETAIL_psv.csv ACT_ADDRESS_DETAIL_psv
+
+.mode csv OT_ADDRESS_DETAIL_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_ADDRESS_DETAIL_psv.csv OT_ADDRESS_DETAIL_psv
 
 CREATE TABLE "ADDRESS_DETAIL_SRC" AS
 SELECT ogc_fid,address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
@@ -276,6 +364,30 @@ DROP TABLE if exists "ADDRESS_DETAIL_SRC";
 
 DROP TABLE if exists "ADDRESS_FEATURE_SRC";
 
+.mode csv NSW_ADDRESS_FEATURE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_FEATURE_psv.csv NSW_ADDRESS_FEATURE_psv
+
+.mode csv VIC_ADDRESS_FEATURE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_ADDRESS_FEATURE_psv.csv VIC_ADDRESS_FEATURE_psv
+
+.mode csv QLD_ADDRESS_FEATURE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_ADDRESS_FEATURE_psv.csv QLD_ADDRESS_FEATURE_psv
+
+.mode csv SA_ADDRESS_FEATURE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_ADDRESS_FEATURE_psv.csv SA_ADDRESS_FEATURE_psv
+
+.mode csv WA_ADDRESS_FEATURE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_ADDRESS_FEATURE_psv.csv WA_ADDRESS_FEATURE_psv
+
+.mode csv TAS_ADDRESS_FEATURE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_ADDRESS_FEATURE_psv.csv TAS_ADDRESS_FEATURE_psv
+
+.mode csv NT_ADDRESS_FEATURE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_ADDRESS_FEATURE_psv.csv NT_ADDRESS_FEATURE_psv
+
+.mode csv ACT_ADDRESS_FEATURE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_ADDRESS_FEATURE_psv.csv ACT_ADDRESS_FEATURE_psv
+
 CREATE TABLE ADDRESS_FEATURE_SRC AS
 SELECT address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code 
 FROM 
@@ -342,6 +454,35 @@ DROP TABLE if exists "ADDRESS_FEATURE_SRC";
 
 DROP TABLE if exists "ADDRESS_MESH_BLOCK_2011_SRC";
 
+
+.mode csv NSW_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_MESH_BLOCK_2011_psv.csv NSW_ADDRESS_MESH_BLOCK_2011_psv
+
+.mode csv VIC_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_ADDRESS_MESH_BLOCK_2011_psv.csv VIC_ADDRESS_MESH_BLOCK_2011_psv
+
+.mode csv QLD_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_ADDRESS_MESH_BLOCK_2011_psv.csv QLD_ADDRESS_MESH_BLOCK_2011_psv
+
+.mode csv SA_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_ADDRESS_MESH_BLOCK_2011_psv.csv SA_ADDRESS_MESH_BLOCK_2011_psv
+
+.mode csv WA_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_ADDRESS_MESH_BLOCK_2011_psv.csv WA_ADDRESS_MESH_BLOCK_2011_psv
+
+.mode csv TAS_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_ADDRESS_MESH_BLOCK_2011_psv.csv TAS_ADDRESS_MESH_BLOCK_2011_psv
+
+.mode csv NT_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_ADDRESS_MESH_BLOCK_2011_psv.csv NT_ADDRESS_MESH_BLOCK_2011_psv
+
+.mode csv ACT_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_ADDRESS_MESH_BLOCK_2011_psv.csv ACT_ADDRESS_MESH_BLOCK_2011_psv
+
+.mode csv OT_ADDRESS_MESH_BLOCK_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_ADDRESS_MESH_BLOCK_2011_psv.csv OT_ADDRESS_MESH_BLOCK_2011_psv
+
+
 CREATE TABLE "ADDRESS_MESH_BLOCK_2011_SRC" AS
 SELECT ogc_fid,address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
 FROM 
@@ -395,6 +536,7 @@ DROP TABLE if exists "WA_ADDRESS_MESH_BLOCK_2011_psv";
 DROP TABLE if exists "OT_ADDRESS_MESH_BLOCK_2011_psv"; 
 DROP TABLE if exists "ADDRESS_MESH_BLOCK_2011";
 
+
 CREATE TABLE ADDRESS_MESH_BLOCK_2011 (
  ogc_fid integer,
  address_mesh_block_2011_pid varchar(15) NOT NULL,
@@ -413,6 +555,33 @@ FROM
 DROP TABLE if exists "ADDRESS_MESH_BLOCK_2011_SRC";
 
 DROP TABLE if exists "ADDRESS_MESH_BLOCK_2016_SRC";
+
+.mode csv NSW_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_MESH_BLOCK_2016_psv.csv NSW_ADDRESS_MESH_BLOCK_2016_psv
+
+.mode csv VIC_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_ADDRESS_MESH_BLOCK_2016_psv.csv VIC_ADDRESS_MESH_BLOCK_2016_psv
+
+.mode csv QLD_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_ADDRESS_MESH_BLOCK_2016_psv.csv QLD_ADDRESS_MESH_BLOCK_2016_psv
+
+.mode csv SA_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_ADDRESS_MESH_BLOCK_2016_psv.csv SA_ADDRESS_MESH_BLOCK_2016_psv
+
+.mode csv WA_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_ADDRESS_MESH_BLOCK_2016_psv.csv WA_ADDRESS_MESH_BLOCK_2016_psv
+
+.mode csv TAS_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_ADDRESS_MESH_BLOCK_2016_psv.csv TAS_ADDRESS_MESH_BLOCK_2016_psv
+
+.mode csv NT_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_ADDRESS_MESH_BLOCK_2016_psv.csv NT_ADDRESS_MESH_BLOCK_2016_psv
+
+.mode csv ACT_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_ADDRESS_MESH_BLOCK_2016_psv.csv ACT_ADDRESS_MESH_BLOCK_2016_psv
+
+.mode csv OT_ADDRESS_MESH_BLOCK_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_ADDRESS_MESH_BLOCK_2016_psv.csv OT_ADDRESS_MESH_BLOCK_2016_psv
 
 CREATE TABLE "ADDRESS_MESH_BLOCK_2016_SRC" AS
 SELECT ogc_fid,address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
@@ -486,6 +655,35 @@ DROP TABLE IF EXISTS "ADDRESS_MESH_BLOCK_2016_SRC";
 
 DROP TABLE IF EXISTS "ADDRESS_SITE_SRC";
 
+
+.mode csv NSW_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_SITE_psv.csv NSW_ADDRESS_SITE_psv
+
+.mode csv VIC_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_ADDRESS_SITE_psv.csv VIC_ADDRESS_SITE_psv
+
+.mode csv QLD_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_ADDRESS_SITE_psv.csv QLD_ADDRESS_SITE_psv
+
+.mode csv SA_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_ADDRESS_SITE_psv.csv SA_ADDRESS_SITE_psv
+
+.mode csv WA_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_ADDRESS_SITE_psv.csv WA_ADDRESS_SITE_psv
+
+.mode csv TAS_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_ADDRESS_SITE_psv.csv TAS_ADDRESS_SITE_psv
+
+.mode csv NT_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_ADDRESS_SITE_psv.csv NT_ADDRESS_SITE_psv
+
+.mode csv ACT_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_ADDRESS_SITE_psv.csv ACT_ADDRESS_SITE_psv
+
+.mode csv OT_ADDRESS_SITE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_ADDRESS_SITE_psv.csv OT_ADDRESS_SITE_psv
+
+
 CREATE TABLE "ADDRESS_SITE_SRC" AS
 SELECT ogc_fid,address_site_pid,date_created,date_retired,address_type,address_site_name 
 FROM 
@@ -556,6 +754,34 @@ FROM
 DROP TABLE IF EXISTS "ADDRESS_SITE_SRC";
 
 DROP TABLE IF EXISTS "ADDRESS_SITE_GEOCODE_SRC";
+
+.mode csv NSW_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_SITE_GEOCODE_psv.csv NSW_ADDRESS_SITE_GEOCODE_psv
+
+.mode csv VIC_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_ADDRESS_SITE_GEOCODE_psv.csv VIC_ADDRESS_SITE_GEOCODE_psv
+
+.mode csv QLD_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_ADDRESS_SITE_GEOCODE_psv.csv QLD_ADDRESS_SITE_GEOCODE_psv
+
+.mode csv SA_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_ADDRESS_SITE_GEOCODE_psv.csv SA_ADDRESS_SITE_GEOCODE_psv
+
+.mode csv WA_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_ADDRESS_SITE_GEOCODE_psv.csv WA_ADDRESS_SITE_GEOCODE_psv
+
+.mode csv TAS_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_ADDRESS_SITE_GEOCODE_psv.csv TAS_ADDRESS_SITE_GEOCODE_psv
+
+.mode csv NT_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_ADDRESS_SITE_GEOCODE_psv.csv NT_ADDRESS_SITE_GEOCODE_psv
+
+.mode csv ACT_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_ADDRESS_SITE_GEOCODE_psv.csv ACT_ADDRESS_SITE_GEOCODE_psv
+
+.mode csv OT_ADDRESS_SITE_GEOCODE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_ADDRESS_SITE_GEOCODE_psv.csv OT_ADDRESS_SITE_GEOCODE_psv
+
 
 CREATE TABLE "ADDRESS_SITE_GEOCODE_SRC" AS
 SELECT ogc_fid,address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
@@ -636,6 +862,10 @@ DROP TABLE if exists "ADDRESS_SITE_GEOCODE_SRC";
  
 DROP TABLE if exists "ADDRESS_TYPE_AUT";
 
+.mode csv Authority_Code_ADDRESS_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_ADDRESS_TYPE_AUT_psv.csv Authority_Code_ADDRESS_TYPE_AUT_psv
+
+
 CREATE TABLE ADDRESS_TYPE_AUT (
  ogc_fid integer,
  code varchar(50) NOT NULL,
@@ -646,9 +876,9 @@ CREATE TABLE ADDRESS_TYPE_AUT (
 INSERT INTO ADDRESS_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_address_type_aut_psv;
+ Authority_Code_ADDRESS_TYPE_AUT_psv;
 
-DROP TABLE if exists "authority_code_address_type_aut_psv";
+DROP TABLE if exists "Authority_Code_FLAT_TYPE_AUT_psv";
 
 DROP TABLE if exists "FLAT_TYPE_AUT";
 
@@ -662,11 +892,14 @@ CREATE TABLE FLAT_TYPE_AUT (
 INSERT INTO FLAT_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_flat_type_aut_psv;
+ Authority_Code_FLAT_TYPE_AUT_psv;
 
-DROP TABLE if exists "authority_code_flat_type_aut_psv";
+DROP TABLE if exists "Authority_Code_FLAT_TYPE_AUT_psv";
  
 DROP TABLE if exists "GEOCODED_LEVEL_TYPE_AUT";
+
+.mode csv Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv.csv Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv
 
 CREATE TABLE GEOCODED_LEVEL_TYPE_AUT (
  ogc_fid integer,
@@ -678,11 +911,14 @@ CREATE TABLE GEOCODED_LEVEL_TYPE_AUT (
 INSERT INTO GEOCODED_LEVEL_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_geocoded_level_type_aut_psv;
+ Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv;
  
-DROP TABLE if exists "authority_code_geocoded_level_type_aut_psv";
+DROP TABLE if exists "Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv";
 
 DROP TABLE if exists "GEOCODE_RELIABILITY_AUT";
+
+.mode csv Authority_Code_GEOCODE_RELIABILITY_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_GEOCODE_RELIABILITY_AUT_psv.csv Authority_Code_GEOCODE_RELIABILITY_AUT_psv
 
 CREATE TABLE GEOCODE_RELIABILITY_AUT (
  ogc_fid integer,
@@ -712,9 +948,12 @@ INSERT INTO GEOCODE_TYPE_AUT  SELECT
 FROM
  authority_code_geocode_type_aut_psv;
 
-DROP TABLE if exists "authority_code_geocode_type_aut_psv";
- 
+DROP TABLE if exists "Authority_Code_GEOCODE_TYPE_AUT_psv";
+
 DROP TABLE if exists "LEVEL_TYPE_AUT";
+
+.mode csv Authority_Code_LEVEL_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_LEVEL_TYPE_AUT_psv.csv Authority_Code_LEVEL_TYPE_AUT_psv 
 
 CREATE TABLE LEVEL_TYPE_AUT (
  ogc_fid integer,
@@ -726,16 +965,43 @@ CREATE TABLE LEVEL_TYPE_AUT (
 INSERT INTO LEVEL_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_level_type_aut_psv;
+ Authority_Code_LEVEL_TYPE_AUT_psv;
  
-DROP TABLE IF EXISTS "authority_code_level_type_aut_psv";
+DROP TABLE IF EXISTS "Authority_Code_Level_TYPE_AUT_psv";
 
 DROP TABLE IF EXISTS "LOCALITY_SRC";
+
+.mode csv NSW_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_LOCALITY_psv.csv NSW_LOCALITY_psv
+
+.mode csv VIC_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_LOCALITY_psv.csv VIC_LOCALITY_psv
+
+.mode csv QLD_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_LOCALITY_psv.csv QLD_LOCALITY_psv
+
+.mode csv SA_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_LOCALITY_psv.csv SA_LOCALITY_psv
+
+.mode csv WA_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_LOCALITY_psv.csv WA_LOCALITY_psv
+
+.mode csv TAS_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_LOCALITY_psv.csv TAS_LOCALITY_psv
+
+.mode csv NT_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_LOCALITY_psv.csv NT_LOCALITY_psv
+
+.mode csv ACT_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_LOCALITY_psv.csv ACT_LOCALITY_psv
+
+.mode csv OT_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_LOCALITY_psv.csv OT_LOCALITY_psv
 
 CREATE TABLE "LOCALITY_SRC" AS
 SELECT ogc_fid,locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
 FROM 
-NSW_LOCALITY_PSV
+NSW_LOCALITY_psv
 UNION
 SELECT ogc_fid,locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
 FROM  
@@ -806,6 +1072,10 @@ FROM
 DROP TABLE if exists "LOCALITY_SRC";
 
 DROP TABLE if exists "LOCALITY_ALIAS_TYPE_AUT";
+
+
+.mode csv Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv.csv Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv
 
 CREATE TABLE LOCALITY_ALIAS_TYPE_AUT (
  ogc_fid integer,
@@ -910,6 +1180,33 @@ DROP TABLE if exists "LOCALITY_NEIGHBOUR_SRC";
 
 DROP TABLE if exists "LOCALITY_POINT_SRC";
 
+.mode csv NSW_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_LOCALITY_POINT_psv.csv NSW_LOCALITY_POINT_psv
+
+.mode csv VIC_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_LOCALITY_POINT_psv.csv VIC_LOCALITY_POINT_psv
+
+.mode csv QLD_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_LOCALITY_POINT_psv.csv QLD_LOCALITY_POINT_psv
+
+.mode csv SA_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_LOCALITY_POINT_psv.csv SA_LOCALITY_POINT_psv
+
+.mode csv WA_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_LOCALITY_POINT_psv.csv WA_LOCALITY_POINT_psv
+
+.mode csv TAS_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_LOCALITY_POINT_psv.csv TAS_LOCALITY_POINT_psv
+
+.mode csv NT_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_LOCALITY_POINT_psv.csv NT_LOCALITY_POINT_psv
+
+.mode csv ACT_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_LOCALITY_POINT_psv.csv ACT_LOCALITY_POINT_psv
+
+.mode csv OT_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_LOCALITY_POINT_psv.csv OT_LOCALITY_POINT_psv
+
 CREATE TABLE "LOCALITY_POINT_SRC" AS
 SELECT ogc_fid,locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
 FROM
@@ -983,6 +1280,34 @@ DROP TABLE IF EXISTS "LOCALITY_POINT_SRC";
 
 DROP TABLE IF EXISTS "MB_2011_SRC";
 
+.mode csv NSW_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_MB_2011_psv.csv NSW_MB_2011_psv
+
+.mode csv VIC_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_MB_2011_psv.csv VIC_MB_2011_psv
+
+.mode csv QLD_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_MB_2011_psv.csv QLD_MB_2011_psv
+
+.mode csv SA_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_MB_2011_psv.csv SA_MB_2011_psv
+
+.mode csv WA_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_MB_2011_psv.csv WA_MB_2011_psv
+
+.mode csv TAS_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_MB_2011_psv.csv TAS_MB_2011_psv
+
+.mode csv NT_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_MB_2011_psv.csv NT_MB_2011_psv
+
+.mode csv ACT_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_MB_2011_psv.csv ACT_MB_2011_psv
+
+.mode csv OT_MB_2011_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_MB_2011_psv.csv OT_MB_2011_psv
+
+
 CREATE TABLE "MB_2011_SRC" AS
 SELECT ogc_fid,mb_2011_pid,date_created,date_retired,mb_2011_code
 FROM
@@ -1052,7 +1377,34 @@ FROM
 DROP TABLE IF EXISTS "MB_2011_SRC";
 
 DROP TABLE IF EXISTS "MB_2016_SRC";
- 
+
+.mode csv NSW_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_MB_2016_psv.csv NSW_MB_2016_psv
+
+.mode csv VIC_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_MB_2016_psv.csv VIC_MB_2016_psv
+
+.mode csv QLD_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_MB_2016_psv.csv QLD_MB_2016_psv
+
+.mode csv SA_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_MB_2016_psv.csv SA_MB_2016_psv
+
+.mode csv WA_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_MB_2016_psv.csv WA_MB_2016_psv
+
+.mode csv TAS_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_MB_2016_psv.csv TAS_MB_2016_psv
+
+.mode csv NT_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_MB_2016_psv.csv NT_MB_2016_psv
+
+.mode csv ACT_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_MB_2016_psv.csv ACT_MB_2016_psv
+
+.mode csv OT_MB_2016_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_MB_2016_psv.csv OT_MB_2016_psv
+
 CREATE TABLE "MB_2016_SRC" AS
 SELECT ogc_fid,mb_2016_pid,date_created,date_retired,mb_2016_code
 FROM
@@ -1123,6 +1475,9 @@ DROP TABLE if exists "MB_2016_SRC";
 
 DROP TABLE if exists "MB_MATCH_CODE_AUT";
 
+.mode csv Authority_Code_MB_MATCH_CODE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_MB_MATCH_CODE_AUT_psv.csv Authority_Code_MB_MATCH_CODE_AUT_psv
+
 CREATE TABLE MB_MATCH_CODE_AUT (
  ogc_fid integer,
  code varchar(15) NOT NULL,
@@ -1133,11 +1488,14 @@ CREATE TABLE MB_MATCH_CODE_AUT (
 INSERT INTO MB_MATCH_CODE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_mb_match_code_aut_psv;
+ Authority_Code_MB_MATCH_CODE_AUT_psv;
 
-DROP TABLE if exists "authority_code_mb_match_code_aut_psv";
+DROP TABLE if exists "Authority_Code_MB_MATCH_CODE_AUT_psv";
 
 DROP TABLE if exists "PS_JOIN_TYPE_AUT";
+
+.mode csv Authority_Code_PS_JOIN_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_PS_JOIN_TYPE_AUT_psv.csv Authority_Code_PS_JOIN_TYPE_AUT_psv
 
 CREATE TABLE PS_JOIN_TYPE_AUT (
  ogc_fid integer,
@@ -1149,11 +1507,38 @@ CREATE TABLE PS_JOIN_TYPE_AUT (
 INSERT INTO PS_JOIN_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_ps_join_type_aut_psv;
+ Authority_Code_PS_JOIN_TYPE_AUT_psv;
 
-DROP TABLE IF EXISTS "authority_code_ps_join_type_aut_psv";
+DROP TABLE IF EXISTS "Authority_Code_PS_JOIN_TYPE_AUT_psv";
 
 DROP TABLE IF EXISTS "PRIMARY_SECONDARY_SRC";
+
+.mode csv NSW_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_PRIMARY_SECONDARY_psv.csv NSW_PRIMARY_SECONDARY_psv
+
+.mode csv VIC_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_PRIMARY_SECONDARY_psv.csv VIC_PRIMARY_SECONDARY_psv
+
+.mode csv QLD_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_PRIMARY_SECONDARY_psv.csv QLD_PRIMARY_SECONDARY_psv
+
+.mode csv SA_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_PRIMARY_SECONDARY_psv.csv SA_PRIMARY_SECONDARY_psv
+
+.mode csv WA_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_PRIMARY_SECONDARY_psv.csv WA_PRIMARY_SECONDARY_psv
+
+.mode csv TAS_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_PRIMARY_SECONDARY_psv.csv TAS_PRIMARY_SECONDARY_psv
+
+.mode csv NT_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_PRIMARY_SECONDARY_psv.csv NT_PRIMARY_SECONDARY_psv
+
+.mode csv ACT_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_PRIMARY_SECONDARY_psv.csv ACT_PRIMARY_SECONDARY_psv
+
+.mode csv OT_PRIMARY_SECONDARY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_PRIMARY_SECONDARY_psv.csv OT_PRIMARY_SECONDARY_psv
 
 CREATE TABLE "PRIMARY_SECONDARY_SRC" AS
 SELECT  ogc_fid,primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
@@ -1228,6 +1613,34 @@ DROP TABLE IF EXISTS "PRIMARY_SECONDARY_SRC";
 
 DROP TABLE IF EXISTS "STATE_SRC";
 
+.mode csv NSW_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_STATE_psv.csv NSW_STATE_psv
+
+.mode csv VIC_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_STATE_psv.csv VIC_STATE_psv
+
+.mode csv QLD_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_STATE_psv.csv QLD_STATE_psv
+
+.mode csv SA_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_STATE_psv.csv SA_STATE_psv
+
+.mode csv WA_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_STATE_psv.csv WA_STATE_psv
+
+.mode csv TAS_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_STATE_psv.csv TAS_STATE_psv
+
+.mode csv NT_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_STATE_psv.csv NT_STATE_psv
+
+.mode csv ACT_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_STATE_psv.csv ACT_STATE_psv
+
+.mode csv OT_STATE_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_STATE_psv.csv OT_STATE_psv
+
+
 CREATE TABLE "STATE_SRC" AS
 SELECT  ogc_fid,state_pid,date_created,date_retired,state_name,state_abbreviation
 FROM
@@ -1299,6 +1712,9 @@ DROP TABLE if exists "STATE_SRC";
 
 DROP TABLE if exists "STREET_CLASS_AUT";
 
+.mode csv Authority_Code_STREET_CLASS_AU_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_STREET_CLASS_AUT_psv.csv Authority_Code_STREET_CLASS_AUT_psv
+
 CREATE TABLE STREET_CLASS_AUT (
  ogc_fid integer,
  code char(1) NOT NULL,
@@ -1311,9 +1727,12 @@ INSERT INTO STREET_CLASS_AUT  SELECT
 FROM
  authority_code_street_class_aut_psv;
 
-DROP TABLE if exists "authority_code_street_class_aut_psv";
+DROP TABLE if exists "Authority_Code_STREET_CLASS_AUT_psv";
 
 DROP TABLE if exists "STREET_SUFFIX_AUT";
+
+.mode csv Authority_Code_STREET_CLASS_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_STREET_CLASS_AUT_psv.csv Authority_Code_STREET_CLASS_AUT_psv
 
 CREATE TABLE STREET_SUFFIX_AUT (
  ogc_fid integer,
@@ -1327,7 +1746,7 @@ INSERT INTO STREET_SUFFIX_AUT  SELECT
 FROM
  authority_code_street_suffix_aut_psv;
 
-DROP TABLE if exists "authority_code_street_suffix_aut_psv";
+DROP TABLE if exists "Authority_Code_STREET_SUFFIX_AUT_psv";
 
 DROP TABLE if exists "STREET_TYPE_AUT";
 
@@ -1341,11 +1760,14 @@ CREATE TABLE STREET_TYPE_AUT (
 INSERT INTO STREET_TYPE_AUT  SELECT
  ogc_fid,code,name,description
 FROM
- authority_code_street_type_aut_psv;
+ Authority_Code_STREET_SUFFIX_AUT_psv;
 
-DROP TABLE if exists "authority_code_street_type_aut_psv";
+DROP TABLE if exists "Authority_Code_STREET_SUFFIX_AUT_psv";
  
 DROP TABLE if exists "STREET_LOCALITY_ALIAS_TYPE_AUT";
+
+.mode csv Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv.csv Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv
 
 CREATE TABLE STREET_LOCALITY_ALIAS_TYPE_AUT (
  ogc_fid integer,
@@ -1359,9 +1781,37 @@ INSERT INTO STREET_LOCALITY_ALIAS_TYPE_AUT  SELECT
 FROM
  authority_code_street_locality_alias_type_aut_psv;
 
-DROP TABLE IF EXISTS "authority_code_street_locality_alias_type_aut_psv";
+DROP TABLE IF EXISTS "Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv";
 
 DROP TABLE IF EXISTS "STREET_LOCALITY_SRC";
+
+.mode csv NSW_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_STREET_LOCALITY_psv.csv NSW_STREET_LOCALITY_psv
+
+.mode csv VIC_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_STREET_LOCALITY_psv.csv VIC_STREET_LOCALITY_psv
+
+.mode csv QLD_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_STREET_LOCALITY_psv.csv QLD_STREET_LOCALITY_psv
+
+.mode csv SA_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_STREET_LOCALITY_psv.csv SA_STREET_LOCALITY_psv
+
+.mode csv WA_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_STREET_LOCALITY_psv.csv WA_STREET_LOCALITY_psv
+
+.mode csv TAS_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_STREET_LOCALITY_psv.csv TAS_STREET_LOCALITY_psv
+
+.mode csv NT_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_STREET_LOCALITY_psv.csv NT_STREET_LOCALITY_psv
+
+.mode csv ACT_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_STREET_LOCALITY_psv.csv ACT_STREET_LOCALITY_psv
+
+.mode csv OT_STREET_LOCALITY_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_STREET_LOCALITY_psv.csv OT_STREET_LOCALITY_psv
+
 
 CREATE TABLE "STREET_LOCALITY_SRC" AS
 SELECT ogc_fid,street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
@@ -1440,6 +1890,33 @@ DROP TABLE IF EXISTS "STREET_LOCALITY_SRC";
 
 DROP TABLE IF EXISTS "STREET_LOCALITY_ALIAS_SRC";
 
+.mode csv NSW_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_STREET_LOCALITY_ALIAS_psv.csv NSW_STREET_LOCALITY_ALIAS_psv
+
+.mode csv VIC_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_STREET_LOCALITY_ALIAS_psv.csv VIC_STREET_LOCALITY_ALIAS_psv
+
+.mode csv QLD_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_STREET_LOCALITY_ALIAS_psv.csv QLD_STREET_LOCALITY_ALIAS_psv
+
+.mode csv SA_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_STREET_LOCALITY_ALIAS_psv.csv SA_STREET_LOCALITY_ALIAS_psv
+
+.mode csv WA_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_STREET_LOCALITY_ALIAS_psv.csv WA_STREET_LOCALITY_ALIAS_psv
+
+.mode csv TAS_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_STREET_LOCALITY_ALIAS_psv.csv TAS_STREET_LOCALITY_ALIAS_psv
+
+.mode csv NT_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_STREET_LOCALITY_ALIAS_psv.csv NT_STREET_LOCALITY_ALIAS_psv
+
+.mode csv ACT_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_STREET_LOCALITY_ALIAS_psv.csv ACT_STREET_LOCALITY_ALIAS_psv
+
+.mode csv OT_STREET_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_STREET_LOCALITY_ALIAS_psv.csv OT_STREET_LOCALITY_ALIAS_psv
+
 CREATE TABLE "STREET_LOCALITY_ALIAS_SRC" AS
 SELECT ogc_fid,street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
 FROM
@@ -1511,7 +1988,36 @@ FROM
  STREET_LOCALITY_ALIAS_SRC;
 
 DROP TABLE IF EXISTS "STREET_LOCALITY_ALIAS_SRC";
- 
+
+DROP TABLE IF EXISTS "STREET_LOCALITY_POINT_SRC";
+
+.mode csv NSW_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_STREET_LOCALITY_POINT_psv.csv NSW_STREET_LOCALITY_POINT_psv
+
+.mode csv VIC_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_STREET_LOCALITY_POINT_psv.csv VIC_STREET_LOCALITY_POINT_psv
+
+.mode csv QLD_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_STREET_LOCALITY_POINT_psv.csv QLD_STREET_LOCALITY_POINT_psv
+
+.mode csv SA_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_STREET_LOCALITY_POINT_psv.csv SA_STREET_LOCALITY_POINT_psv
+
+.mode csv WA_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_STREET_LOCALITY_POINT_psv.csv WA_STREET_LOCALITY_POINT_psv
+
+.mode csv TAS_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_STREET_LOCALITY_POINT_psv.csv TAS_STREET_LOCALITY_POINT_psv
+
+.mode csv NT_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_STREET_LOCALITY_POINT_psv.csv NT_STREET_LOCALITY_POINT_psv
+
+.mode csv ACT_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_STREET_LOCALITY_POINT_psv.csv ACT_STREET_LOCALITY_POINT_psv
+
+.mode csv OT_STREET_LOCALITY_POINT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_STREET_LOCALITY_POINT_psv.csv OT_STREET_LOCALITY_POINT_psv
+
 CREATE TABLE "STREET_LOCALITY_POINT_SRC" AS
 SELECT ogc_fid, street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
 FROM 
@@ -1584,6 +2090,33 @@ FROM
 DROP TABLE IF EXISTS "STREET_LOCALITY_POINT_SRC";
 
 DROP TABLE IF EXISTS "LOCALITY_ALIAS_SRC";
+
+.mode csv NSW_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_LOCALITY_ALIAS_psv.csv NSW_LOCALITY_ALIAS_psv
+
+.mode csv VIC_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/VIC_LOCALITY_ALIAS_psv.csv VIC_LOCALITY_ALIAS_psv
+
+.mode csv QLD_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/QLD_LOCALITY_ALIAS_psv.csv QLD_LOCALITY_ALIAS_psv
+
+.mode csv SA_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/SA_LOCALITY_ALIAS_psv.csv SA_LOCALITY_ALIAS_psv
+
+.mode csv WA_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/WA_LOCALITY_ALIAS_psv.csv WA_STREET_LOCALITY_ALIAS_psv
+
+.mode csv TAS_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/TAS_LOCALITY_ALIAS_psv.csv TAS_LOCALITY_ALIAS_psv
+
+.mode csv NT_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NT_LOCALITY_ALIAS_psv.csv NT_LOCALITY_ALIAS_psv
+
+.mode csv ACT_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/ACT_LOCALITY_ALIAS_psv.csv ACT_LOCALITY_ALIAS_psv
+
+.mode csv OT_LOCALITY_ALIAS_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_LOCALITY_ALIAS_psv.csv OT_LOCALITY_ALIAS_psv
 
 CREATE TABLE "LOCALITY_ALIAS_SRC" AS
 SELECT ogc_fid,locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
