@@ -22,6 +22,7 @@ output ../street_locality.csv
 select * from STREET_LOCALITY_VIEW;
 output ../locality.csv
 select * from LOCALITY_VIEW;
+.quit
 ```
 
 
