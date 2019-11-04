@@ -19,4 +19,4 @@ for thestate in d.states8:
 
 
 #
-Process.Collate.create_sql(d,p)
+Process.Collate.create_sql(d.state8,p)
