@@ -7,6 +7,7 @@ sh load_basefiles.sh
 sqlite3 ../spatialite_db/db.sqlite < ../spatialite_db/etl2.sql
 ...
 
+
 - res_street_locality.csv,
 - street_locality.csv,
 - locality.csv
