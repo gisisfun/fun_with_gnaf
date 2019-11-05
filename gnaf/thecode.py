@@ -1,6 +1,6 @@
 from gnaf.parameters import Tables,Defaults
 
-import os,sqlite3
+import os,sqlite3,subprocess
 
 
 class Process:    
@@ -19,7 +19,26 @@ class Process:
                 self.Slash = '/' # posixValues.Slash # '/'
             else:
                 self.Slash = '\\'# ntValues.Slash # '\\'
-            
+        
+#        def cmds_to_db (self,cmdfile, db):
+#        db_text = '{SplitePath}{slash}{db}.sqlite'.\
+#                  format(db = db,\
+#                         slash = self.Slash,\
+#                         SplitePath = self.SpatialitePath)
+#                                                      
+#        cmd_text = '{vrtPath}{slash}{cmdfile}.vrt'.\
+#                   format(cmdfile = cmdfile,\
+#                          slash = self.Slash,\
+#                          vrtPath = self.VRTPath)
+#        options = [cmd_text,  db_text ,'<', cmd_text]
+
+        try:
+            # record the output!        
+            subprocess.check_output(options)
+            print('\ncommands successful')
+        except FileNotFoundError:
+            print('No commands processed')
+        
         def sql_to_db (self,sqltext, db):
         
             with sqlite3.connect("{Splite}{slash}{db}.sqlite".\
