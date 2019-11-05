@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS "ADDRESS_ALIAS_SRC";
+
 .mode csv NSW_ADDRESS_ALIAS_psv
 .import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/NSW_ADDRESS_ALIAS_psv.csv NSW_ADDRESS_ALIAS_psv
 
@@ -25,7 +27,6 @@
 .mode csv OT_ADDRESS_ALIAS_psv
 .import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Standard/OT_ADDRESS_ALIAS_psv.csv OT_ADDRESS_ALIAS_psv
 
-DROP TABLE IF EXISTS "ADDRESS_ALIAS_SRC";
 CREATE TABLE "ADDRESS_ALIAS_SRC" AS
 SELECT ogc_fid,address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment 
 FROM 
@@ -874,6 +875,9 @@ FROM
 DROP TABLE if exists "Authority_Code_FLAT_TYPE_AUT_psv";
 
 DROP TABLE if exists "FLAT_TYPE_AUT";
+
+.mode csv Authority_Code_FLAT_TYPE_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_FLAT_TYPE_AUT_psv.csv Authority_Code_FLAT_TYPE_AUT_psv
 
 CREATE TABLE FLAT_TYPE_AUT (
  ogc_fid integer,
@@ -1732,7 +1736,7 @@ DROP TABLE if exists "STATE_SRC";
 
 DROP TABLE if exists "STREET_CLASS_AUT";
 
-.mode csv Authority_Code_STREET_CLASS_AU_psv
+.mode csv Authority_Code_STREET_CLASS_AUT_psv
 .import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_STREET_CLASS_AUT_psv.csv Authority_Code_STREET_CLASS_AUT_psv
 
 CREATE TABLE STREET_CLASS_AUT (
@@ -1751,8 +1755,8 @@ DROP TABLE if exists "Authority_Code_STREET_CLASS_AUT_psv";
 
 DROP TABLE if exists "STREET_SUFFIX_AUT";
 
-.mode csv Authority_Code_STREET_CLASS_AUT_psv
-.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_STREET_CLASS_AUT_psv.csv Authority_Code_STREET_CLASS_AUT_psv
+.mode csv Authority_Code_STREET_SUFFIX_AUT_psv
+.import ../AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/Authority_Code/Authority_Code_STREET_SUFFIX_AUT_psv.csv Authority_Code_STREET_SUFFIX_AUT_psv
 
 CREATE TABLE STREET_SUFFIX_AUT (
  ogc_fid integer,
