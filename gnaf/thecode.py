@@ -66,8 +66,9 @@ class Process:
             c.state_pipes(tbl)
             c.drop_states_sql_st(tbl)
             c.load_states_sql_st(tbl)
-            upd = 'UPDATE'
+            upd = 'UNION'
             print(tbl.sqlDropMrgTbl)
+            print(tbl.sqlDropOutTbl)
             print(tbl.sqlStart)
             for thestate in tbl.stateList:
                 print(tbl.sqlState.format(state = thestate))

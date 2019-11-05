@@ -20,19 +20,19 @@ class Tables:
         
     
         class ADDRESS_ALIAS:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
-                self.stateList = Def.states8
+                self.stateList = Def.states9
                 self.filePiped = '{state}_ADDRESS_ALIAS_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_ALIAS_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_ALIAS_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_ALIAS";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_ALIAS_SRC" AS'
-                self.sqlState = """SELECT ogc_fid,address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment
+                self.sqlState = """SELECT address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment
 FROM {state}_ADDRESS_ALIAS_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_ALIAS (
- ogc_fid integer,
  address_alias_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -42,7 +42,7 @@ FROM {state}_ADDRESS_ALIAS_psv"""
  alias_comment varchar(200)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_ALIAS SELECT
- ogc_fid,address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment
+ address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment
 FROM ADDRESS_ALIAS_SRC;"""
                 
         class ADDRESS_DEFAULT_GEOCODE:
@@ -54,11 +54,11 @@ FROM ADDRESS_ALIAS_SRC;"""
                 self.filePiped = '{state}_ADDRESS_DEFAULT_GEOCODE_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_DEFAULT_GEOCODE_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_DEFAULT_GEOCODE_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_DEFAULT_GEOCODE";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_DEFAULT_GEOCODE_SRC" AS'
-                self.sqlState = """SELECT ogc_fid,address_default_geocode_pid,date_created,date_retired,address_detail_pid,geocode_type_code,longitude,latitude
+                self.sqlState = """SELECT address_default_geocode_pid,date_created,date_retired,address_detail_pid,geocode_type_code,longitude,latitude
 FROM {state}_ADDRESS_DEFAULT_GEOCODE_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_DEFAULT_GEOCODE (
- ogc_fid integer,
  address_default_geocode_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -68,7 +68,7 @@ FROM {state}_ADDRESS_DEFAULT_GEOCODE_psv"""
  latitude numeric(10,8)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_DEFAULT_GEOCODE
-SELECT ogc_fid,address_default_geocode_pid,date_created,date_retired,address_detail_pid,geocode_type_code,longitude,latitude
+SELECT address_default_geocode_pid,date_created,date_retired,address_detail_pid,geocode_type_code,longitude,latitude
 FROM ADDRESS_DEFAULT_GEOCODE_SRC;"""
 
         class ADDRESS_DETAIL:
@@ -80,11 +80,11 @@ FROM ADDRESS_DEFAULT_GEOCODE_SRC;"""
                 self.filePiped = '{state}_ADDRESS_DETAIL_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_DETAIL_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_DETAIL_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_DETAIL";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_DETAIL_SRC" AS'
-                self.sqlState = """SELECT ogc_fid,address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
+                self.sqlState = """SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
 FROM {state}_ADDRESS_DETAIL_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_DETAIL (
- ogc_fid integer,
  address_detail_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_last_modified date,
@@ -122,7 +122,7 @@ FROM {state}_ADDRESS_DETAIL_psv"""
  primary_secondary varchar(1)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_DETAIL
-SELECT ogc_fid,address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
+SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
 FROM ADDRESS_DETAIL_SRC;"""
 
 
@@ -135,6 +135,7 @@ FROM ADDRESS_DETAIL_SRC;"""
                 self.filePiped = '{state}_ADDRESS_FEATURE_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_FEATURE_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_FEATURE_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_FEATURE";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_FEATURE_SRC" AS'
                 self.sqlState = """SELECT  address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code
 FROM {state}_ADDRESS_FEATURE_psv"""
@@ -147,7 +148,7 @@ FROM {state}_ADDRESS_FEATURE_psv"""
  address_change_type_code varchar(50)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_FEATURE
-SELECT ogc_fid,address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
+SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
 FROM ADDRESS_FEATURE_SRC;"""
         
         class ADDRESS_MESH_BLOCK_2011:
@@ -159,11 +160,11 @@ FROM ADDRESS_FEATURE_SRC;"""
                 self.filePiped = '{state}_ADDRESS_MESH_BLOCK_2011_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_MESH_BLOCK_2011_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_MESH_BLOCK_2011_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_MESH_BLOCK_2011";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_MESH_BLOCK_2011_SRC" AS'
-                self.sqlState = """SELECT ogc_fid, address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
+                self.sqlState = """SELECT  address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
 FROM {state}_ADDRESS_MESH_BLOCK_2011_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_MESH_BLOCK_2011 (
- ogc_fid integer,
  address_mesh_block_2011_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -172,7 +173,7 @@ FROM {state}_ADDRESS_MESH_BLOCK_2011_psv"""
  mb_2011_pid varchar(15) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_MESH_BLOCK_2011
-SELECT ogc_fid,address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
+SELECT address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
 FROM  ADDRESS_MESH_BLOCK_2011_SRC;"""
 
         class ADDRESS_MESH_BLOCK_2016:
@@ -184,11 +185,11 @@ FROM  ADDRESS_MESH_BLOCK_2011_SRC;"""
                 self.filePiped = '{state}_ADDRESS_MESH_BLOCK_2016_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_MESH_BLOCK_2016_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_MESH_BLOCK_2016_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_MESH_BLOCK_2016";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_MESH_BLOCK_2016_SRC" AS'
-                self.sqlState = """SELECT ogc_fid,address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
+                self.sqlState = """SELECT address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
 FROM {state}_ADDRESS_MESH_BLOCK_2016_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_MESH_BLOCK_2016 (
- ogc_fid integer,
  address_mesh_block_2016_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -197,7 +198,7 @@ FROM {state}_ADDRESS_MESH_BLOCK_2016_psv"""
  mb_2016_pid varchar(15) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_MESH_BLOCK_2016
-SELECT ogc_fid,address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
+SELECT address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
 FROM ADDRESS_MESH_BLOCK_2016_SRC;"""
 
         class ADDRESS_SITE:
@@ -209,11 +210,11 @@ FROM ADDRESS_MESH_BLOCK_2016_SRC;"""
                 self.filePiped = '{state}_ADDRESS_SITE_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_SITE_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_SITE_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_SITE";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_SITE" AS'
-                self.sqlState = """SELECT ogc_fid,address_site_pid,date_created,date_retired,address_type,address_site_name 
+                self.sqlState = """SELECT address_site_pid,date_created,date_retired,address_type,address_site_name 
 FROM {state}_ADDRESS_SITE_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_SITE (
- ogc_fid integer,
  address_site_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -221,7 +222,7 @@ FROM {state}_ADDRESS_SITE_psv"""
  address_site_name varchar(200)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_SITE
-SELECT ogc_fid,address_site_pid,date_created,date_retired,address_type,address_site_name 
+SELECT address_site_pid,date_created,date_retired,address_type,address_site_name 
 FROM ADDRESS_SITE_SRC;"""
 
         class ADDRESS_SITE_GEOCODE:
@@ -233,11 +234,11 @@ FROM ADDRESS_SITE_SRC;"""
                 self.filePiped = '{state}_ADDRESS_SITE_GEOCODE_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_SITE_GEOCODE_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_SITE_GEOCODE_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_SITE_GEOCODE";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_SITE_GEOCODE_SRC" AS'
-                self.sqlState = """SELECT ogc_fid,address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
+                self.sqlState = """SELECT address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
 FROM {state}_ADDRESS_SITE_GEOCODE_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_SITE_GEOCODE (
- ogc_fid integer,
  address_site_geocode_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -253,7 +254,7 @@ FROM {state}_ADDRESS_SITE_GEOCODE_psv"""
  latitude numeric(10,8)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_SITE_GEOCODE
-SELECT ogc_fid,address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
+SELECT address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
 FROM ADDRESS_SITE_GEOCODE_SRC;"""
 
         class LOCALITY:
@@ -265,11 +266,11 @@ FROM ADDRESS_SITE_GEOCODE_SRC;"""
                 self.filePiped = '{state}_LOCALITY_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_LOCALITY_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY";'
                 self.sqlStart = 'CREATE TABLE "LOCALITY" AS'
-                self.sqlState = """SELECT ogc_fid,locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
+                self.sqlState = """SELECT locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
 FROM {state}_LOCALITY_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY (
- ogc_fid integer,
  locality_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -281,7 +282,7 @@ FROM {state}_LOCALITY_psv"""
  gnaf_reliability_code numeric(1) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO LOCALITY
-SELECT ogc_fid,locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
+SELECT locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
 FROM LOCALITY_SRC;"""
                 
 
@@ -294,11 +295,11 @@ FROM LOCALITY_SRC;"""
                 self.filePiped = '{state}_LOCALITY_NEIGHBOUR_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_LOCALITY_NEIGHBOUR_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_NEIGHBOUR_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY_NEIGHBOUR";'
                 self.sqlStart = 'CREATE TABLE "LOCALITY_NEIGHBOUR" AS'
-                self.sqlState = """SELECT  ogc_fid,locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
+                self.sqlState = """SELECT  locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
 FROM {state}_LOCALITY_NEIGHBOUR_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY_NEIGHBOUR (
- ogc_fid integer,
  locality_neighbour_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -307,7 +308,7 @@ FROM {state}_LOCALITY_NEIGHBOUR_psv"""
 );
 """
                 self.sqlInsert = """INSERT INTO LOCALITY_NEIGHBOUR
-SELECT ogc_fid,locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
+SELECT locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
 FROM LOCALITY_NEIGHBOUR_SRC;"""
 
         class LOCALITY_POINT:
@@ -319,11 +320,11 @@ FROM LOCALITY_NEIGHBOUR_SRC;"""
                 self.filePiped = '{state}_LOCALITY_POINT_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_LOCALITY_POINT_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_POINT_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY_POINT";'
                 self.sqlStart = 'CREATE TABLE "LOCALITY_POINT" AS'
-                self.sqlState = """SELECT ogc_fid,locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
+                self.sqlState = """SELECT locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
 FROM {state}_LOCALITY_POINT_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY_POINT (
- ogc_fid integer,
  locality_point_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -333,7 +334,7 @@ FROM {state}_LOCALITY_POINT_psv"""
  latitude numeric(10,8)
 );"""
                 self.sqlInsert = """INSERT INTO LOCALITY_POINT
-SELECT ogc_fid,locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
+SELECT locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
 FROM LOCALITY_POINT_SRC;"""
 
 
@@ -346,18 +347,18 @@ FROM LOCALITY_POINT_SRC;"""
                 self.filePiped = '{state}_MB_2011_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_MB_2011_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "MB_2011_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "MB_2011";'
                 self.sqlStart = 'CREATE TABLE "MB_2011" AS'
-                self.sqlState = """SELECT ogc_fid,mb_2011_pid,date_created,date_retired,mb_2011_code
+                self.sqlState = """SELECT mb_2011_pid,date_created,date_retired,mb_2011_code
 FROM {state}_MB_2011_psv"""
                 self.sqlTable = """CREATE TABLE "MB_2011" (
- ogc_fid integer,
  mb_2011_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
  mb_2011_code varchar(15) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO "MB_2011"
-SELECT ogc_fid,mb_2011_pid,date_created,date_retired,mb_2011_code
+SELECT mb_2011_pid,date_created,date_retired,mb_2011_code
 FROM MB_2011_SRC;"""
 
         class MB_2016:
@@ -369,18 +370,18 @@ FROM MB_2011_SRC;"""
                 self.filePiped = '{state}_MB_2016_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_MB_2016_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "MB_2016_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "MB_2016";'
                 self.sqlStart = 'CREATE TABLE "MB_2016" AS'
-                self.sqlState = """SELECT ogc_fid,mb_2016_pid,date_created,date_retired,mb_2011_code
+                self.sqlState = """SELECT mb_2016_pid,date_created,date_retired,mb_2011_code
 FROM {state}_MB_2016_psv"""
                 self.sqlTable = """CREATE TABLE "MB_2016" (
- ogc_fid integer,
  mb_2016_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
  mb_2016_code varchar(15) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO "MB_2016"
-SELECT ogc_fid,mb_2011_pid,date_created,date_retired,mb_2011_code
+SELECT mb_2011_pid,date_created,date_retired,mb_2011_code
 FROM MB_2016_SRC;"""
 
         class PRIMARY_SECONDARY:
@@ -392,11 +393,11 @@ FROM MB_2016_SRC;"""
                 self.filePiped = '{state}_PRIMARY_SECONDARY_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_PRIMARY_SECONDARY_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "PRIMARY_SECONDARY_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "PRIMARY_SECONDARY";'
                 self.sqlStart = 'CREATE TABLE "PRIMARY_SECONDARY" AS'
-                self.sqlState = """SELECT  ogc_fid,primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
+                self.sqlState = """SELECT  primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
 FROM {state}_PRIMARY_SECONDARY_psv"""
                 self.sqlTable = """CREATE TABLE PRIMARY_SECONDARY (
- ogc_fid integer,
  primary_secondary_pid varchar(15) NOT NULL,
  primary_pid varchar(15) NOT NULL,
  secondary_pid varchar(15) NOT NULL,
@@ -406,7 +407,7 @@ FROM {state}_PRIMARY_SECONDARY_psv"""
  ps_join_comment varchar(500)
 );"""
                 self.sqlInsert = """INSERT INTO PRIMARY_SECONDARY
-SELECT ogc_fid,primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
+SELECT primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
 FROM PRIMARY_SECONDARY_SRC;"""
 
 
@@ -419,11 +420,11 @@ FROM PRIMARY_SECONDARY_SRC;"""
                 self.filePiped = '{state}_STATE_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_STATE_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "STATE_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "STATE";'
                 self.sqlStart = 'CREATE TABLE "STATE" AS'
-                self.sqlState = """SELECT  ogc_fid,state_pid,date_created,date_retired,state_name,state_abbreviation
+                self.sqlState = """SELECT  state_pid,date_created,date_retired,state_name,state_abbreviation
 FROM {state}_STATE_psv"""
                 self.sqlTable = """CREATE TABLE STATE (
- ogc_fid integer,
  state_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -431,7 +432,7 @@ FROM {state}_STATE_psv"""
  state_abbreviation varchar(3) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO STATE
-SELECT ogc_fid,state_pid,date_created,date_retired,state_name,state_abbreviation
+SELECT state_pid,date_created,date_retired,state_name,state_abbreviation
 FROM STATE_SRC;"""
 
 
@@ -444,11 +445,11 @@ FROM STATE_SRC;"""
                 self.filePiped = '{state}_STREET_LOCALITY_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_STREET_LOCALITY_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY";'
                 self.sqlStart = 'CREATE TABLE "STREET_LOCALITY" AS'
-                self.sqlState = """SELECT ogc_fid,street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
+                self.sqlState = """SELECT street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
 FROM {state}_STREET_LOCALITY_psv"""
                 self.sqlTable = """CREATE TABLE STREET_LOCALITY (
- ogc_fid integer,
  street_locality_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -462,7 +463,7 @@ FROM {state}_STREET_LOCALITY_psv"""
  gnaf_reliability_code numeric(1) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY  SELECT
- ogc_fid,street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
+ street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
 FROM
  STREET_LOCALITY_SRC;"""
 
@@ -475,11 +476,11 @@ FROM
                 self.filePiped = '{state}_STREET_LOCALITY_ALIAS_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_STREET_LOCALITY_ALIAS_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_ALIAS_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_ALIAS";'
                 self.sqlStart = 'CREATE TABLE "STREET_LOCALITY_ALIAS" AS'
-                self.sqlState = """SELECT ogc_fid,street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
+                self.sqlState = """SELECT street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
 FROM {state}_STREET_LOCALITY_ALIAS_psv"""
                 self.sqlTable = """CREATE TABLE STREET_LOCALITY_ALIAS (
- ogc_fid integer,
  street_locality_alias_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -491,7 +492,7 @@ FROM {state}_STREET_LOCALITY_ALIAS_psv"""
 );
 """
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY_ALIAS
-SELECT ogc_fid, street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
+SELECT  street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
 FROM STREET_LOCALITY_ALIAS_SRC;"""
 
 
@@ -504,11 +505,11 @@ FROM STREET_LOCALITY_ALIAS_SRC;"""
                 self.filePiped = '{state}_STREET_LOCALITY_POINT_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_STREET_LOCALITY_POINT_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_POINT_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_POINT";'
                 self.sqlStart = 'CREATE TABLE "STREET_LOCALITY_POINT" AS'
-                self.sqlState = """SELECT ogc_fid, street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
+                self.sqlState = """SELECT  street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
 FROM {state}_STREET_LOCALITY_POINT_psv"""
                 self.sqlTable = """CREATE TABLE STREET_LOCALITY_POINT (
- ogc_fid integer,
  street_locality_point_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -519,7 +520,7 @@ FROM {state}_STREET_LOCALITY_POINT_psv"""
  latitude numeric(10,8)
 );"""
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY_POINT
-SELECT ogc_fid, street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
+SELECT  street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
 FROM  STREET_LOCALITY_POINT_SRC;"""
 
 
@@ -532,11 +533,11 @@ FROM  STREET_LOCALITY_POINT_SRC;"""
                 self.filePiped = '{state}_LOCALITY_ALIAS_psv'
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_LOCALITY_ALIAS_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_ALIAS_SRC";'
+                self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY_ALIAS";'
                 self.sqlStart = 'CREATE TABLE "LOCALITY_ALIAS" AS'
-                self.sqlState = """SELECT ogc_fid,locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
+                self.sqlState = """SELECT locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
 FROM {state}_LOCALITY_ALIAS_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY_ALIAS (
- ogc_fid integer,
  locality_alias_pid varchar(15) NOT NULL,
  date_created date NOT NULL,
  date_retired date,
@@ -547,7 +548,7 @@ FROM {state}_LOCALITY_ALIAS_psv"""
  state_pid varchar(15) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO LOCALITY_ALIAS
-SELECT ogc_fid,locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
+SELECT locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
 FROM LOCALITY_ALIAS_SRC;"""
 
 
@@ -562,13 +563,12 @@ FROM LOCALITY_ALIAS_SRC;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_ALIAS_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE ADDRESS_ALIAS_TYPE_AUT (
- ogc_fid integer,
  code varchar(10) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(30)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_ALIAS_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv;
 """
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv";'
@@ -581,14 +581,13 @@ FROM Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv;
                 self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_CHANGE_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE ADDRESS_CHANGE_TYPE_AUT (
- ogc_fid integer,
  code varchar(50) NOT NULL,
  name varchar(100) NOT NULL,
  description varchar(500)
 );"""
                 self.sqlInsert = """
 INSERT INTO ADDRESS_CHANGE_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv";'
 
@@ -600,14 +599,13 @@ FROM Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE ADDRESS_TYPE_AUT (
- ogc_fid integer,
  code varchar(50) NOT NULL,
  name varchar(100) NOT NULL,
  description varchar(500)
 );"""
                 self.sqlInsert = """
 INSERT INTO ADDRESS_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_ADDRESS_TYPE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_TYPE_AUT_psv";'
 
@@ -619,14 +617,13 @@ FROM Authority_Code_ADDRESS_TYPE_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "FLAT_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE FLAT_TYPE_AUT (
- ogc_fid integer,
  code varchar(50) NOT NULL,
  name varchar(100) NOT NULL,
  description varchar(500)
 );"""
                 self.sqlInsert = """
 INSERT INTO ADDRESS_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_ADDRESS_TYPE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_FLAT_TYPE_AUT_psv";'
                 
@@ -639,14 +636,13 @@ FROM Authority_Code_ADDRESS_TYPE_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "GEOCODE_RELIABILITY_AUT";'
                 self.sqlTable = """
 CREATE TABLE GEOCODE_RELIABILITY_AUT (
- ogc_fid integer,
  code numeric(1) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(100)
 );"""
                 self.sqlInsert = """
 INSERT INTO GEOCODE_RELIABILITY_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_GEOCODE_RELIABILITY_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_GEOCODE_RELIABILITY_AUT_psv";'
                 
@@ -658,14 +654,13 @@ FROM Authority_Code_GEOCODE_RELIABILITY_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "GEOCODE_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE GEOCODE_TYPE_AUT (
- ogc_fid integer,
  code numeric(4) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(250)
 );"""
                 self.sqlInsert = """
 INSERT INTO GEOCODE_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_GEOCODE_TYPE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_GEOCODE_TYPE_AUT_psv";'
                 
@@ -677,14 +672,13 @@ FROM Authority_Code_GEOCODE_TYPE_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "LEVEL_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE LEVEL_TYPE_AUT (
- ogc_fid integer,
  code varchar(4) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(30)
 );"""
                 self.sqlInsert = """
 INSERT INTO LEVEL_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_LEVEL_TYPE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_LEVEL_TYPE_AUT_psv";'
                 
@@ -696,14 +690,13 @@ FROM Authority_Code_LEVEL_TYPE_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "LOCALITY_ALIAS_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE LOCALITY_ALIAS_TYPE_AUT (
- ogc_fid integer,
  code varchar(10) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(100)
 );"""
                 self.sqlInsert = """
 INSERT INTO LOCALITY_ALIAS_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv";'
                 
@@ -715,14 +708,13 @@ FROM Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "LOCALITY_CLASS_AUT";'
                 self.sqlTable = """
 CREATE TABLE LOCALITY_CLASS_AUT (
- ogc_fid integer,
  code char(1) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(200)
 );"""
                 self.sqlInsert = """
 INSERT INTO LOCALITY_CLASS_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_LOCALITY_CLASS_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_LOCALITY_CLASS_AUT_psv";'
                 
@@ -734,14 +726,13 @@ FROM Authority_Code_LOCALITY_CLASS_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "MB_MATCH_CODE_AUT";'
                 self.sqlTable = """
 CREATE TABLE MB_MATCH_CODE_AUT (
- ogc_fid integer,
  code varchar(15) NOT NULL,
  name varchar(100) NOT NULL,
  description varchar(250)
 );"""
                 self.sqlInsert = """
 INSERT INTO MB_MATCH_CODE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_MB_MATCH_CODE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_MB_MATCH_CODE_AUT_psv";'
                 
@@ -753,14 +744,13 @@ FROM Authority_Code_MB_MATCH_CODE_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "PS_JOIN_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE PS_JOIN_TYPE_AUT (
- ogc_fid integer,
  code numeric(2) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(500)
 );"""
                 self.sqlInsert = """
 INSERT INTO PS_JOIN_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_PS_JOIN_TYPE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_PS_JOIN_TYPE_AUT_psv";'
 
@@ -772,14 +762,13 @@ FROM Authority_Code_PS_JOIN_TYPE_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "STREET_CLASS_AUT";'
                 self.sqlTable = """
 CREATE TABLE STREET_CLASS_AUT (
- ogc_fid integer,
  code char(1) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(200)
 );"""
                 self.sqlInsert = """
 INSERT INTO STREET_CLASS_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_STREET_CLASS_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_STREET_CLASS_AUT_psv";'
 
@@ -791,14 +780,13 @@ FROM Authority_Code_STREET_CLASS_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "STREET_SUFFIX_AUT";'
                 self.sqlTable = """
 CREATE TABLE STREET_SUFFIX_AUT (
- ogc_fid integer,
  code varchar(15) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(30)
 );"""
                 self.sqlInsert = """
 INSERT INTO STREET_SUFFIX_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_STREET_SUFFIX_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_STREET_SUFFIX_AUT_psv";'
 
@@ -810,13 +798,12 @@ FROM Authority_Code_STREET_SUFFIX_AUT_psv;"""
                 self.sqlDropTbl = 'DROP TABLE if exists "STREET_LOCALITY_ALIAS_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE STREET_LOCALITY_ALIAS_TYPE_AUT (
- ogc_fid integer,
  code varchar(10) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(15)
 );"""
                 self.sqlInsert = """
 INSERT INTO STREET_LOCALITY_ALIAS_TYPE_AUT
-SELECT ogc_fid,code,name,description
+SELECT code,name,description
 FROM Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv;"""
                 self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv";'
