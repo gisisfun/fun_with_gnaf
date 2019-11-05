@@ -62,8 +62,10 @@ class Process:
                 
     class Collate:
 
-        def create_merge_sql_st(d,tbl):
-            #d = Defaults()
+        def create_merge_state_sql_st(tbl):
+            c = Process.Collect('AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/','Standard/')
+            c.drop_states_sql_st(tbl)
+            c.load_states_sql_st(tbl)
             upd = 'UPDATE'
             print(tbl.sqlDropMrgTbl)
             print(tbl.sqlStart)
@@ -77,5 +79,5 @@ class Process:
             print(tbl.sqlTable)
             print(tbl.sqlInsert)
             print(tbl.sqlDropMrgTbl)
-
+            c.drop_states_sql_st(tbl)
         
