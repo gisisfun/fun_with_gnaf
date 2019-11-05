@@ -34,7 +34,7 @@ from gnaf.parameters import Tables,Defaults
 from gnaf.thecode import Process
 
 gnafP = 'AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/'
-ds = Process.Do_Stuff()
+ds = Process.Do_Stuff('spatialite_db')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_DEFAULT_GEOCODE(),gnafP,'Standard/'),'testing')
 ```
 
