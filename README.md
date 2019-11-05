@@ -31,7 +31,7 @@ Some Python Code under developmennt to replace bash shell scripts.
 
 **Accessing Output of Code**
 
-*in powershell
+*in powershell*
 
 ```
 get-content res_street_locality.csv | select-string "PARLIAMENT HOUSE" | select-string "ACT"
@@ -40,13 +40,13 @@ get-content locality.csv | select-string "CAPITAL HILL"
 
 ```
 
-*A DIY Powershell Address Geocoder
+A DIY Powershell Address Geocoder
 
-Let's clean the input file
+*Let's clean the input file*
 ```
 get-content rawaddresses.txt | % {$_.replace("/"," ")} |% {$_.replace("cres ","crescent ")} | % {$_.replace(","," ")} |% {$_.replace("st ","street ")} |% {$_.replace("  " , " ")} | out-file myaddresses.txt
 ```
-*Let's Geocode addresses and record the output in another file
+*Let's Geocode addresses and record the output in another file*
 ```
 echo "" | Out-File -FilePath Process.txt;foreach($line in [System.IO.File]::ReadLines("myaddresses.txt")){ echo $line| Out-File -FilePath Process.txt -Append; get-content res_street_locality.csv | select-string $line| select -first 1 | Out-File -FilePath Process.txt -Append}
 ```
@@ -54,14 +54,14 @@ echo "" | Out-File -FilePath Process.txt;foreach($line in [System.IO.File]::Read
 
 https://stackoverflow.com/questions/33511772/read-file-line-by-line-in-powershell
 
-*in linux shell
+*in linux shell*
 
 ```
 cat res_street_locality.csv | grep "PARLIAMENT HOUSE" | grep "ACT"
 cat street_locality.csv | grep "CAPITAL HILL" 
 cat locality.csv | grep "CAPITAL HILL"
 ```
-*in R
+*in R*
 
 ```
 library(readr)
