@@ -21,8 +21,8 @@ from gnaf.thecode import Process
 #c.load_states_sql_st(p)
 #c.drop_states_sql_st(p)
 gnafP = 'AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/'
-ds = Process.Do_Stuff()
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_DEFAULT_GEOCODE(),gnafP,'Standard/'),'testing')
+ds = Process.Do_Stuff('spatialite_db')
+ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_MESH_BLOCK_2016(),gnafP,'Standard/'),'testing')
 
 #Process.Collate.create_merge_auth_sql_st(Tables.Authority_Code.ADDRESS_ALIAS_TYPE_AUT(),gnafP,'Authority_Code/')
 
