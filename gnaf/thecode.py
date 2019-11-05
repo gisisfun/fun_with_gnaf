@@ -26,33 +26,56 @@ class Process:
                     outfile.write(newline)
 
             outfile.close()
-
-        def load_sql(self, defs, db):
-            #d = Defaults()
             
-            print(defs.sqlLoad)
-            for thestate in states_list:
-                print(defs.sqlLoad.format(tables = thestate, subdir = self.subDir, filespath = self.GNAFPath))
+        def state_pipes(self,tbl):
+            for thestate in tbl.stateList:
+                print(thestate)
+                self.pipes_to_comma(tbl.filePiped.format(state = thestate))
 
-
-        def load_states_sql(self, states_list, defs, db):
+        def drop_inp_sql_st(self, tblexp, theState):
             #d = Defaults()
+            Def = Defaults()
             
-            print(defs.sqlLoad)
-            for thestate in states_list:
-                print(defs.sqlLoad.format(tables = thestate, subdir = self.subDir, filespath = self.GNAFPath))
+            newExp = tblexp.format(state = theState)
+            print(newExp)
+
+        def drop_states_sql_st(self, tbl):
+            #d = Defaults()
+            Def = Defaults()
+            
+            for theState in tbl.stateList:
+                self.drop_inp_sql_st(tbl.sqlDropInpTbl,theState)
+
+        def load_sql_st(self, tblname, theState):
+            #d = Defaults()
+            Def = Defaults()
+            newState = tblname.format(state = theState)
+            print(Def.sqlLoad.format(table = newState, subdir = self.subDir, filespath = self.GNAFPath))
+
+
+        def load_states_sql_st(self, tbl):
+            #d = Defaults()
+            Def = Defaults()
+            
+            for theState in tbl.stateList:
+                self.load_sql_st(tbl.filePiped,theState)
                 
     class Collate:
 
-        def create_sql(d,t):
+        def create_merge_sql_st(d,tbl):
             #d = Defaults()
             upd = 'UPDATE'
-            print(t.sqlStart)
-            for thestate in d.states8:
-                print(t.sqlState.format(state = thestate))
-                if thestate is not d.states8[-1]:
+            print(tbl.sqlDropMrgTbl)
+            print(tbl.sqlStart)
+            for thestate in tbl.stateList:
+                print(tbl.sqlState.format(state = thestate))
+                if thestate is not tbl.stateList[-1]:
                     print(upd)
                 else:
                     print(';')
+            
+            print(tbl.sqlTable)
+            print(tbl.sqlInsert)
+            print(tbl.sqlDropMrgTbl)
 
         

@@ -9,22 +9,25 @@ class Defaults:
         self.gnaf_path = ''
         self.states9 = ['NSW','VIC','QLD','SA','WA','TAS','NT','ACT','OT']
         self.states8 = ['NSW','VIC','QLD','SA','WA','TAS','NT','ACT']
-	self.sqlLoad = """.mode csv {table}
-.import {filespath)/{subdir}/{table}.csv {table}"""
+        self.sqlLoad = """.mode csv {table}
+.import {filespath}/{subdir}/{table}.csv {table}"""
         
         
         
 class Tables:
     
     class Standard:
-    
+        
     
         class ADDRESS_ALIAS:
-            __slots__ = ("filePiped","sqlDropTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
+                Def = Defaults()
+                self.stateList = Def.states8
                 self.filePiped = '{state}_ADDRESS_ALIAS_psv'
-                self.sqlDropTbl = 'DROP TABLE IF EXISTS "ADDRESS_ALIAS_SRC";'
+                self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_ALIAS_psv";'
+                self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_ALIAS_SRC";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_ALIAS_SRC" AS'
                 self.sqlState = """SELECT ogc_fid,address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment
 FROM {state}_ADDRESS_ALIAS_psv"""
@@ -38,11 +41,10 @@ FROM {state}_ADDRESS_ALIAS_psv"""
  alias_type_code varchar(10) NOT NULL,
  alias_comment varchar(200)
 );"""
-                sql_insert = """INSERT INTO ADDRESS_ALIAS SELECT
+                self.sqlInsert = """INSERT INTO ADDRESS_ALIAS SELECT
  ogc_fid,address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment
 FROM ADDRESS_ALIAS_SRC;"""
-                self.sqlDropImport = 'DROP TABLE IF EXISTS "{state}_ADDRESS_ALIAS_psv";'
-            
+                
             
         
                 
