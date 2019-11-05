@@ -1,10 +1,6 @@
 from gnaf.parameters import Tables,Defaults
 
-
-
-
-class Process:
-    
+class Process:    
     
     class Collect:
         def __init__(self,gnaf_path,sub_dir):
@@ -49,7 +45,10 @@ class Process:
         def load_sql_st(self, tblname, theState):
             #d = Defaults()
             Def = Defaults()
-            newState = tblname.format(state = theState)
+            newState = tblname
+            if theState is not '':
+                newState = tblname.format(state = theState)
+            
             print(Def.sqlLoad.format(table = newState, subdir = self.subDir, filespath = self.GNAFPath))
 
 
@@ -62,8 +61,8 @@ class Process:
                 
     class Collate:
 
-        def create_merge_state_sql_st(tbl):
-            c = Process.Collect('AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/','Standard/')
+        def create_merge_standard_sql_st(tbl,gnafPath,subDir):
+            c = Process.Collect(gnafPath,subDir)
             c.state_pipes(tbl)
             c.drop_states_sql_st(tbl)
             c.load_states_sql_st(tbl)
@@ -82,3 +81,17 @@ class Process:
             print(tbl.sqlDropMrgTbl)
             c.drop_states_sql_st(tbl)
         
+        def create_merge_auth_sql_st(tbl,gnafPath,subDir):
+            c = Process.Collect(gnafPath,subDir)
+            c.pipes_to_comma(tbl.filePiped)
+            print(tbl.sqlDropImpTbl)
+
+            c.load_sql_st(tbl.filePiped, '')
+
+            print(tbl.sqlDropTbl)
+
+            
+            print(tbl.sqlTable)
+            print(tbl.sqlInsert)
+            print(tbl.sqlDropImpTbl)
+#            c.drop_states_sql_st(tbl)

@@ -10,7 +10,7 @@ class Defaults:
         self.states9 = ['NSW','VIC','QLD','SA','WA','TAS','NT','ACT','OT']
         self.states8 = ['NSW','VIC','QLD','SA','WA','TAS','NT','ACT']
         self.sqlLoad = """.mode csv {table}
-.import {filespath}/{subdir}/{table}.csv {table}"""
+.import {filespath}{subdir}{table}.csv {table}"""
         
         
         
@@ -48,44 +48,42 @@ FROM ADDRESS_ALIAS_SRC;"""
             
         
                 
-        class Authority_Code:
+    class Authority_Code:
             
-            class ADDRESS_ALIAS_TYPE_AUT:
-                __slots__ = ("sqlDropTbl", "sqlTable","sqlInsert","sqlDropImport")
+        class ADDRESS_ALIAS_TYPE_AUT:
+            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
         
-                def __init__(self):
-                    self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_ALIAS_TYPE_AUT";'
-                    self.sqlTable = """
-CREATE TABLE ADDRESS_ALIAS (
+            def __init__(self):
+                self.filePiped = 'Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv'
+                self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_ALIAS_TYPE_AUT";'
+                self.sqlTable = """
+CREATE TABLE ADDRESS_ALIAS_TYPE_AUT (
  ogc_fid integer,
- address_alias_pid varchar(15) NOT NULL,
- date_created date NOT NULL,
- date_retired date,
- principal_pid varchar(15) NOT NULL,
- alias_pid varchar(15) NOT NULL,
- alias_type_code varchar(10) NOT NULL,
- alias_comment varchar(200)
+ code varchar(10) NOT NULL,
+ name varchar(50) NOT NULL,
+ description varchar(30)
 );"""
-                    sqlInsert = """INSERT INTO ADDRESS_ALIAS_TYPE_AUT
+                self.sqlInsert = """INSERT INTO ADDRESS_ALIAS_TYPE_AUT
 SELECT ogc_fid,code,name,description
 FROM authority_code_address_alias_type_aut_psv;
 """
-                    self.sqlDropImport = 'DROP TABLE if exists "authority_code_address_alias_type_aut_psv";'
+                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv";'
                 
-            class ADDRESS_CHANGE_TYPE_AUT:
-                __slots__ = ("sqlDropTbl", "sqlTable","sqlInsert","sqlDropImport")
-        
-                def __init__(self):
-                    self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_CHANGE_TYPE_AUT";'
-                    self.sqlTable = """
+        class ADDRESS_CHANGE_TYPE_AUT:
+            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+    
+            def __init__(self):
+                self.filePiped = 'Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv'
+                self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_CHANGE_TYPE_AUT";'
+                self.sqlTable = """
 CREATE TABLE ADDRESS_CHANGE_TYPE_AUT (
  ogc_fid integer,
  code varchar(50) NOT NULL,
  name varchar(100) NOT NULL,
  description varchar(500)
 );"""
-                    sqlInsert = """
+                self.sqlInsert = """
 INSERT INTO ADDRESS_CHANGE_TYPE_AUT
 SELECT ogc_fid,code,name,description
 FROM authority_code_address_change_type_aut_psv;"""
-                    self.sqlDropImport = 'DROP TABLE if exists "authority_code_address_change_type_aut_psv";'
+                self.sqlDropImpTbl = 'DROP TABLE if exists "authority_code_address_change_type_aut_psv";'
