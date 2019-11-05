@@ -5,12 +5,12 @@ import os,sqlite3,subprocess
 
 class Process:    
     
-    class Do_Stuff:
+    class Do_Stuff():
         __slots__ =("SpatialitePath","Slash")
-        def __init__(self):
-            self.SpatialitePath = 'spatialite_db'
+        def __init__(self,splitePath):
+            self.SpatialitePath = splitePath
             my_os = str(os.name)
-            print(my_os)
+            #print(my_os)
             #ntValues = OSVars.nt()
             #posixValues = OSVars.posix()
             #offValues = Offsets()
@@ -20,37 +20,21 @@ class Process:
             else:
                 self.Slash = '\\'# ntValues.Slash # '\\'
         
-#        def cmds_to_db (self,cmdfile, db):
-#        db_text = '{SplitePath}{slash}{db}.sqlite'.\
-#                  format(db = db,\
-#                         slash = self.Slash,\
-#                         SplitePath = self.SpatialitePath)
-#                                                      
-#        cmd_text = '{vrtPath}{slash}{cmdfile}.vrt'.\
-#                   format(cmdfile = cmdfile,\
-#                          slash = self.Slash,\
-#                          vrtPath = self.VRTPath)
-#        options = [cmd_text,  db_text ,'<', cmd_text]
 
-        try:
-            # record the output!        
-            subprocess.check_output(options)
-            print('\ncommands successful')
-        except FileNotFoundError:
-            print('No commands processed')
         
         def sql_to_db (self,sqltext, db):
-        
-            with sqlite3.connect("{Splite}{slash}{db}.sqlite".\
-                                 format(db = db,\
-                                        slash = self.Slash,\
-                                        Splite = self.SpatialitePath)) as conn:
-                conn.enable_load_extension(True)
-                c = conn.cursor()
-                #c.execute(self.Extn)
-                #c.execute("SELECT InitSpatialMetaData(1)")
-                c.execute(str(sqltext))
-                conn.commit()
+            '''
+            source: https://stackoverflow.com/questions/44557745/build-sqlite-query-in-python-but-execute-it-using-sqlite3-command-line-program            '''
+            thesql  = str(sqltext)
+            
+            subprocess.check_output(
+                ["sqlite3",
+                 "{Splite}{slash}{db}.sqlite".\
+                 format(db = db,\
+                        slash = self.Slash,\
+                        Splite = self.SpatialitePath)], input=bytes(thesql.encode("utf-8")))
+            
+
     
     class Collect:
         def __init__(self,gnaf_path,sub_dir):
@@ -136,19 +120,17 @@ class Process:
             expText = expText + '\n' + tbl.sqlInsert
             expText = expText + '\n' + tbl.sqlDropMrgTbl
             expText = expText + '\n' + c.drop_states_sql_st(tbl)
-            print(expText)
+            expText = expText + '\nVACUUM;\n'
+            
+            return expText
         
         def create_merge_auth_sql_st(tbl,gnafPath,subDir):
             c = Process.Collect(gnafPath,subDir)
             c.pipes_to_comma(tbl.filePiped)
-            print(tbl.sqlDropImpTbl)
-
-            c.load_sql_st(tbl.filePiped, '')
-
-            print(tbl.sqlDropTbl)
-
-            
-            print(tbl.sqlTable)
-            print(tbl.sqlInsert)
-            print(tbl.sqlDropImpTbl)
-#            c.drop_states_sql_st(tbl)
+            expText = expText + tbl.sqlDropImpTbl
+            expText = expText + c.load_sql_st(tbl.filePiped, '')
+            expText = expText + tbl.sqlDropTbl
+            expText = expText + tbl.sqlTable
+            expText = expText + tbl.sqlInsert
+            expText = expText + tbl.sqlDropImpTbl
+            return expText
