@@ -25,6 +25,10 @@ select * from LOCALITY_VIEW;
 .quit
 ```
 
+**TODO**
+Some Python Code under developmennt to replace bash shell scripts.
+```
+**Accessing Output of Code**
 
 in powershell
 
