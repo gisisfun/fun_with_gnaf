@@ -64,6 +64,7 @@ class Process:
 
         def create_merge_state_sql_st(tbl):
             c = Process.Collect('AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/','Standard/')
+            c.state_pipes(tbl)
             c.drop_states_sql_st(tbl)
             c.load_states_sql_st(tbl)
             upd = 'UPDATE'
