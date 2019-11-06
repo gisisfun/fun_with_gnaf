@@ -2,9 +2,8 @@
 Lets Build an SQLite3 database with the PSMA G-NAF data set
 
 ```
-cd batch_files
-sh load_basefiles.sh
-sqlite3 ../spatialite_db/db.sqlite < ../spatialite_db/etl2.sql
+python3 demo.py
+
 ```
 
 
@@ -26,17 +25,6 @@ select * from LOCALITY_VIEW;
 ```
 
 **TODO**
-
-Some Python Code under developmennt to replace bash shell scripts.
-
-```
-from gnaf.parameters import Tables,Defaults
-from gnaf.thecode import Process
-
-gnafP = 'AUG19_GNAF_PipeSeparatedValue/G-NAF_AUGUST_2019/'
-ds = Process.Do_Stuff('spatialite_db')
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_DEFAULT_GEOCODE(),gnafP,'Standard/'),'testing')
-```
 
 **Accessing Output of Code**
 
