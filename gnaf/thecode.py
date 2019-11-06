@@ -98,6 +98,7 @@ class Process:
     class Collate:
 
         def create_merge_standard_sql_st(tbl,gnafPath,subDir):
+            print(tbl.filePiped)
             c = Process.Collect(gnafPath,subDir)
             c.state_pipes(tbl)
             expText = c.drop_states_sql_st(tbl)
@@ -125,12 +126,13 @@ class Process:
             return expText
         
         def create_merge_auth_sql_st(tbl,gnafPath,subDir):
+            print(tbl.filePiped)
             c = Process.Collect(gnafPath,subDir)
             c.pipes_to_comma(tbl.filePiped)
-            expText = expText + tbl.sqlDropImpTbl
-            expText = expText + c.load_sql_st(tbl.filePiped, '')
-            expText = expText + tbl.sqlDropTbl
-            expText = expText + tbl.sqlTable
-            expText = expText + tbl.sqlInsert
-            expText = expText + tbl.sqlDropImpTbl
+            expText = tbl.sqlDropInpTbl + '\n'
+            expText = expText + c.load_sql_st(tbl.filePiped, '') + '\n'
+            expText = expText + tbl.sqlDropOutTbl + '\n'
+            expText = expText + tbl.sqlTable + '\n'
+            expText = expText + tbl.sqlInsert + '\n'
+            expText = expText + tbl.sqlDropInpTbl + '\n'
             return expText

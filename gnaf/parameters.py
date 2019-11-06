@@ -20,7 +20,7 @@ class Tables:
         
     
         class ADDRESS_ALIAS:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -46,7 +46,7 @@ FROM {state}_ADDRESS_ALIAS_psv"""
 FROM ADDRESS_ALIAS_SRC;"""
                 
         class ADDRESS_DEFAULT_GEOCODE:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -72,7 +72,7 @@ SELECT address_default_geocode_pid,date_created,date_retired,address_detail_pid,
 FROM ADDRESS_DEFAULT_GEOCODE_SRC;"""
 
         class ADDRESS_DETAIL:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -127,7 +127,7 @@ FROM ADDRESS_DETAIL_SRC;"""
 
 
         class ADDRESS_FEATURE:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -148,11 +148,11 @@ FROM {state}_ADDRESS_FEATURE_psv"""
  address_change_type_code varchar(50)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_FEATURE
-SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
+SELECT address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code 
 FROM ADDRESS_FEATURE_SRC;"""
         
         class ADDRESS_MESH_BLOCK_2011:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -177,7 +177,7 @@ SELECT address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid,
 FROM  ADDRESS_MESH_BLOCK_2011_SRC;"""
 
         class ADDRESS_MESH_BLOCK_2016:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -202,7 +202,7 @@ SELECT address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid,
 FROM ADDRESS_MESH_BLOCK_2016_SRC;"""
 
         class ADDRESS_SITE:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -211,7 +211,7 @@ FROM ADDRESS_MESH_BLOCK_2016_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_ADDRESS_SITE_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_SITE_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_SITE";'
-                self.sqlStart = 'CREATE TABLE "ADDRESS_SITE" AS'
+                self.sqlStart = 'CREATE TABLE "ADDRESS_SITE_SRC" AS'
                 self.sqlState = """SELECT address_site_pid,date_created,date_retired,address_type,address_site_name 
 FROM {state}_ADDRESS_SITE_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_SITE (
@@ -226,7 +226,7 @@ SELECT address_site_pid,date_created,date_retired,address_type,address_site_name
 FROM ADDRESS_SITE_SRC;"""
 
         class ADDRESS_SITE_GEOCODE:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -258,7 +258,7 @@ SELECT address_site_geocode_pid,date_created,date_retired,address_site_pid,geoco
 FROM ADDRESS_SITE_GEOCODE_SRC;"""
 
         class LOCALITY:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -267,7 +267,7 @@ FROM ADDRESS_SITE_GEOCODE_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_LOCALITY_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY";'
-                self.sqlStart = 'CREATE TABLE "LOCALITY" AS'
+                self.sqlStart = 'CREATE TABLE "LOCALITY_SRC" AS'
                 self.sqlState = """SELECT locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
 FROM {state}_LOCALITY_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY (
@@ -287,7 +287,7 @@ FROM LOCALITY_SRC;"""
                 
 
         class LOCALITY_NEIGHBOUR:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -296,7 +296,7 @@ FROM LOCALITY_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_LOCALITY_NEIGHBOUR_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_NEIGHBOUR_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY_NEIGHBOUR";'
-                self.sqlStart = 'CREATE TABLE "LOCALITY_NEIGHBOUR" AS'
+                self.sqlStart = 'CREATE TABLE "LOCALITY_NEIGHBOUR_SRC" AS'
                 self.sqlState = """SELECT  locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_locality_pid
 FROM {state}_LOCALITY_NEIGHBOUR_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY_NEIGHBOUR (
@@ -312,7 +312,7 @@ SELECT locality_neighbour_pid,date_created,date_retired,locality_pid ,neighbour_
 FROM LOCALITY_NEIGHBOUR_SRC;"""
 
         class LOCALITY_POINT:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -321,7 +321,7 @@ FROM LOCALITY_NEIGHBOUR_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_LOCALITY_POINT_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_POINT_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY_POINT";'
-                self.sqlStart = 'CREATE TABLE "LOCALITY_POINT" AS'
+                self.sqlStart = 'CREATE TABLE "LOCALITY_POINT_SRC" AS'
                 self.sqlState = """SELECT locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
 FROM {state}_LOCALITY_POINT_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY_POINT (
@@ -339,7 +339,7 @@ FROM LOCALITY_POINT_SRC;"""
 
 
         class MB_2011:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -348,7 +348,7 @@ FROM LOCALITY_POINT_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_MB_2011_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "MB_2011_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "MB_2011";'
-                self.sqlStart = 'CREATE TABLE "MB_2011" AS'
+                self.sqlStart = 'CREATE TABLE "MB_2011_SRC" AS'
                 self.sqlState = """SELECT mb_2011_pid,date_created,date_retired,mb_2011_code
 FROM {state}_MB_2011_psv"""
                 self.sqlTable = """CREATE TABLE "MB_2011" (
@@ -362,7 +362,7 @@ SELECT mb_2011_pid,date_created,date_retired,mb_2011_code
 FROM MB_2011_SRC;"""
 
         class MB_2016:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -371,8 +371,8 @@ FROM MB_2011_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_MB_2016_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "MB_2016_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "MB_2016";'
-                self.sqlStart = 'CREATE TABLE "MB_2016" AS'
-                self.sqlState = """SELECT mb_2016_pid,date_created,date_retired,mb_2011_code
+                self.sqlStart = 'CREATE TABLE "MB_2016_SRC" AS'
+                self.sqlState = """SELECT mb_2016_pid,date_created,date_retired,mb_2016_code
 FROM {state}_MB_2016_psv"""
                 self.sqlTable = """CREATE TABLE "MB_2016" (
  mb_2016_pid varchar(15) NOT NULL,
@@ -381,11 +381,11 @@ FROM {state}_MB_2016_psv"""
  mb_2016_code varchar(15) NOT NULL
 );"""
                 self.sqlInsert = """INSERT INTO "MB_2016"
-SELECT mb_2011_pid,date_created,date_retired,mb_2011_code
+SELECT mb_2016_pid,date_created,date_retired,mb_2016_code
 FROM MB_2016_SRC;"""
 
         class PRIMARY_SECONDARY:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -394,7 +394,7 @@ FROM MB_2016_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_PRIMARY_SECONDARY_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "PRIMARY_SECONDARY_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "PRIMARY_SECONDARY";'
-                self.sqlStart = 'CREATE TABLE "PRIMARY_SECONDARY" AS'
+                self.sqlStart = 'CREATE TABLE "PRIMARY_SECONDARY_SRC" AS'
                 self.sqlState = """SELECT  primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
 FROM {state}_PRIMARY_SECONDARY_psv"""
                 self.sqlTable = """CREATE TABLE PRIMARY_SECONDARY (
@@ -412,7 +412,7 @@ FROM PRIMARY_SECONDARY_SRC;"""
 
 
         class STATE:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -421,7 +421,7 @@ FROM PRIMARY_SECONDARY_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_STATE_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "STATE_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "STATE";'
-                self.sqlStart = 'CREATE TABLE "STATE" AS'
+                self.sqlStart = 'CREATE TABLE "STATE_SRC" AS'
                 self.sqlState = """SELECT  state_pid,date_created,date_retired,state_name,state_abbreviation
 FROM {state}_STATE_psv"""
                 self.sqlTable = """CREATE TABLE STATE (
@@ -437,7 +437,7 @@ FROM STATE_SRC;"""
 
 
         class STREET_LOCALITY:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -446,7 +446,7 @@ FROM STATE_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_STREET_LOCALITY_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY";'
-                self.sqlStart = 'CREATE TABLE "STREET_LOCALITY" AS'
+                self.sqlStart = 'CREATE TABLE "STREET_LOCALITY_SRC" AS'
                 self.sqlState = """SELECT street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
 FROM {state}_STREET_LOCALITY_psv"""
                 self.sqlTable = """CREATE TABLE STREET_LOCALITY (
@@ -468,7 +468,7 @@ FROM
  STREET_LOCALITY_SRC;"""
 
         class STREET_LOCALITY_ALIAS:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -477,7 +477,7 @@ FROM
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_STREET_LOCALITY_ALIAS_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_ALIAS_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_ALIAS";'
-                self.sqlStart = 'CREATE TABLE "STREET_LOCALITY_ALIAS" AS'
+                self.sqlStart = 'CREATE TABLE "STREET_LOCALITY_ALIAS_SRC" AS'
                 self.sqlState = """SELECT street_locality_alias_pid,date_created,date_retired,street_locality_pid,street_name,street_type_code,street_suffix_code,alias_type_code
 FROM {state}_STREET_LOCALITY_ALIAS_psv"""
                 self.sqlTable = """CREATE TABLE STREET_LOCALITY_ALIAS (
@@ -497,7 +497,7 @@ FROM STREET_LOCALITY_ALIAS_SRC;"""
 
 
         class STREET_LOCALITY_POINT:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -506,7 +506,7 @@ FROM STREET_LOCALITY_ALIAS_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_STREET_LOCALITY_POINT_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_POINT_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "STREET_LOCALITY_POINT";'
-                self.sqlStart = 'CREATE TABLE "STREET_LOCALITY_POINT" AS'
+                self.sqlStart = 'CREATE TABLE "STREET_LOCALITY_POINT_SRC" AS'
                 self.sqlState = """SELECT  street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
 FROM {state}_STREET_LOCALITY_POINT_psv"""
                 self.sqlTable = """CREATE TABLE STREET_LOCALITY_POINT (
@@ -525,7 +525,7 @@ FROM  STREET_LOCALITY_POINT_SRC;"""
 
 
         class LOCALITY_ALIAS:
-            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropImport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
+            __slots__ = ("stateList","filePiped","sqlDropMrgTbl","sqlDropInpTbl","sqlDropOutTbl","sqlDropInport","sqlStart","sqlState","sqlUnion", "sqlInsert", "sqlTable")
         
             def __init__(self):
                 Def = Defaults()
@@ -534,7 +534,7 @@ FROM  STREET_LOCALITY_POINT_SRC;"""
                 self.sqlDropInpTbl = 'DROP TABLE IF EXISTS "{state}_LOCALITY_ALIAS_psv";'
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_ALIAS_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY_ALIAS";'
-                self.sqlStart = 'CREATE TABLE "LOCALITY_ALIAS" AS'
+                self.sqlStart = 'CREATE TABLE "LOCALITY_ALIAS_SRC" AS'
                 self.sqlState = """SELECT locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
 FROM {state}_LOCALITY_ALIAS_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY_ALIAS (
@@ -556,11 +556,11 @@ FROM LOCALITY_ALIAS_SRC;"""
     class Authority_Code:
             
         class ADDRESS_ALIAS_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
         
             def __init__(self):
                 self.filePiped = 'Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_ALIAS_TYPE_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "ADDRESS_ALIAS_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE ADDRESS_ALIAS_TYPE_AUT (
  code varchar(10) NOT NULL,
@@ -571,14 +571,14 @@ CREATE TABLE ADDRESS_ALIAS_TYPE_AUT (
 SELECT code,name,description
 FROM Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv;
 """
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_ALIAS_TYPE_AUT_psv";'
                 
         class ADDRESS_CHANGE_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_CHANGE_TYPE_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "ADDRESS_CHANGE_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE ADDRESS_CHANGE_TYPE_AUT (
  code varchar(50) NOT NULL,
@@ -589,51 +589,66 @@ CREATE TABLE ADDRESS_CHANGE_TYPE_AUT (
 INSERT INTO ADDRESS_CHANGE_TYPE_AUT
 SELECT code,name,description
 FROM Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_CHANGE_TYPE_AUT_psv";'
 
         class ADDRESS_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_ADDRESS_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "ADDRESS_TYPE_AUT";'
-                self.sqlTable = """
-CREATE TABLE ADDRESS_TYPE_AUT (
+                self.sqlDropOutTbl = 'DROP TABLE if exists "ADDRESS_TYPE_AUT";'
+                self.sqlTable = """CREATE TABLE ADDRESS_TYPE_AUT (
  code varchar(50) NOT NULL,
  name varchar(100) NOT NULL,
  description varchar(500)
 );"""
-                self.sqlInsert = """
-INSERT INTO ADDRESS_TYPE_AUT
+                self.sqlInsert = """INSERT INTO ADDRESS_TYPE_AUT
 SELECT code,name,description
 FROM Authority_Code_ADDRESS_TYPE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_TYPE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_ADDRESS_TYPE_AUT_psv";'
 
         class FLAT_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_FLAT_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "FLAT_TYPE_AUT";'
-                self.sqlTable = """
-CREATE TABLE FLAT_TYPE_AUT (
+                self.sqlDropOutTbl = 'DROP TABLE if exists "FLAT_TYPE_AUT";'
+                self.sqlTable = """CREATE TABLE FLAT_TYPE_AUT (
  code varchar(50) NOT NULL,
  name varchar(100) NOT NULL,
  description varchar(500)
 );"""
-                self.sqlInsert = """
-INSERT INTO ADDRESS_TYPE_AUT
+                self.sqlInsert = """INSERT INTO FLAT_TYPE_AUT
 SELECT code,name,description
-FROM Authority_Code_ADDRESS_TYPE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_FLAT_TYPE_AUT_psv";'
+FROM Authority_Code_FLAT_TYPE_AUT_psv;"""
+
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_FLAT_TYPE_AUT_psv";'
                 
                 
+        class GEOCODED_LEVEL_TYPE_AUT:
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
+    
+            def __init__(self):
+                self.filePiped = 'Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "GEOCODED_LEVEL_TYPE_AUT";'
+                self.sqlTable = """CREATE TABLE GEOCODED_LEVEL_TYPE_AUT (
+ code numeric(2) NOT NULL,
+ name varchar(50) NOT NULL,
+ description varchar(70)
+);"""
+                self.sqlInsert = """INSERT INTO GEOCODED_LEVEL_TYPE_AUT
+SELECT code,name,description
+FROM Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv;"""
+
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_GEOCODED_LEVEL_TYPE_AUT_psv";'
+
+
         class GEOCODE_RELIABILITY_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_GEOCODE_RELIABILITY_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "GEOCODE_RELIABILITY_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "GEOCODE_RELIABILITY_AUT";'
                 self.sqlTable = """
 CREATE TABLE GEOCODE_RELIABILITY_AUT (
  code numeric(1) NOT NULL,
@@ -644,14 +659,14 @@ CREATE TABLE GEOCODE_RELIABILITY_AUT (
 INSERT INTO GEOCODE_RELIABILITY_AUT
 SELECT code,name,description
 FROM Authority_Code_GEOCODE_RELIABILITY_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_GEOCODE_RELIABILITY_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_GEOCODE_RELIABILITY_AUT_psv";'
                 
         class GEOCODE_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_GEOCODE_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "GEOCODE_TYPE_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "GEOCODE_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE GEOCODE_TYPE_AUT (
  code numeric(4) NOT NULL,
@@ -662,32 +677,30 @@ CREATE TABLE GEOCODE_TYPE_AUT (
 INSERT INTO GEOCODE_TYPE_AUT
 SELECT code,name,description
 FROM Authority_Code_GEOCODE_TYPE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_GEOCODE_TYPE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_GEOCODE_TYPE_AUT_psv";'
                 
         class LEVEL_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_LEVEL_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "LEVEL_TYPE_AUT";'
-                self.sqlTable = """
-CREATE TABLE LEVEL_TYPE_AUT (
+                self.sqlDropOutTbl = 'DROP TABLE if exists "LEVEL_TYPE_AUT";'
+                self.sqlTable = """CREATE TABLE LEVEL_TYPE_AUT (
  code varchar(4) NOT NULL,
  name varchar(50) NOT NULL,
  description varchar(30)
 );"""
-                self.sqlInsert = """
-INSERT INTO LEVEL_TYPE_AUT
+                self.sqlInsert = """INSERT INTO LEVEL_TYPE_AUT
 SELECT code,name,description
 FROM Authority_Code_LEVEL_TYPE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_LEVEL_TYPE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_LEVEL_TYPE_AUT_psv";'
                 
         class LOCALITY_ALIAS_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "LOCALITY_ALIAS_TYPE_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "LOCALITY_ALIAS_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE LOCALITY_ALIAS_TYPE_AUT (
  code varchar(10) NOT NULL,
@@ -698,14 +711,14 @@ CREATE TABLE LOCALITY_ALIAS_TYPE_AUT (
 INSERT INTO LOCALITY_ALIAS_TYPE_AUT
 SELECT code,name,description
 FROM Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_LOCALITY_ALIAS_TYPE_AUT_psv";'
                 
         class LOCALITY_CLASS_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_LOCALITY_CLASS_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "LOCALITY_CLASS_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "LOCALITY_CLASS_AUT";'
                 self.sqlTable = """
 CREATE TABLE LOCALITY_CLASS_AUT (
  code char(1) NOT NULL,
@@ -716,14 +729,14 @@ CREATE TABLE LOCALITY_CLASS_AUT (
 INSERT INTO LOCALITY_CLASS_AUT
 SELECT code,name,description
 FROM Authority_Code_LOCALITY_CLASS_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_LOCALITY_CLASS_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_LOCALITY_CLASS_AUT_psv";'
                 
         class MB_MATCH_CODE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_MB_MATCH_CODE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "MB_MATCH_CODE_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "MB_MATCH_CODE_AUT";'
                 self.sqlTable = """
 CREATE TABLE MB_MATCH_CODE_AUT (
  code varchar(15) NOT NULL,
@@ -734,14 +747,14 @@ CREATE TABLE MB_MATCH_CODE_AUT (
 INSERT INTO MB_MATCH_CODE_AUT
 SELECT code,name,description
 FROM Authority_Code_MB_MATCH_CODE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_MB_MATCH_CODE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_MB_MATCH_CODE_AUT_psv";'
                 
         class PS_JOIN_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_PS_JOIN_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "PS_JOIN_TYPE_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "PS_JOIN_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE PS_JOIN_TYPE_AUT (
  code numeric(2) NOT NULL,
@@ -752,14 +765,14 @@ CREATE TABLE PS_JOIN_TYPE_AUT (
 INSERT INTO PS_JOIN_TYPE_AUT
 SELECT code,name,description
 FROM Authority_Code_PS_JOIN_TYPE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_PS_JOIN_TYPE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_PS_JOIN_TYPE_AUT_psv";'
 
         class STREET_CLASS_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_STREET_CLASS_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "STREET_CLASS_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "STREET_CLASS_AUT";'
                 self.sqlTable = """
 CREATE TABLE STREET_CLASS_AUT (
  code char(1) NOT NULL,
@@ -770,14 +783,14 @@ CREATE TABLE STREET_CLASS_AUT (
 INSERT INTO STREET_CLASS_AUT
 SELECT code,name,description
 FROM Authority_Code_STREET_CLASS_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_STREET_CLASS_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_STREET_CLASS_AUT_psv";'
 
         class STREET_SUFFIX_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_STREET_SUFFIX_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "STREET_SUFFIX_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "STREET_SUFFIX_AUT";'
                 self.sqlTable = """
 CREATE TABLE STREET_SUFFIX_AUT (
  code varchar(15) NOT NULL,
@@ -788,14 +801,14 @@ CREATE TABLE STREET_SUFFIX_AUT (
 INSERT INTO STREET_SUFFIX_AUT
 SELECT code,name,description
 FROM Authority_Code_STREET_SUFFIX_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_STREET_SUFFIX_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_STREET_SUFFIX_AUT_psv";'
 
         class STREET_LOCALITY_ALIAS_TYPE_AUT:
-            __slots__ = ("filePiped","sqlDropTbl", "sqlTable","sqlInsert","sqlDropImpTbl")
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlTable","sqlInsert","sqlDropInpTbl")
     
             def __init__(self):
                 self.filePiped = 'Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv'
-                self.sqlDropTbl = 'DROP TABLE if exists "STREET_LOCALITY_ALIAS_TYPE_AUT";'
+                self.sqlDropOutTbl = 'DROP TABLE if exists "STREET_LOCALITY_ALIAS_TYPE_AUT";'
                 self.sqlTable = """
 CREATE TABLE STREET_LOCALITY_ALIAS_TYPE_AUT (
  code varchar(10) NOT NULL,
@@ -806,4 +819,4 @@ CREATE TABLE STREET_LOCALITY_ALIAS_TYPE_AUT (
 INSERT INTO STREET_LOCALITY_ALIAS_TYPE_AUT
 SELECT code,name,description
 FROM Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv;"""
-                self.sqlDropImpTbl = 'DROP TABLE if exists "Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv";'
+                self.sqlDropInpTbl = 'DROP TABLE if exists "Authority_Code_STREET_LOCALITY_ALIAS_TYPE_AUT_psv";'
