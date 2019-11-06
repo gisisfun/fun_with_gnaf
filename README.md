@@ -1,12 +1,23 @@
-# fun_with_gnaf
-Lets Build an SQLite3 database with the PSMA G-NAF data set
+# Fun with G-NAF
+Using the Geospatial National Address File (G-NAF) can be fun and enjoyable once you can see how it works outside of the Value Added Reseller (VAR) products. The code here can be used to gain this understanding. 
+
+**Geospatial National Address File (G-NAF)**
+
+The 'file' in reality 38 3rd Nominal Form (3NF) tables aggregated into a lesser number of tables by the code folowing. At this point it is still not a file. These aggregated tables can reconstructed to conform to the address content you are working with. Normally this task is made easier for organsiations by Value Added Resellers (VAR) but a full understanding of the wide range of the G-NAF File makes hard to understand what is, how it works and what your geocoding software delivers to you. The G-NAF File is complex beacuse addresses usage and collection are subject a wide range of variation.
+
+On 26 February 2016 the G-NAF File was made open source by the Australian Government. The data set is available for download on the data.gov.au website. Prior to this date all use of the address file data was licensed to owner of the VAR software license and G_NAF license fee.
+
+People and data suppliers have their own preferences that influence how data is supplied to your geocoding software and data supplied to the Public Sector Mapping Authority (PSMA) for inclusing the the G-NAF file respectively. The G-NAF file allows for a wide range of variation. Address data is collected from Local Government Authorities (LGA) for inclusion in periodic releases to VARs or available from the Public Sector Mapping Authority (PSMA) Online acccess systems. These data are collected and subject to local conditions that vary over the country. Addresss locations are measured from a range of reference points on the ground and a level of certainty.
+
+
+**Over to You**
+Lets Build an SQLite3 database with the PSMA G-NAF data set. 
+*If you already have the fies output the skip this section*.
 
 ```
 python3 demo.py
 
 ```
-
-
 - res_street_locality.csv,
 - street_locality.csv,
 - locality.csv
