@@ -1,5 +1,6 @@
 # Fun with G-NAF
 **Introduction**
+
 Using the Geospatial National Address File (G-NAF) can be fun and enjoyable once you can see how it works outside of the Value Added Reseller (VAR) products. The code here can be used to gain this understanding. 
 
 **Geospatial National Address File (G-NAF)**
@@ -12,6 +13,7 @@ People and data suppliers have their own preferences that influence how data is 
 
 
 **Over to You**
+
 Lets Build an SqLite3 database with the PSMA G-NAF data set. 
 *If you already have the fies output the skip this section*.
 
