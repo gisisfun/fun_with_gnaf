@@ -24,9 +24,9 @@ select * from LOCALITY_VIEW;
 .quit
 ```
 
-**TODO**
 
-**Accessing Output of Code**
+
+**Accessing Data Output of Code**
 
 *in powershell*
 
