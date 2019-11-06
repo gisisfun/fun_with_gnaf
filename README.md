@@ -5,7 +5,7 @@ Using the Geospatial National Address File (G-NAF) can be fun and enjoyable once
 
 **Geospatial National Address File (G-NAF)**
 
-The 'file' in reality 38 3rd Nominal Form (3NF) tables aggregated into a lesser number of tables by the code folowing. At this point it is still not a file. These aggregated tables can reconstructed to conform to the address content you are working with. Normally this task is made easier for organsiations by Value Added Resellers (VAR) but a full understanding of the wide range of the G-NAF File makes hard to understand what is, how it works and what your geocoding software delivers to you. The G-NAF File is complex beacuse addresses usage and collection are subject a wide range of variation.
+The 'file' in reality 38 3rd Nominal Form (3NF) tables ' These tables are aggregated into a lesser number of tables by the code following. At this point it is still not a file. These aggregated tables can reconstructed to conform to the address content you are working with. Normally this task is made easier for organsiations by Value Added Resellers (VAR) but a full understanding of the wide range of the G-NAF File makes hard to understand what is, how it works and what your geocoding software delivers to you. The G-NAF File is complex beacuse addresses usage and collection are subject a wide range of variation.
 
 On 26 February 2016 the G-NAF File was made open source by the Australian Government. The data set is available for download on the data.gov.au website. Prior to this date all use of the address file data was licensed to owner of the VAR software license and G-NAF license fee.
 
