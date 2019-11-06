@@ -1,7 +1,7 @@
 # Fun with G-NAF
 **Introduction**
 
-Using the Geospatial National Address File (G-NAF) can be fun and enjoyable once you can see how it works outside of the Value Added Reseller (VAR) products. The code here can be used to gain this understanding. 
+Using the Geospatial National Address File (G-NAF) can be fun and enjoyable experience once you see how it works outside of the Value Added Reseller (VAR) environment. The code here can be used to gain this knowledge. 
 
 **Geospatial National Address File (G-NAF)**
 
