@@ -136,3 +136,10 @@ class Process:
             expText = expText + tbl.sqlInsert + '\n'
             expText = expText + tbl.sqlDropInpTbl + '\n'
             return expText
+
+        def create_views_sql_st(tbl):
+            print(tbl.filePiped)
+            
+            expText = tbl.sqlDropOutTbl + '\n'
+            expText = expText + tbl.sqlView 
+            return expText
