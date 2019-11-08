@@ -1058,3 +1058,23 @@ join [STATE] as State
 on Loc.state_pid = State.state_pid;
 """
                 
+class DataSets:
+    
+    class Australia:
+        """
+        ABS Australian Boundary
+        """    
+        ...
+    
+    class AGIL_Dataset:
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'AGIL DataSet'
+                self.Format = 'CSV'
+                self.FilePath = 'csv{slash}agil_locations20190208.csv'
+                self.DownURL = 'https://data.gov.au/dataset/34b1c164-fbe8-44a0-84fd-467dba645aa7/resource/625e0a41-6a30-4c11-9a20-ac64ba5a1d1f/download/agil_locations20190208.csv'                
+                self.ZipDir = 'csv'
+                self.ZipPath =''
