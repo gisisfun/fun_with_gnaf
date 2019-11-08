@@ -3,16 +3,32 @@ class Defaults:
     """
     
 
-    __slots__ = ("gnaf_path","states9","states8","sqlLoad")
+    __slots__ = ("sqlitePath","gnaf_path","states9","states8","sqlLoad")
     
     def __init__(self):
+        self.sqlitePath = 'spatialite_db'
         self.gnaf_path = ''
         self.states9 = ['NSW','VIC','QLD','SA','WA','TAS','NT','ACT','OT']
         self.states8 = ['NSW','VIC','QLD','SA','WA','TAS','NT','ACT']
         self.sqlLoad = """.mode csv {table}
 .import {filespath}{subdir}{table}.csv {table}"""
+       
+class OSVars:
+    """
+    Operating System Dependant values for 'posix' and 'nt'
+    """
+
+    class posix:
+        __slots__ = ("Slash","Ogr2ogr","Spatialite")
+        def __init__(self):
+            self.Slash = '/'
+            self.Sqlite3 = '/usr/bin/sqlite3'
         
-        
+    class nt:
+        __slots__ = ("Slash","Ogr2ogr","Spatialite")
+        def __init__(self):
+            self.Slash = '\\'
+            self.Sqlite3 = 'c:\\OSGeo4W64\\bin\\sqlite3.exe'
         
 class Tables:
     
