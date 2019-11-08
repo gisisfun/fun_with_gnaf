@@ -1,6 +1,8 @@
 from gnaf.parameters import Tables,Defaults
 
-import os,sqlite3,subprocess
+import os,sys,sqlite3,subprocess
+
+
 
 
 class Process:    
@@ -33,6 +35,28 @@ class Process:
                  format(db = db,\
                         slash = self.Slash,\
                         Splite = self.SpatialitePath)], input=bytes(thesql.encode("utf-8")))
+    class Files:
+        def __inte__(self):
+            my_os = str(os.name)
+            
+            if (my_os is 'posix'):
+                self.Slash = '/' # posixValues.Slash # '/'
+            else:
+                self.Slash = '\\'# ntValues.Slash # '\\'
+
+            
+
+
+        def no_more_spaces_in_path(self,dirPath):
+            '''
+            # http://pythonfiddle.com/remove-spaces-from-directory-names/
+            '''
+            
+            for dirName in os.listdir(dirPath):
+		        if not os.path.isdir(os.path.join(dirPath, dirName)):
+			        continue
+		        os.rename(os.path.join(dirPath, dirName), os.path.join(dirPath, dirName.replace(' ', '.')))
+	        sys.exit(0)
             
 
     
@@ -143,3 +167,70 @@ class Process:
             expText = tbl.sqlDropOutTbl + '\n'
             expText = expText + tbl.sqlView 
             return expText
+        
+class DataSets:
+    
+    class Australia:
+        """
+        ABS Australian Boundary
+        """    
+        ...
+    
+        class ShapeFormat:
+            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            def __init__(self):
+                self.Description = 'ABS Australia'
+                self.Format = 'Shape'
+                self.FilePath = 'shapefiles{slash}AUS_2016_AUST.shp'
+                self.DownURL = 'http://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_aus_2016_aust_shape.zip&1270.0.55.001&Data%20Cubes&5503B37F8055BFFECA2581640014462C&0&July%202016&24.07.2017&Latest'
+                self.ZipDir = 'shapefiles'
+                self.ZipPath ='shapefiles{slash}1270055001_aus_2016_aust_shape.zip'
+                
+    
+        class TabFormat:
+            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            def __init__(self):
+                self.Description = 'ABS Australia'
+                self.Format = 'Tab'
+                self.FilePath = 'tabfiles{slash}AUS_2016_AUST.tab'
+                self.DownURL = 'http://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_aus_2016_aust_shape.zip&1270.0.55.001&Data%20Cubes&5503B37F8055BFFECA2581640014462C&0&July%202016&24.07.2017&Latest'
+                self.ZipDir = 'tabfiles'
+                self.ZipPath ='tabfiles{slash}1270055001_aus_2016_aust_tab.zip'
+                
+    class Statistical_Areas_Level_1_2011:
+
+        class ShapeFormat:
+            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            def __init__(self):
+                self.Description = '2011 ABS Statistical Areas Level 1'
+                self.Format = 'Shape'
+                self.FilePath = 'shapefiles{slash}SA1_2011_AUST.shp'
+                self.DownURL = 'http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055001_sa1_2011_aust_shape.zip&1270.0.55.001&Data%20Cubes&24A18E7B88E716BDCA257801000D0AF1&0&July%202011&23.12.2010&Latest'
+                self.ZipDir = 'shapefiles'
+                self.ZipPath ='shapefiles{slash}1270055001_sa1_2011_aust_shape.zip'
+                
+    class Statistical_Areas_Level_1_2016:
+
+        class ShapeFormat:
+            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'ABS Australia'
+                self.Format = 'Shape'
+                self.FilePath = 'shapefiles{slash}SA1_2011_AUST.shp'
+                self.DownURL = 'http://www.abs.gov.au/AUSSTATS/subscriber.nsf/log?openagent&1270055001_sa1_2016_aust_tab.zip&1270.0.55.001&Data%20Cubes&39A556A0197D8C02CA257FED00140567&0&July%202016&12.07.2016&Latest'
+                self.ZipDir = 'shapefiles'
+                self.ZipPath ='shapefiles{slash}1270055001_sa1_2011_aust_shape.zip'
+                
+    class AGIL_Dataset:
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'AGIL DataSet'
+                self.Format = 'CSV'
+                self.FilePath = 'csv{slash}agil_locations20190208.csv'
+                self.DownURL = 'https://data.gov.au/dataset/34b1c164-fbe8-44a0-84fd-467dba645aa7/resource/625e0a41-6a30-4c11-9a20-ac64ba5a1d1f/download/agil_locations20190208.csv'                
+                self.ZipDir = 'csv'
+                self.ZipPath =''
