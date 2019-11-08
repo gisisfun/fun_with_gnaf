@@ -504,7 +504,8 @@ FROM {state}_STREET_LOCALITY_ALIAS_psv"""
  street_name varchar(100) NOT NULL,
  street_type_code varchar(15),
  street_suffix_code varchar(15),
- alias_type_code varchar(10) NOT NULL
+ alias_type_code varchar(10) NOT NULL,
+ FOREIGN KEY (street_type_code) REFERENCES STREET_TYPE_AUT (code)
 );
 """
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY_ALIAS
@@ -533,7 +534,8 @@ FROM {state}_STREET_LOCALITY_POINT_psv"""
  boundary_extent numeric(7),
  planimetric_accuracy numeric(12),
  longitude numeric(11,8),
- latitude numeric(10,8)
+ latitude numeric(10,8),
+ FOREIGN KEY (street_locality_pid) REFERENCES STREET_LOCALITY (street_locality_pid)
 );"""
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY_POINT
 SELECT  street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
