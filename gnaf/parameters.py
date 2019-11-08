@@ -49,13 +49,20 @@ class Tables:
                 self.sqlState = """SELECT address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment
 FROM {state}_ADDRESS_ALIAS_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_ALIAS (
- address_alias_pid varchar(15) NOT NULL RRIMARY KEY,
+ address_alias_pid varchar(15) NOT NULL PRIMARY KEY,
  date_created date NOT NULL,
  date_retired date,
  principal_pid varchar(15) NOT NULL,
  alias_pid varchar(15) NOT NULL,
  alias_type_code varchar(10) NOT NULL,
- alias_comment varchar(200)
+ alias_comment varchar(200),
+ FOREIGN KEY (alias_type_code)
+  REFERENCES ADDRESS_ALIAS_TYPE_AUT (code),
+ FOREIGN KEY (alias_pid)
+  REFERENCES ADDRESS_DETAIL (address_detail_pid),
+ FOREIGN KEY (principal_pid)
+  REFERENCES ADDRESS_DETAIL (address_detail_pid)
+ 
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_ALIAS SELECT
  address_alias_pid,date_created,date_retired,principal_pid,alias_pid,alias_type_code,alias_comment
@@ -81,7 +88,11 @@ FROM {state}_ADDRESS_DEFAULT_GEOCODE_psv"""
  address_detail_pid varchar(15) NOT NULL,
  geocode_type_code varchar(4) NOT NULL,
  longitude numeric(11,8),
- latitude numeric(10,8)
+ latitude numeric(10,8),
+ FOREIGN KEY (address_detail_pid)
+  REFERENCES ADDRESS_DETAIL (address_detail_pid),
+ FOREIGN KEY (geocode_type_code)
+  REFERENCES GEOCODE_TYPE_AUT (code)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_DEFAULT_GEOCODE
 SELECT address_default_geocode_pid,date_created,date_retired,address_detail_pid,geocode_type_code,longitude,latitude
@@ -135,7 +146,20 @@ FROM {state}_ADDRESS_DETAIL_psv"""
  level_geocoded_code numeric(2) NOT NULL,
  property_pid varchar(15),
  gnaf_property_pid varchar(15),
- primary_secondary varchar(1)
+ primary_secondary varchar(1),
+ FOREIGN KEY (address_site_pid)
+  REFERENCES ADDRESS_SITE (address_site_pid),
+ FOREIGN KEY (flat_type_code)
+  REFERENCES FLAT_TYPE_AUT (code),
+ FOREIGN KEY (level_geocoded_code)
+  REFERENCES GEOCODED_LEVEL_TYPE_AUT (code),
+ FOREIGN KEY (level_type_code)
+  REFERENCES LEVEL_TYPE_AUT (code),
+ FOREIGN KEY (locality_pid)
+  REFERENCES LOCALITY (locality_pid),
+ FOREIGN KEY (street_locality_pid)
+  REFERENCES STREET_LOCALITY (street_locality_pid)
+ 
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_DETAIL
 SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
@@ -161,7 +185,11 @@ FROM {state}_ADDRESS_FEATURE_psv"""
  address_detail_pid varchar(15) NOT NULL,
  date_address_detail_created date NOT NULL,
  date_address_detail_retired date,
- address_change_type_code varchar(50)
+ address_change_type_code varchar(50),
+ FOREIGN KEY (address_change_type_code)
+  REFERENCES ADDRESS_CHANGE_TYPE_AUT (code),
+ FOREIGN KEY (address_detail_pid)
+  REFERENCES ADDRESS_DETAIL (address_detail_pid)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_FEATURE
 SELECT address_feature_id,address_feature_pid, address_detail_pid,date_address_detail_created, date_address_detail_retired,address_change_type_code 
@@ -186,7 +214,13 @@ FROM {state}_ADDRESS_MESH_BLOCK_2011_psv"""
  date_retired date,
  address_detail_pid varchar(15) NOT NULL,
  mb_match_code varchar(15) NOT NULL,
- mb_2011_pid varchar(15) NOT NULL
+ mb_2011_pid varchar(15) NOT NULL,
+ FOREIGN KEY (address_detail_pid)
+  REFERENCES ADDRESS_DETAIL (address_detail_pid),
+ FOREIGN KEY (mb_2011_pid)
+  REFERENCES MB_2011 (mb_2011_pid),
+ FOREIGN KEY (mb_match_code)
+  REFERENCES MB_MATCH_CODE_AUT (code)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_MESH_BLOCK_2011
 SELECT address_mesh_block_2011_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2011_pid 
@@ -211,7 +245,13 @@ FROM {state}_ADDRESS_MESH_BLOCK_2016_psv"""
  date_retired date,
  address_detail_pid varchar(15) NOT NULL,
  mb_match_code varchar(15) NOT NULL,
- mb_2016_pid varchar(15) NOT NULL
+ mb_2016_pid varchar(15) NOT NULL,
+ FOREIGN KEY (address_detail_pid)
+  REFERENCES ADDRESS_DETAIL (address_detail_pid),
+ FOREIGN KEY (mb_2016_pid)
+  REFERENCES MB_2016 (mb_2016_pid),
+ FOREIGN KEY (mb_match_code)
+  REFERENCES MB_MATCH_CODE_AUT (code)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_MESH_BLOCK_2016
 SELECT address_mesh_block_2016_pid,date_created,date_retired,address_detail_pid, mb_match_code,mb_2016_pid 
@@ -235,7 +275,9 @@ FROM {state}_ADDRESS_SITE_psv"""
  date_created date NOT NULL,
  date_retired date,
  address_type varchar(8),
- address_site_name varchar(200)
+ address_site_name varchar(200),
+ FOREIGN KEY (address_type)
+  REFERENCES ADDRESS_TYPE_AUT (code)
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_SITE
 SELECT address_site_pid,date_created,date_retired,address_type,address_site_name 
@@ -267,7 +309,14 @@ FROM {state}_ADDRESS_SITE_GEOCODE_psv"""
  planimetric_accuracy numeric(12),
  elevation numeric(7),
  longitude numeric(11,8),
- latitude numeric(10,8)
+ latitude numeric(10,8),
+ FOREIGN KEY (address_site_pid)
+  REFERENCES ADDRESS_SITE (address_site_pid),
+ FOREIGN KEY (geocode_type_code)
+  REFERENCES GEOCODE_TYPE_AUT (code),
+ FOREIGN KEY (reliability_code)
+  REFERENCES GEOCODE_RELIABILITY_AUT (code)
+ 
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_SITE_GEOCODE
 SELECT address_site_geocode_pid,date_created,date_retired,address_site_pid,geocode_site_name,geocode_site_description,geocode_type_code, reliability_code, boundary_extent, planimetric_accuracy , elevation, longitude, latitude 
@@ -295,7 +344,10 @@ FROM {state}_LOCALITY_psv"""
  locality_class_code char(1) NOT NULL,
  state_pid varchar(15) NOT NULL,
  gnaf_locality_pid varchar(15),
- gnaf_reliability_code numeric(1) NOT NULL
+ gnaf_reliability_code numeric(1) NOT NULL,
+ FOREIGN KEY (gnaf_reliability_code)
+  REFERENCES GEOCODE_RELIABILITY_AUT (code)
+ 
 );"""
                 self.sqlInsert = """INSERT INTO LOCALITY
 SELECT locality_pid, date_created,date_retired,locality_name,primary_postcode,locality_class_code,state_pid,gnaf_locality_pid,gnaf_reliability_code
@@ -320,7 +372,11 @@ FROM {state}_LOCALITY_NEIGHBOUR_psv"""
  date_created date NOT NULL,
  date_retired date,
  locality_pid varchar(15) NOT NULL,
- neighbour_locality_pid varchar(15) NOT NULL
+ neighbour_locality_pid varchar(15) NOT NULL,
+ FOREIGN KEY (locality_pid)
+  REFERENCES LOCALITY (locality_pid),
+ FOREIGN KEY (neighbour_locality_pid)
+  REFERENCES LOCALITY (locality_pid)
 );
 """
                 self.sqlInsert = """INSERT INTO LOCALITY_NEIGHBOUR
@@ -347,7 +403,9 @@ FROM {state}_LOCALITY_POINT_psv"""
  locality_pid varchar(15) NOT NULL,
  planimetric_accuracy numeric(12),
  longitude numeric(11,8),
- latitude numeric(10,8)
+ latitude numeric(10,8),
+ FOREIGN KEY (locality_pid)
+  REFERENCES LOCALITY (locality_pid)
 );"""
                 self.sqlInsert = """INSERT INTO LOCALITY_POINT
 SELECT locality_point_pid,date_created,date_retired,locality_pid,planimetric_accuracy,longitude,latitude
@@ -420,7 +478,13 @@ FROM {state}_PRIMARY_SECONDARY_psv"""
  date_created date NOT NULL,
  date_retired date,
  ps_join_type_code numeric(2) NOT NULL,
- ps_join_comment varchar(500)
+ ps_join_comment varchar(500),
+ FOREIGN KEY (primary_pid)
+  REFERENCES ADDRESS_DETAIL (address_detail_pid),
+ FOREIGN KEY (ps_join_type_code)
+  REFERENCES PS_JOIN_TYPE_AUT (code),
+ FOREIGN KEY (secondary_pid)
+  REFERENCES ADDRESS_DETAIL (address_detail_pid)
 );"""
                 self.sqlInsert = """INSERT INTO PRIMARY_SECONDARY
 SELECT primary_secondary_pid ,primary_pid,secondary_pid,date_created,date_retired,ps_join_type_code,ps_join_comment
@@ -476,7 +540,18 @@ FROM {state}_STREET_LOCALITY_psv"""
  locality_pid varchar(15) NOT NULL,
  gnaf_street_pid varchar(15),
  gnaf_street_confidence numeric(1),
- gnaf_reliability_code numeric(1) NOT NULL
+ gnaf_reliability_code numeric(1) NOT NULL,
+ FOREIGN KEY (gnaf_reliability_code)
+  REFERENCES GEOCODE_RELIABILITY_AUT (code),
+ FOREIGN KEY (locality_pid)
+  REFERENCES LOCALITY (locality_pid),
+ FOREIGN KEY (street_class_code)
+  REFERENCES STREET_CLASS_AUT (code),
+ FOREIGN KEY (street_suffix_code)
+  REFERENCES STREET_SUFFIX_AUT (code),
+ FOREIGN KEY (street_type_code)
+  REFERENCES STREET_TYPE_AUT (code)
+ 
 );"""
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY  SELECT
  street_locality_pid,date_created,date_retired,street_class_code,street_name,street_type_code,street_suffix_code ,locality_pid,gnaf_street_pid,gnaf_street_confidence,gnaf_reliability_code
@@ -505,7 +580,15 @@ FROM {state}_STREET_LOCALITY_ALIAS_psv"""
  street_type_code varchar(15),
  street_suffix_code varchar(15),
  alias_type_code varchar(10) NOT NULL,
- FOREIGN KEY (street_type_code) REFERENCES STREET_TYPE_AUT (code)
+ FOREIGN KEY (alias_type_code)
+  REFERENCES STREET_LOCALITY_ALIAS_TYPE_AUT (code),
+ FOREIGN KEY (street_locality_pid)
+  REFERENCES STREET_LOCALITY (street_locality_pid),
+ FOREIGN KEY (street_suffix_code)
+  REFERENCES STREET_SUFFIX_AUT (code),
+ FOREIGN KEY (street_type_code)
+  REFERENCES STREET_TYPE_AUT (code)
+  
 );
 """
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY_ALIAS
@@ -535,7 +618,10 @@ FROM {state}_STREET_LOCALITY_POINT_psv"""
  planimetric_accuracy numeric(12),
  longitude numeric(11,8),
  latitude numeric(10,8),
- FOREIGN KEY (street_locality_pid) REFERENCES STREET_LOCALITY (street_locality_pid)
+ FOREIGN KEY (street_locality_pid)
+  REFERENCES STREET_LOCALITY (street_locality_pid),
+  FOREIGN KEY (street_locality_pid)
+  REFERENCES STREET_LOCALITY_ALIAS (street_locality_alias_pid)
 );"""
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY_POINT
 SELECT  street_locality_point_pid,date_created,date_retired,street_locality_pid,boundary_extent,planimetric_accuracy,longitude,latitude
@@ -563,7 +649,12 @@ FROM {state}_LOCALITY_ALIAS_psv"""
  name varchar(100) NOT NULL,
  postcode varchar(4),
  alias_type_code varchar(10) NOT NULL,
- state_pid varchar(15) NOT NULL
+ state_pid varchar(15) NOT NULL,
+ FOREIGN KEY (alias_type_code)
+  REFERENCES LOCALITY_ALIAS_TYPE_AUT (code),
+ FOREIGN KEY (locality_pid)
+  REFERENCES LOCALITY (locality_pid)
+ 
 );"""
                 self.sqlInsert = """INSERT INTO LOCALITY_ALIAS
 SELECT locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
@@ -916,9 +1007,7 @@ LEFT JOIN [GEOCODED_LEVEL_TYPE_AUT] as GLTA ON AD.level_geocoded_code=GLTA.code
 JOIN [STATE] as ST ON L.state_pid=ST.state_pid
 WHERE 
 AD.confidence > -1
-
 UNION
-
 SELECT AD.address_detail_pid as Address_Detail_PID,
 AD.street_locality_pid as Street_Locality_PID,
 AD.locality_pid as Locality_PID,
@@ -986,9 +1075,7 @@ JOIN [LOCALITY_POINT] as Loc_Point
 ON Loc.locality_pid = Loc_Point.locality_pid
 JOIN [STATE] as State
 ON Loc.state_pid = State.state_pid
-
 UNION
-
 SELECT DISTINCT Loc.name as locality_name,
 State.state_abbreviation as state_abbreviation,
 AD.postcode as postcode,
@@ -1026,9 +1113,7 @@ join [STREET_LOCALITY] as St_Loc
 on St_Loc.locality_pid = Loc.locality_pid
 join [STATE] as State
 on Loc.state_pid = State.state_pid
-
 UNION
-
 SELECT DISTINCT St_Loc.street_name as street_name,
 St_Loc.street_type_code as street_type_code,
 Loc.name as locality_name,
@@ -1046,7 +1131,7 @@ on St_Loc.Street_locality_pid = Loc.locality_alias_pid
 join [STATE] as State
 on Loc.state_pid = State.state_pid;
 """
-                
+             
 class DataSets:
     
     class Australia:
@@ -1067,3 +1152,4 @@ class DataSets:
                 self.DownURL = 'https://data.gov.au/dataset/34b1c164-fbe8-44a0-84fd-467dba645aa7/resource/625e0a41-6a30-4c11-9a20-ac64ba5a1d1f/download/agil_locations20190208.csv'                
                 self.ZipDir = 'csv'
                 self.ZipPath =''
+
