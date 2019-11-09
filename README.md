@@ -13,10 +13,10 @@ People and data suppliers have their own preferences that influence how data is 
 
 **Addresses are as diffrent**
 
-Addresses can be differ from the 'standard' have been supported by the by the G-NAF File:
+Addresses vary in content from the 'standard' have been supported by the by the G-NAF File:
 
-- use of conforming street and suburb (locality) names
-- use of knwon aliases for suburb (locality_alias) names
+- use of conforming to the standard street and suburb (locality) names.
+- use of knwon aliases for suburb (locality_alias) names.
 - use of neiighbouring or better known suburb (locality_neighbour) names.
 
 **Over to You**
