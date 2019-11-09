@@ -157,8 +157,12 @@ FROM {state}_ADDRESS_DETAIL_psv"""
   REFERENCES LEVEL_TYPE_AUT (code),
  FOREIGN KEY (locality_pid)
   REFERENCES LOCALITY (locality_pid),
+ FOREIGN KEY (locality_pid)
+  REFERENCES LOCALITY_ALIAS (locality_alias_pid),
  FOREIGN KEY (street_locality_pid)
-  REFERENCES STREET_LOCALITY (street_locality_pid)
+  REFERENCES STREET_LOCALITY (street_locality_pid),
+ FOREIGN KEY (street_locality_pid)
+  REFERENCES STREET_LOCALITY_ALIAS (street_locality_alias_pid) 
  
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_DETAIL
@@ -509,7 +513,7 @@ FROM {state}_STATE_psv"""
  date_created date NOT NULL,
  date_retired date,
  state_name varchar(50) NOT NULL,
- state_abbreviation varchar(3) NOT NULL
+ state_abbreviation varchar(3) NOT NULL 
 );"""
                 self.sqlInsert = """INSERT INTO STATE
 SELECT state_pid,date_created,date_retired,state_name,state_abbreviation
@@ -588,7 +592,6 @@ FROM {state}_STREET_LOCALITY_ALIAS_psv"""
   REFERENCES STREET_SUFFIX_AUT (code),
  FOREIGN KEY (street_type_code)
   REFERENCES STREET_TYPE_AUT (code)
-  
 );
 """
                 self.sqlInsert = """INSERT INTO STREET_LOCALITY_ALIAS
@@ -1097,7 +1100,7 @@ ON Loc.state_pid = State.state_pid;
                 self.filePiped = 'STREET_LOCALITY_VIEW'
                 self.sqlDropOutTbl = 'DROP VIEW if exists "STREET_LOCALITY_VIEW";'
                 self.sqlView = """CREATE VIEW STREET_LOCALITY_VIEW AS
-SELECT DISTINCT St_Loc.street_name as street_name,
+SELECT St_Loc.street_name as street_name,
 St_Loc.street_type_code as street_type_code,
 Loc.locality_name as locality_name,
 State.state_abbreviation as state_abbreviation,
@@ -1114,7 +1117,7 @@ on St_Loc.locality_pid = Loc.locality_pid
 join [STATE] as State
 on Loc.state_pid = State.state_pid
 UNION
-SELECT DISTINCT St_Loc.street_name as street_name,
+SELECT St_Loc.street_name as street_name,
 St_Loc.street_type_code as street_type_code,
 Loc.name as locality_name,
 State.state_abbreviation as state_abbreviation,
