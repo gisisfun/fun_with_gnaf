@@ -39,8 +39,6 @@ ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALI
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALITY_NEIGHBOUR(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.PRIMARY_SECONDARY(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALITY_POINT(),gnafP,'Standard/'),'testing')
-
-
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.STREET_LOCALITY(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.STREET_LOCALITY_ALIAS(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.STREET_LOCALITY_POINT(),gnafP,'Standard/'),'testing')
@@ -50,7 +48,8 @@ ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.LOCALITY_VIEW()),'
 ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.STREET_LOCALITY_VIEW()),'testing')
 ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.ADDRESS_VIEW()),'testing')
 ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.NEIGHBOUR_LOCALITY_VIEW()),'testing')
+ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.NEIGHBOUR_LOCALITY_LIST_VIEW()),'testing')
+ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.ALIAS_LOCALITY_VIEW()),'testing')
 
-#ds.sql_to_db(Process.Collate.create_foreign_keys_sql_st(Tables.Foreign_Keys.constraints()),'testing')
 #http://grainier.net/iterate-and-initialize-all-sub-classes-in-python/
 
