@@ -23,7 +23,7 @@ Post offices and rural addresses do not comply with the Australian Standard for 
 
 *ADDRESS_DETAIL*
 
-THis is where the fun starts. The rest of the address is connected by the contents of this table. 
+This is where the process starts. The rest of the address is connected by the contents of this table. Using the range of address   data variations in address content you can recronstruct what a reference set of address for address geocoding. 
 
 *LOCAILITY_ALIAS and related tables*
 
