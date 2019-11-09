@@ -1104,11 +1104,15 @@ ON Loc.state_pid = State.state_pid;
                 self.sqlView = """CREATE VIEW ALIAS_LOCALITY_VIEW AS
 SELECT Loc.locality_pid as locality_pid,
 Loc.locality_name as locality_name,
+Ste.state_abbreviation as state,
+Loc.primary_postcode as postcode,
 Loc_ALias.locality_alias_pid as alias_locality_pid,
 Loc_Alias.name as alias_locality_name
 from [LOCALITY_ALIAS] as Loc_Alias 
 inner JOIN [LOCALITY] as Loc
 ON Loc.locality_pid = Loc_ALias.locality_pid
+join [STATE] as Ste
+on Loc_Alias.state_pid = Ste.state_pid
 where locality_name = 'LYNEHAM'
 order by locality_pid
 
