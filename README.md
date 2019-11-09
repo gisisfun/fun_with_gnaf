@@ -28,6 +28,7 @@ Post offices and rural addresses do not comply with the Australian Standard for 
 |ACT101|LYNEHAM|24780|MITCHELL|
 |ACT101|LYNEHAM|428425|CANBERRA CENTRAL|
 
+Known Aliases are names that are in use but not officially recognised as the correct suburb name.
 
 *LOCALITY_NEIGHBOUR and related tables in action*
 
@@ -43,6 +44,8 @@ Post offices and rural addresses do not comply with the Australian Standard for 
 | 259266 | ACT101 | LYNEHAM | ACT102 | DICKSON |
 | 259407 | ACT101 | LYNEHAM | ACT124 | DOWNER |
 | 259474 | ACT101 | LYNEHAM | ACT105 | TURNER |
+
+If the person providing the address prefers a different or better suburn to used for their mail deliveries other than the rela suburb this list can narrow down what the corrected addres should be recorded.
 
 **Over to You**
 
