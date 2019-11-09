@@ -21,7 +21,15 @@ Addresses vary in content from the 'standard' have been supported by the by the 
 
 Post offices and rural addresses do not comply with the Australian Standard for addresses or define a physical loction but refer to where mail is physically delivered.
 
-*LOCAILITY_ALIAS and related tables in actioon*
+*ADDRESS_DETAIL*
+
+|address_detail_pid|date_created|date_last_modified|date_retired|building_name|lot_number_prefix|lot_number|lot_number_suffix|flat_type_code|flat_number_prefix|flat_number|flat_number_suffix|level_type_code|level_number_prefix|level_number|level_number_suffix|number_first_prefix|number_first|number_first_suffix|number_last_prefix|number_last|number_last_suffix|street_locality_pid|location_description|locality_pid|alias_principal|postcode|private_street|legal_parcel_id|confidence|address_site_pid|level_geocoded_code|property_pid|gnaf_property_pid|primary_secondary|
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---||:---|:---||:---|:---|:---5||:---|:---|:---|:---||:---|
+|GAACT714845933|2004-04-29|2018-02-01|||||||||||||||6|||||ACT3857||ACT570|P|2615||BELC/CHAR/15/16/|2|710446419|7||1026280|
+
+THis is where the fun starts. The rest of the address is connected by the contents of this table.
+
+*LOCAILITY_ALIAS and related tables*
 
 |locality_pid|locality_name|alias_locality_pid|alias_locality_name|
 |:-----------|:------------|:-----------------|:------------------|
@@ -30,7 +38,7 @@ Post offices and rural addresses do not comply with the Australian Standard for 
 
 Known Aliases are names that are in use but not officially recognised as the correct suburb name.
 
-*LOCALITY_NEIGHBOUR and related tables in action*
+*LOCALITY_NEIGHBOUR and related tables*
 
 | locality_neighbour_pid | std_neighbour_locality_pid | std_locality_name | nbr_locality_pid|nbr_locality_name |
 | :--------------------- | :------------------------- | :---------------- | :--------------- | :-------------- |
