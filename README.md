@@ -23,18 +23,18 @@ Post offices and rural addresses do not comply with the Australian Standard for 
 
 *LOCALITY_NEIGHBOUR and related tables in action*
 
-|locality_neighbour_pid|std_neighbour_locality_pid|std_locality_name|nbr_locality_pid|nbr_locality_name|
-|:---------------------|:-------------------------|:----------------|:---------------------------------|
-|258771|ACT101|LYNEHAM|ACT553|KALEEN|
-|258829|ACT101|LYNEHAM|ACT701|MITCHELL|
-|258862|ACT101|LYNEHAM|ACT103|O'CONNOR|
-|258949|ACT101|LYNEHAM|ACT125|WATSON|
-|258986|ACT101|LYNEHAM|ACT914|GUNGAHLIN|
-|259187|ACT101|LYNEHAM|ACT106|BRADDON|
-|259193|ACT101|LYNEHAM|ACT555|BRUCE|
-|259266|ACT101|LYNEHAM|ACT102|DICKSON|
-|259407|ACT101|LYNEHAM|ACT124|DOWNER|
-|259474|ACT101|LYNEHAM|ACT105|TURNER|
+| locality_neighbour_pid | std_neighbour_locality_pid | std_locality_name | nbr_locality_pid|nbr_locality_name |
+| :--------------------- | :------------------------- | :---------------- | :--------------------------------- |
+| 258771 | ACT101 | LYNEHAM | ACT553 | KALEEN |
+| 258829 | ACT101 | LYNEHAM | ACT701 | MITCHELL |
+| 258862 | ACT101 | LYNEHAM |ACT103 | O'CONNOR|
+| 258949 | ACT101 | LYNEHAM |ACT125 | WATSON|
+| 258986 | ACT101 | LYNEHAM |ACT914 | GUNGAHLIN|
+| 259187 | ACT101 | LYNEHAM |ACT106 | BRADDON|
+| 259193 | ACT101 | LYNEHAM |ACT555 | BRUCE|
+| 259266 | ACT101 | LYNEHAM |ACT102 | DICKSON|
+| 259407 | ACT101 | LYNEHAM | ACT124 | DOWNER |
+| 259474 |ACT101 | LYNEHAM |ACT105 | TURNER |
 
 **Over to You**
 
