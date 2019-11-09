@@ -21,6 +21,14 @@ Addresses vary in content from the 'standard' have been supported by the by the 
 
 Post offices and rural addresses do not comply with the Australian Standard for addresses or define a physical loction but refer to where mail is physically delivered.
 
+*LOCAILITY_ALIAS and related tables in actioon*
+
+|locality_pid|locality_name|alias_locality_pid|alias_locality_name|
+|:-----------|:------------|:-----------------|:------------------|
+|ACT101|LYNEHAM|24780|MITCHELL|
+|ACT101|LYNEHAM|428425|CANBERRA CENTRAL|
+
+
 *LOCALITY_NEIGHBOUR and related tables in action*
 
 | locality_neighbour_pid | std_neighbour_locality_pid | std_locality_name | nbr_locality_pid|nbr_locality_name |
