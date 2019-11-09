@@ -19,7 +19,7 @@ Addresses vary in content from the 'standard' have been supported by the by the 
 - use of knwon aliases for suburb (LOCALITY_ALIAS) names.
 - use of neiighbouring or better known suburb (LOCALITY_NEIGHBOUR) names.
 
-Post offices and rural addresses do not comply with the Australian Standard for addresses or define a physical loction but refer to where mail is physically delivered to.
+Post offices and rural addresses do not comply with the Australian Standard for addresses or define a physical loction but refer to where mail is physically delivered.
 
 
 **Over to You**
