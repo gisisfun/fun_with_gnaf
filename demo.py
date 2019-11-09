@@ -22,22 +22,25 @@ ds.sql_to_db(Process.Collate.create_merge_auth_sql_st(Tables.Authority_Code.STRE
 ds.sql_to_db(Process.Collate.create_merge_auth_sql_st(Tables.Authority_Code.STREET_SUFFIX_AUT(),gnafP,'Authority_Code/'),'testing')
 
 
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_ALIAS(),gnafP,'Standard/'),'testing')
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_DEFAULT_GEOCODE(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_DETAIL(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_FEATURE(),gnafP,'Standard/'),'testing')
+ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.MB_2011(),gnafP,'Standard/'),'testing')
+ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.MB_2016(),gnafP,'Standard/'),'testing')
+
+ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.STATE(),gnafP,'Standard/'),'testing')
+
+ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_ALIAS(),gnafP,'Standard/'),'testing')
+ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_DEFAULT_GEOCODE(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_MESH_BLOCK_2011(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_MESH_BLOCK_2016(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_SITE(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.ADDRESS_SITE_GEOCODE(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALITY(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALITY_NEIGHBOUR(),gnafP,'Standard/'),'testing')
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALITY(),gnafP,'Standard/'),'testing')
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALITY_POINT(),gnafP,'Standard/'),'testing')
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.MB_2011(),gnafP,'Standard/'),'testing')
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.MB_2016(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.PRIMARY_SECONDARY(),gnafP,'Standard/'),'testing')
-ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.STATE(),gnafP,'Standard/'),'testing')
+ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALITY_POINT(),gnafP,'Standard/'),'testing')
+
+
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.STREET_LOCALITY(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.STREET_LOCALITY_ALIAS(),gnafP,'Standard/'),'testing')
 ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.STREET_LOCALITY_POINT(),gnafP,'Standard/'),'testing')
@@ -46,7 +49,8 @@ ds.sql_to_db(Process.Collate.create_merge_standard_sql_st(Tables.Standard.LOCALI
 ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.LOCALITY_VIEW()),'testing')
 ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.STREET_LOCALITY_VIEW()),'testing')
 ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.ADDRESS_VIEW()),'testing')
+ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.NEIGHBOUR_LOCALITY_VIEW()),'testing')
 
-
+#ds.sql_to_db(Process.Collate.create_foreign_keys_sql_st(Tables.Foreign_Keys.constraints()),'testing')
 #http://grainier.net/iterate-and-initialize-all-sub-classes-in-python/
 
