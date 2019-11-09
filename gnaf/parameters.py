@@ -162,7 +162,9 @@ FROM {state}_ADDRESS_DETAIL_psv"""
  FOREIGN KEY (street_locality_pid)
   REFERENCES STREET_LOCALITY (street_locality_pid),
  FOREIGN KEY (street_locality_pid)
-  REFERENCES STREET_LOCALITY_ALIAS (street_locality_alias_pid) 
+  REFERENCES STREET_LOCALITY_ALIAS (street_locality_alias_pid),
+ FOREIGN KEY (street_locality_pid)
+  REFERENCES STREET_LOCALITY_NEIGHBOUR (street_locality_neighbour_pid)  
  
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_DETAIL
@@ -1057,7 +1059,7 @@ LEFT JOIN [GEOCODE_TYPE_AUT] as GTA ON ADG.geocode_type_code=GTA.code
 LEFT JOIN [GEOCODED_LEVEL_TYPE_AUT] as GLTA ON AD.level_geocoded_code=GLTA.code
 JOIN [STATE] as ST ON L.state_pid=ST.state_pid
 WHERE 
-AD.confidence > -1;
+AD.confidence > -1
 """
         class LOCALITY_VIEW:
             __slots__ = ("filePiped","sqlDropOutTbl", "sqlView")
@@ -1093,6 +1095,61 @@ JOIN [STATE] as State
 ON Loc.state_pid = State.state_pid;
 """
 
+        class ALIAS_LOCALITY_VIEW:
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlView")
+    
+            def __init__(self):
+                self.filePiped = 'ALIAS_LOCALITY_VIEW'
+                self.sqlDropOutTbl = 'DROP VIEW if exists "ALIAS_LOCALITY_VIEW";'
+                self.sqlView = """CREATE VIEW ALIAS_LOCALITY_VIEW AS
+SELECT Loc.locality_pid as locality_pid,
+Loc.locality_name as locality_name,
+Loc_ALias.locality_alias_pid as alias_locality_pid,
+Loc_Alias.name as alias_locality_name
+from [LOCALITY_ALIAS] as Loc_Alias 
+inner JOIN [LOCALITY] as Loc
+ON Loc.locality_pid = Loc_ALias.locality_pid
+where locality_name = 'LYNEHAM'
+order by locality_pid
+
+"""
+
+        class NEIGHBOUR_LOCALITY_VIEW:
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlView")
+    
+            def __init__(self):
+                self.filePiped = 'NEIGHBOUR_LOCALITY_VIEW'
+                self.sqlDropOutTbl = 'DROP VIEW if exists "NEIGHBOUR_LOCALITY_VIEW";'
+                self.sqlView = """CREATE VIEW NEIGHBOUR_LOCALITY_VIEW AS
+SELECT Loc.locality_name as locality_name,
+Loc_Neighbour.locality_pid as locality_pid,
+Loc_Neighbour.locality_neighbour_pid as locality_neighbour_pid,
+Loc_Neighbour.neighbour_locality_pid as neighbour_locality_pid
+
+from [LOCALITY_NEIGHBOUR] as Loc_Neighbour 
+inner JOIN [LOCALITY] as Loc
+ON Loc.locality_pid = Loc_Neighbour.neighbour_locality_pid
+order by neighbour_locality_pid
+"""
+
+        class NEIGHBOUR_LOCALITY_LIST_VIEW:
+
+            def __init__(self):
+                self.filePiped = 'NEIGHBOUR_LOCALITY_LIST_VIEW'
+                self.sqlDropOutTbl = 'DROP VIEW if exists "NEIGHBOUR_LOCALITY_LIST_VIEW";'
+                self.sqlView = """CREATE VIEW NEIGHBOUR_LOCALITY_LIST_VIEW AS
+SELECT NLoc.locality_neighbour_pid as locality_neighbour_pid,
+NLoc.neighbour_locality_pid as std_neighbour_locality_pid,
+NLoc.locality_name as std_locality_name,
+NLoc.locality_pid as nbr_locality_pid,
+Loc.locality_name as nbr_locality_name
+from
+[NEIGHBOUR_LOCALITY_VIEW] as NLoc
+inner join [LOCALITY] as Loc on
+Nloc.locality_pid = Loc.locality_pid
+order by std_neighbour_locality_pid
+"""
+                
         class STREET_LOCALITY_VIEW:
             __slots__ = ("filePiped","sqlDropOutTbl", "sqlView")
     
@@ -1100,7 +1157,7 @@ ON Loc.state_pid = State.state_pid;
                 self.filePiped = 'STREET_LOCALITY_VIEW'
                 self.sqlDropOutTbl = 'DROP VIEW if exists "STREET_LOCALITY_VIEW";'
                 self.sqlView = """CREATE VIEW STREET_LOCALITY_VIEW AS
-SELECT St_Loc.street_name as street_name,
+SELECT DISTINCT St_Loc.street_name as street_name,
 St_Loc.street_type_code as street_type_code,
 Loc.locality_name as locality_name,
 State.state_abbreviation as state_abbreviation,
@@ -1116,8 +1173,10 @@ join [STREET_LOCALITY] as St_Loc
 on St_Loc.locality_pid = Loc.locality_pid
 join [STATE] as State
 on Loc.state_pid = State.state_pid
+
 UNION
-SELECT St_Loc.street_name as street_name,
+
+SELECT DISTINCT St_Loc.street_name as street_name,
 St_Loc.street_type_code as street_type_code,
 Loc.name as locality_name,
 State.state_abbreviation as state_abbreviation,
