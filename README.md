@@ -15,8 +15,8 @@ People and data suppliers have their own preferences that influence how data is 
 
 Addresses vary in content from the 'standard' have been supported by the by the G-NAF File:
 
-- use of conforming to the standard street and suburb (LOCALITY) names.
-- use of knwon aliases for suburb (LOCALITY_ALIAS) names.
+- use of conforming to the standard street (STREET_LOCALITY) suburb (LOCALITY), (STATE) and postcodes (ADDRESS_DETAIL) names.
+- use of known aliases for street (STREET_LOCALIITY_ALIAS) and suburb (LOCALITY_ALIAS) names.
 - use of neiighbouring or better known suburb (LOCALITY_NEIGHBOUR) names.
 
 Post offices and rural addresses do not comply with the Australian Standard for addresses or define a physical loction but refer to where mail is physically delivered.
