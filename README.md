@@ -11,6 +11,13 @@ On 26 February 2016 the G-NAF File was made open source by the Australian Govern
 
 People and data suppliers have their own preferences that influence how data is supplied to your geocoding software and data supplied to the Public Sector Mapping Authority (PSMA) for inclusing the the G-NAF file respectively. The G-NAF file allows for a wide range of variation. Address data is collected from Local Government Authorities (LGA) and contributing organisations for inclusion in periodic releases to VARs or available from the Public Sector Mapping Authority (PSMA) Online acccess systems. These data are collected and subject to local conditions that vary over the country. Addresss locations are measured from a range of reference points on the ground and a level of certainty.
 
+**Addresses are as diffrent**
+
+Addresses can be differ from the 'standard' have been supported by the by the G-NAF File:
+
+- use of conforming street and suburb (locality) names
+- use of knwon aliases for suburb (locality_alias) names
+- use of neiighbouring or better known suburb (locality_neighbour) names.
 
 **Over to You**
 
