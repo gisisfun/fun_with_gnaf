@@ -1,8 +1,6 @@
 from gnaf.parameters import Tables,Defaults
 
-import os,sys,sqlite3,subprocess
-
-
+import os,sqlite3,subprocess
 
 
 class Process:    
@@ -35,28 +33,6 @@ class Process:
                  format(db = db,\
                         slash = self.Slash,\
                         Splite = self.SpatialitePath)], input=bytes(thesql.encode("utf-8")))
-    class Files:
-        def __inte__(self):
-            my_os = str(os.name)
-            
-            if (my_os is 'posix'):
-                self.Slash = '/' # posixValues.Slash # '/'
-            else:
-                self.Slash = '\\'# ntValues.Slash # '\\'
-
-            
-
-
-        def no_more_spaces_in_path(self,dirPath):
-            '''
-            # http://pythonfiddle.com/remove-spaces-from-directory-names/
-            '''
-            
-            for dirName in os.listdir(dirPath):
-		        if not os.path.isdir(os.path.join(dirPath, dirName)):
-			        continue
-		        os.rename(os.path.join(dirPath, dirName), os.path.join(dirPath, dirName.replace(' ', '.')))
-	        sys.exit(0)
             
 
     
@@ -168,3 +144,8 @@ class Process:
             expText = expText + tbl.sqlView 
             return expText
         
+        def create_foreign_keys_sql_st(tbl):
+            print('Foreign Keys')
+            
+            expText = tbl.sqlConstraints  
+            return expText
