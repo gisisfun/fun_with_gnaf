@@ -23,7 +23,8 @@ Post offices and rural addresses do not comply with the Australian Standard for 
 
 *LOCALITY_NEIGHBOUR and related tables in action*
 
-|locality_neighbour_pid|std_neighbour_locality_pid|std_locality_name|nbr_locality_pid|nbr_locality_name
+|locality_neighbour_pid|std_neighbour_locality_pid|std_locality_name|nbr_locality_pid|nbr_locality_name|
+|:---------------------|:-------------------------|:----------------|:---------------------------------|
 |258771|ACT101|LYNEHAM|ACT553|KALEEN|
 |258829|ACT101|LYNEHAM|ACT701|MITCHELL|
 |258862|ACT101|LYNEHAM|ACT103|O'CONNOR|
