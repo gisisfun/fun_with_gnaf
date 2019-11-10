@@ -130,6 +130,10 @@ Survey methodology is used to collect and manage location data and positional ac
 |STL|STREET LOCALITY|POINT REPRESENTING THE EXTENT OF A STREET WITHIN A LOCALITY|
 |LOC|LOCALITY|POINT REPRESENTING A LOCALITY
 
+**Flats/Units**
+
+Flat/Unit dwellings share the same location latitude/longitude with their own address as a primary address for a single unit dweling (a house, townhouse). the PRIMARY_SECONDARY table holds this information.
+
 **Over to You**
 
 Lets Build an SqLite3 database with the PSMA G-NAF data set. The Python code stores all of the SQL code that is executed by the Sqlite3 appplication. 
