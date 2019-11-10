@@ -17,7 +17,7 @@ On 26 February 2016 the G-NAF File was made open source by the Australian Govern
 
 People and data suppliers have their own preferences that influence how data is supplied to your geocoding software and data supplied to the Public Sector Mapping Authority (PSMA) for inclusing the the G-NAF file respectively. The G-NAF file allows for a wide range of variation. Address data is collected from Local Government Authorities (LGA) and contributing organisations for inclusion in periodic releases to VARs or available from the Public Sector Mapping Authority (PSMA) Online acccess systems. These data are collected and subject to local conditions that vary over the country. Addresss locations are measured from a range of reference points on the ground and a level of certainty.
 
-**Non-Standard Addresses used to find Standard Addresses**
+**Non-Standard Addresses Used to Find Standard Addresses**
 
 Addresses vary in content from the 'standard' have been supported by the by the G-NAF File, Documented varation in address content is used to assign the the values of the 'standard' address:
 
@@ -59,7 +59,7 @@ Known Aliases are names that are in use but not officially recognised as the cor
 
 If the person providing the address prefers a different or better suburn to used for their mail deliveries other than the rela suburb this list can narrow down what the corrected addres should be recorded.
 
-**Not all locations are actual locations**
+**Not All Locations Are Actual Locations**
 
 Once you have certainty that the correct address record with a corresponding latitude and longitude has been chosen a better understanding of why some latitude and longitude locations where misrepresented (the dot is in the wrong place on the map and/or on the ground).
 
