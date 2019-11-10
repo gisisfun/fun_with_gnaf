@@ -1229,10 +1229,10 @@ class DataSets:
             def __init__(self):
                 self.Description = 'gnaf_feb_2019'
                 self.Format = 'CSV'
-                self.FilePath = 'feb19_gnaf_pipeseparatedvalue_20190218152308{slash}agil_locations20190208.csv'
-                self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/4251f991-9541-46c2-9a87-5e27f8b0e32d/download/feb19_gnaf_pipeseparatedvalue_20190218152308.zip'                
+                self.FilePath = 'AUG19_GNAF_PipeseparatedValue_20190218152308{slash}G-NAF{slash}G-NAF_AUG_2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
+                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/4b084096-65e4-4c8e-abbe-5e54ff85f42f/download/aug19_gnaf_pipeseparatedvalue.zip'                
                 self.ZipDir = 'csv'
-                self.ZipPath ='feb19_gnaf_pipeseparatedvalue_20190218152308.zip'
+                self.ZipPath ='aug_gnaf_pipeseparatedvalue.zip'
 
     class gnaf_may_2019:
         
@@ -1242,7 +1242,7 @@ class DataSets:
             def __init__(self):
                 self.Description = 'gnaf_may_2019'
                 self.Format = 'CSV'
-                self.FilePath = 'may19_gnaf_pipeseparatedvalue_20190521155815{slash}G-NAF{slash}G-NAF MAY 2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
+                self.FilePath = 'MAY19_GNAF_PipeSeparatedValue_20190521155815{slash}G-NAF{slash}G-NAF_MAY_2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
                 self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/6d481878-82ba-485c-9e01-d1d253383c77/download/may19_gnaf_pipeseparatedvalue_20190521155815.zip'                
                 self.ZipDir = 'csv'
                 self.ZipPath ='may19_gnaf_pipeseparatedvalue_20190521155815.zip'
@@ -1255,7 +1255,7 @@ class DataSets:
             def __init__(self):
                 self.Description = 'gnaf_feb_2019'
                 self.Format = 'CSV'
-                self.FilePath = 'feb19_gnaf_pipeseparatedvalue_20190218152308{slash}G-NAF{slash}G-NAF_FEBRUARY_2019{slash}G-NAF FEBRUARY 2019'
+                self.FilePath = 'FEB19_GNAF_PipeSeparatedValue_20190218152308{slash}G-NAF{slash}G-NAF_FEBRUARY_2019{slash}G-NAF FEBRUARY 2019'
                 self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/4251f991-9541-46c2-9a87-5e27f8b0e32d/download/feb19_gnaf_pipeseparatedvalue_20190218152308.zip'                
                 self.ZipDir = 'csv'
                 self.ZipPath ='feb19_gnaf_pipeseparatedvalue_20190218152308.zip'
