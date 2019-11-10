@@ -134,6 +134,35 @@ Survey methodology is used to collect and manage location data and positional ac
 
 Flat/Unit dwellings share the same location latitude/longitude with their own address as a primary address for a single unit dweling (a house, townhouse). the PRIMARY_SECONDARY table holds this information.
 
+*SECONDARY_VIEW*
+
+```
+CREATE VIEW SECONDARY_VIEW AS
+SELECT PS.primary_secondary_pid as ps_primary_secondary_pid, PS.primary_pid as ps_primary_pid, PS.secondary_pid as ps_secondary_pid,
+AD.address_detail_pid as ad_address_detail_pid,
+PSJT.name as ps_join_type
+FROM [PRIMARY_SECONDARY] AS PS
+JOIN [ADDRESS_DETAIL] as AD ON
+(PS.secondary_pid = AD.address_detail_pid) and (AD.primary_secondary = 'S')
+join [PS_JOIN_TYPE_AUT] as PSJT
+ON PS.ps_join_type_code = PSJT.code
+```
+
+
+|ps_primary_secondary_pid|ps_primary_pid|ps_secondary_pid|ad_address_detail_pid|ps_join_type|
+|:----------------------|:--------------|:---------------|:--------------------|:-----------|
+|ACT10077665|GAOT_718908063|GAOT_718908062|GAOT_718908062|AUTO|
+|ACT10077668|GAACT714848778|GAACT718909697|GAACT718909697|AUTO|
+|ACT10077669|GAACT714848778|GAACT718909698|GAACT718909698|AUTO|
+|ACT10077670|GAACT714848778|GAACT718909699|GAACT718909699|AUTO|
+|ACT10077675|GAACT714881052|GAACT718909690|GAACT718909690|AUTO|
+|ACT10077676|GAACT714884695|GAACT718908557|GAACT718908557|AUTO|
+|ACT10077677|GAACT714884695|GAACT718908558|GAACT718908558|AUTO|
+|ACT10077678|GAACT714884695|GAACT718908559|GAACT718908559|AUTO|
+|ACT10077679|GAACT714884695|GAACT718908560|GAACT718908560|AUTO|
+|ACT10077680|GAACT714884695|GAACT718908561|GAACT718908561|AUTO|
+
+
 **Over to You**
 
 Lets Build an SqLite3 database with the PSMA G-NAF data set. The Python code stores all of the SQL code that is executed by the Sqlite3 appplication. 
