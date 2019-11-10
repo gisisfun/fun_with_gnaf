@@ -5,7 +5,9 @@ Using the Geospatial National Address File (G-NAF) can be fun and enjoyable expe
 
 The reason people choose the G_NAF File is beacuse it maganges the issues of of complexity when it comes to how people describe their location by a mail delivery address. This makes the file complex. Organisations purchase softeare to further assist with this complexity.
 
-The ability for an organisation to say that the supplied software is being used to produce correct results is based on the level of understanding the the underlying G_NAF File and changes applied it over time by staff of the organsiation. 
+Location source from the G-NAF file on whole are 'accurate' relative to the environemnt the location data was collect. Not all G-NAF file locations match the ground truth locations due to a range of factors. 
+
+The ability for an organisation to say that the supplied software is being used to produce correct results is based on the level of understanding the the underlying G_NAF File and changes applied it over time by staff of the organstsaion. 
 
 **Geospatial National Address File (G-NAF)**
 
@@ -57,9 +59,15 @@ Known Aliases are names that are in use but not officially recognised as the cor
 
 If the person providing the address prefers a different or better suburn to used for their mail deliveries other than the rela suburb this list can narrow down what the corrected addres should be recorded.
 
+**Not all locations are actual locations**
+
+Once you have certainty that the correct address record with a corresponding latitude and longitude has been chosen a better understanding of why some latitude and longitude locations where misrepresented (the dot is in the wrong place on the map and/or on the ground).
+
+Survey methodology is used to collect and manage location data and positional accuracy issues. The methodology provides that the location and some kind of description defining the tolerance of postional error of the collected location.  
+
 **Over to You**
 
-Lets Build an SqLite3 database with the PSMA G-NAF data set. 
+Lets Build an SqLite3 database with the PSMA G-NAF data set. The Python code stores all of the SQL code that is executed by the Sqlite3 appplication. 
 *If you already have the fies output the skip this section*.
 
 ```
