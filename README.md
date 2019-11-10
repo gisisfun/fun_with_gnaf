@@ -5,7 +5,7 @@ Using the Geospatial National Address File (G-NAF) can be fun and enjoyable expe
 
 The reason people choose the G_NAF File is beacuse it maganges the issues of of complexity when it comes to how people describe their location by a mail delivery address. This makes the file complex. Organisations purchase softeare to further assist with this complexity.
 
-Location source from the G-NAF file on whole are 'accurate' relative to the environment the location data was collect. Not all G-NAF file locations match the ground truth locations due to a range of factors. 
+Location source from the G-NAF file on whole are 'accurate' relative to the environment the location data was collected. Not all G-NAF file locations match the ground truth locations due to a range of factors. 
 
 The ability for an organisation to say that the supplied software is being used to produce correct results is based on the level of understanding the the underlying G-NAF File and changes applied it over time by staff of the organstsaion. 
 
