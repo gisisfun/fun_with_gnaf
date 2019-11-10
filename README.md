@@ -203,6 +203,13 @@ ON PS.ps_join_type_code = PSJT.code
 |ACT10077679|GAACT714884695|GAACT718908560|GAACT718908560|AUTO|
 |ACT10077680|GAACT714884695|GAACT718908561|GAACT718908561|AUTO|
 
+**Address Binning and  Customised Standard and Authority Code Tables**
+Based on analysis of address content the processing of addresses is broken up into separate 'bins' with fit for purpose reference address content. These bins form part of the workflow.
+
+Addresses are matched to a combination of non-standard street/locality including prefixes/suffixes/values in Authority Code files that can hold custom values.
+
+The Value Added Reseller (VAR) provides the organisation with ability to customise the bins, Application Program Interfaces (APIs) connect the G-NAF File, Address text preprocessing,address matching services and updates to G-NAF File.
+
 
 **Over to You**
 
