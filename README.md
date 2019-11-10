@@ -66,6 +66,18 @@ Once you have certainty that the correct address record with a corresponding lat
 Survey methodology is used to collect and manage location data and positional accuracy issues. The methodology provides that the location and some kind of description defining the tolerance of postional error of the collected location.  
 
 
+*GEOCODE_RELIABILITY_AUT*
+
+|code|name|description|
+|:----|:-----------|:--------------------------------------------------------------------------------------------|
+|1|SURVEYING STANDARD|GEOCODE ACCURACY RECORDED TO APPROPRIATE SURVEYING STANDARD|
+|2|WITHIN ADDRESS SITE BOUNDARY OR ACCESS POINT|GEOCODE ACCURACY SUFFICIENT TO PLACE CENTROID WITHIN ADDRESS SITE BOUNDARY OR ACCESS POINT|
+|3|NEAR (OR POSSIBLY WITHIN) ADDRESS SITE BOUNDARY|GEOCODE ACCURACY SUFFICIENT TO PLACE CENTROID NEAR (OR POSSIBLY WITHIN) ADDRESS SITE BOUNDARY|
+|4|UNIQUE ROAD FEATURE|GEOCODE ACCURACY SUFFICIENT TO ASSOCIATE ADDRESS SITE WITH A UNIQUE ROAD FEATURE|
+|5||UNIQUE LOCALITY OR NEIGHBOURHOOD|GEOCODE ACCURACY SUFFICIENT TO ASSOCIATE ADDRESS SITE WITH A UNIQUE LOCALITY OR NEIGHBOURHOOD|
+|6|UNIQUE REGION|GEOCODE ACCURACY SUFFICIENT TO ASSOCIATE ADDRESS SITE WITH A UNIQUE REGION|
+
+
 *GEOCODED_LEVEL_TYPE_AUT*
 
 |code|name|description|
@@ -78,7 +90,6 @@ Survey methodology is used to collect and manage location data and positional ac
 |5|LOCALITY|NO STREET|
 |6|LOCALITY|STREET|
 |7|LOCALITY|STREET|
-
 
 
 *GEOCODE_TYPE_AUT*
