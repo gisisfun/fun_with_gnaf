@@ -39,6 +39,23 @@ This is where the process starts. The rest of the address is connected by the co
 
 *LOCAILITY_ALIAS and related tables*
 
+```
+CREATE VIEW ALIAS_LOCALITY_VIEW AS
+SELECT Loc.locality_pid as locality_pid,
+Loc.locality_name as locality_name,
+Ste.state_abbreviation as state,
+Loc.primary_postcode as postcode,
+Loc_ALias.locality_alias_pid as alias_locality_pid,
+Loc_Alias.name as alias_locality_name
+from [LOCALITY_ALIAS] as Loc_Alias 
+inner JOIN [LOCALITY] as Loc
+ON Loc.locality_pid = Loc_ALias.locality_pid
+join [STATE] as Ste
+on Loc_Alias.state_pid = Ste.state_pid
+where locality_name = 'LYNEHAM'
+order by locality_pid
+```
+
 |locality_pid|locality_name|alias_locality_pid|alias_locality_name|
 |:-----------|:------------|:-----------------|:------------------|
 |ACT101|LYNEHAM|24780|MITCHELL|
@@ -47,6 +64,30 @@ This is where the process starts. The rest of the address is connected by the co
 Known Aliases are names that are in use but not officially recognised as the correct suburb name.
 
 *LOCALITY_NEIGHBOUR and related tables*
+
+```
+CREATE VIEW NEIGHBOUR_LOCALITY_VIEW AS
+SELECT Loc.locality_name as locality_name,
+Loc_Neighbour.locality_pid as locality_pid,
+Loc_Neighbour.locality_neighbour_pid as locality_neighbour_pid,
+Loc_Neighbour.neighbour_locality_pid as neighbour_locality_pid
+from [LOCALITY_NEIGHBOUR] as Loc_Neighbour 
+inner JOIN [LOCALITY] as Loc
+ON Loc.locality_pid = Loc_Neighbour.neighbour_locality_pid
+order by neighbour_locality_pid
+
+CREATE VIEW NEIGHBOUR_LOCALITY_LIST_VIEW AS
+SELECT NLoc.locality_neighbour_pid as locality_neighbour_pid,
+NLoc.neighbour_locality_pid as std_neighbour_locality_pid,
+NLoc.locality_name as std_locality_name,
+NLoc.locality_pid as nbr_locality_pid,
+Loc.locality_name as nbr_locality_name
+from
+[NEIGHBOUR_LOCALITY_VIEW] as NLoc
+inner join [LOCALITY] as Loc on
+Nloc.locality_pid = Loc.locality_pid
+order by std_neighbour_locality_pid
+```
 
 | locality_neighbour_pid | std_neighbour_locality_pid | std_locality_name | nbr_locality_pid|nbr_locality_name |
 | :--------------------- | :------------------------- | :---------------- | :--------------- | :-------------- |
