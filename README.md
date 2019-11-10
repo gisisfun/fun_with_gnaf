@@ -7,7 +7,7 @@ The reason people choose the G_NAF File is beacuse it maganges the issues of of 
 
 Location source from the G-NAF file on whole are 'accurate' relative to the environemnt the location data was collect. Not all G-NAF file locations match the ground truth locations due to a range of factors. 
 
-The ability for an organisation to say that the supplied software is being used to produce correct results is based on the level of understanding the the underlying G_NAF File and changes applied it over time by staff of the organstsaion. 
+The ability for an organisation to say that the supplied software is being used to produce correct results is based on the level of understanding the the underlying G-NAF File and changes applied it over time by staff of the organstsaion. 
 
 **Geospatial National Address File (G-NAF)**
 
