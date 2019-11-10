@@ -204,4 +204,10 @@ locality <- read_csv("locality.csv")
 locality[grep('CAPTIAL HILL',locality$AddressText),]
 ```
 Sea Also
-https://programtalk.com/vs2/python/8511/gnaf-loader/load-gnaf.py/
+https://github.com/minus34/gnaf-loader/blob/master/load-gnaf.py
+https://github.com/Zeppelin-and-Pails/Albatros
+https://github.com/data61/gnaf
+https://github.com/AGLDWG/gnaf-dataset
+https://github.com/HughParsonage/PSMA
+
+
