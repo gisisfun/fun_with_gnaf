@@ -59,7 +59,7 @@ Known Aliases are names that are in use but not officially recognised as the cor
 
 If the person providing the address prefers a different or better suburn to used for their mail deliveries other than the rela suburb this list can narrow down what the corrected addres should be recorded.
 
-**'X' does not always mark the spot**
+**'X' Does Not Always Mark the Spot**
 
 Matching your cleaned address to the correct address record with a corresponding latitude and longitude is not the end of the journey. The location defined by a latitude and longitude are provided for official records (completeness) at worst and reflect the place they are describing at best (accuracy as a relative term). 
 
