@@ -9,6 +9,10 @@ Location source from the G-NAF file on whole are 'accurate' relative to the envi
 
 The ability for an organisation to say that the supplied software is being used to produce correct results is based on the level of understanding the the underlying G-NAF File and changes applied it over time by staff of the organstsaion. 
 
+Further information can be found at the PSMA website: 
+https://psma.com.au/wp-content/uploads/2019/08/G-NAF-Product-Description.pdf
+
+
 **Geospatial National Address File (G-NAF)**
 
 The 'file' in reality 38 3rd Nominal Form (3NF) tables ' These tables are aggregated into a lesser number of tables by the code following. At this point it is still not a file. These aggregated tables can reconstructed to conform to the address content you are working with. Normally this task is made easier for organsiations by Value Added Resellers (VAR) but a full understanding of the wide range of the G-NAF File makes hard to understand what is, how it works and what your geocoding software delivers to you. The G-NAF File is complex beacuse addresses usage and collection are subject a wide range of variation.
@@ -59,9 +63,9 @@ Known Aliases are names that are in use but not officially recognised as the cor
 
 If the person providing the address prefers a different or better suburn to used for their mail deliveries other than the rela suburb this list can narrow down what the corrected addres should be recorded.
 
-**'X' Does Not Always Mark the Spot**
+**Not All Locations Are Actual Locations**
 
-Matching your cleaned address to the correct address record with a corresponding latitude and longitude is not the end of the journey. The location defined by a latitude and longitude are provided for official records (completeness) at worst and reflect the place they are describing at best (accuracy as a relative term). 
+Once you have certainty that the correct address record with a corresponding latitude and longitude has been chosen a better understanding of why some latitude and longitude locations where misrepresented (the dot is in the wrong place on the map and/or on the ground).
 
 Survey methodology is used to collect and manage location data and positional accuracy issues. The methodology provides that the location and some kind of description defining the tolerance of postional error of the collected location.  
 
@@ -125,16 +129,6 @@ Survey methodology is used to collect and manage location data and positional ac
 |UNK|UNKNOWN|THE TYPE OF REAL WORLD FEATURE THE POINT REPRESENTS IS NOT KNOWN.|
 |STL|STREET LOCALITY|POINT REPRESENTING THE EXTENT OF A STREET WITHIN A LOCALITY|
 |LOC|LOCALITY|POINT REPRESENTING A LOCALITY
-
-*MB_MATCH_CODE_AUT*
-
-|code|name|description|
-|:----|:----|:--------------------------------------------------------------------------------------------|
-|1|PARCEL LEVEL MATCH|A parcel level geocode for the address has been applied and clearly within the boundaries of a single mesh block.  The mesh block ID allocated to the address in most cases is at a very high level of confidence.|
-|2|GAP GEOCODED ADDRESS LEVEL MATCH|A gap geocoded match for the address has been applied and clearly within the boundaries of a single mesh block.  The mesh block ID allocated to the address in most cases is at a high level of confidence.|
-|3|STREET LOCALITY LEVEL SINGLE MATCH|A street-locality level geocode for the address has been applied and clearly within the boundaries of a single mesh block.  The mesh block ID allocated to the address in most cases is at a high level of confidence.|
-|4|STREET LOCALITY LEVEL MULTIPLE MATCH|A street-locality level geocode for the address has been applied and is within the boundaries of a multiple mesh blocks.  The mesh block ID allocated to the address is at a low level of confidence.|
-|5|LOCALITY LEVEL MULTIPLE MATCH|A locality level geocode for the address has been applied and is within the boundaries of a multiple mesh blocks.  The mesh block ID allocated to the address is at a very low level of confidence.|
 
 **Over to You**
 
