@@ -1118,6 +1118,23 @@ order by locality_pid
 
 """
 
+        class SECONDARY_VIEW:
+            __slots__ = ("filePiped","sqlDropOutTbl", "sqlView")
+    
+            def __init__(self):
+                self.filePiped = 'SECONDARY_VIEW'
+                self.sqlDropOutTbl = 'DROP VIEW if exists "SECONDARY_VIEW";'
+                self.sqlView = """CREATE VIEW SECONDARY_VIEW AS
+SELECT PS.primary_secondary_pid as ps_primary_secondary_pid, PS.primary_pid as ps_primary_pid, PS.secondary_pid as ps_secondary_pid,
+AD.address_detail_pid as ad_address_detail_pid,
+PSJT.name as ps_join_type
+FROM [PRIMARY_SECONDARY] AS PS
+JOIN [ADDRESS_DETAIL] as AD ON
+(PS.secondary_pid = AD.address_detail_pid) and (AD.primary_secondary = 'S')
+join [PS_JOIN_TYPE_AUT] as PSJT
+ON PS.ps_join_type_code = PSJT.code
+"""
+
         class NEIGHBOUR_LOCALITY_VIEW:
             __slots__ = ("filePiped","sqlDropOutTbl", "sqlView")
     
@@ -1199,23 +1216,47 @@ on Loc.state_pid = State.state_pid;
 """
              
 class DataSets:
-    
-    class Australia:
+
+    class gnaf_aug_2019:
         """
         ABS Australian Boundary
-        """    
+        """  
         ...
-    
-    class AGIL_Dataset:
         
         class CSVFormat:
             __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
             
             def __init__(self):
-                self.Description = 'AGIL DataSet'
+                self.Description = 'gnaf_feb_2019'
                 self.Format = 'CSV'
-                self.FilePath = 'csv{slash}agil_locations20190208.csv'
-                self.DownURL = 'https://data.gov.au/dataset/34b1c164-fbe8-44a0-84fd-467dba645aa7/resource/625e0a41-6a30-4c11-9a20-ac64ba5a1d1f/download/agil_locations20190208.csv'                
+                self.FilePath = 'feb19_gnaf_pipeseparatedvalue_20190218152308{slash}agil_locations20190208.csv'
+                self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/4251f991-9541-46c2-9a87-5e27f8b0e32d/download/feb19_gnaf_pipeseparatedvalue_20190218152308.zip'                
                 self.ZipDir = 'csv'
-                self.ZipPath =''
+                self.ZipPath ='feb19_gnaf_pipeseparatedvalue_20190218152308.zip'
+
+    class gnaf_may_2019:
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'gnaf_may_2019'
+                self.Format = 'CSV'
+                self.FilePath = 'may19_gnaf_pipeseparatedvalue_20190521155815{slash}G-NAF{slash}G-NAF MAY 2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
+                self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/6d481878-82ba-485c-9e01-d1d253383c77/download/may19_gnaf_pipeseparatedvalue_20190521155815.zip'                
+                self.ZipDir = 'csv'
+                self.ZipPath ='may19_gnaf_pipeseparatedvalue_20190521155815.zip'
+
+    class gnaf_feb_2019:
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'gnaf_feb_2019'
+                self.Format = 'CSV'
+                self.FilePath = 'feb19_gnaf_pipeseparatedvalue_20190218152308{slash}G-NAF{slash}G-NAF_FEBRUARY_2019{slash}G-NAF FEBRUARY 2019'
+                self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/4251f991-9541-46c2-9a87-5e27f8b0e32d/download/feb19_gnaf_pipeseparatedvalue_20190218152308.zip'                
+                self.ZipDir = 'csv'
+                self.ZipPath ='feb19_gnaf_pipeseparatedvalue_20190218152308.zip'
 
