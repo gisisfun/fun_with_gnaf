@@ -109,7 +109,7 @@ FROM ADDRESS_DEFAULT_GEOCODE_SRC;"""
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "ADDRESS_DETAIL_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "ADDRESS_DETAIL";'
                 self.sqlStart = 'CREATE TABLE "ADDRESS_DETAIL_SRC" AS'
-                self.sqlState = """SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
+                self.sqlState = """SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, printf('%04d', postcode) AS postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
 FROM {state}_ADDRESS_DETAIL_psv"""
                 self.sqlTable = """CREATE TABLE ADDRESS_DETAIL (
  address_detail_pid varchar(15) NOT NULL PRIMARY KEY,
@@ -168,7 +168,7 @@ FROM {state}_ADDRESS_DETAIL_psv"""
  
 );"""
                 self.sqlInsert = """INSERT INTO ADDRESS_DETAIL
-SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
+SELECT address_detail_pid,date_created,date_last_modified,date_retired,building_name,lot_number_prefix,lot_number,lot_number_suffix,flat_type_code,flat_number_prefix,flat_number,flat_number_suffix ,level_type_code,level_number_prefix,level_number,level_number_suffix,number_first_prefix,number_first,number_first_suffix,number_last_prefix,number_last,number_last_suffix,street_locality_pid,location_description, locality_pid, alias_principal, printf('%04d', postcode) AS postcode, private_street, legal_parcel_id, confidence, address_site_pid, level_geocoded_code, property_pid, gnaf_property_pid,primary_secondary
 FROM ADDRESS_DETAIL_SRC;"""
 
 
@@ -644,7 +644,7 @@ FROM  STREET_LOCALITY_POINT_SRC;"""
                 self.sqlDropMrgTbl = 'DROP TABLE IF EXISTS "LOCALITY_ALIAS_SRC";'
                 self.sqlDropOutTbl = 'DROP TABLE IF EXISTS "LOCALITY_ALIAS";'
                 self.sqlStart = 'CREATE TABLE "LOCALITY_ALIAS_SRC" AS'
-                self.sqlState = """SELECT locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
+                self.sqlState = """SELECT locality_alias_pid,date_created,date_retired,locality_pid,name,printf('%04d', postcode) AS postcode,alias_type_code,state_pid
 FROM {state}_LOCALITY_ALIAS_psv"""
                 self.sqlTable = """CREATE TABLE LOCALITY_ALIAS (
  locality_alias_pid varchar(15) NOT NULL PRIMARY KEY,
@@ -662,7 +662,7 @@ FROM {state}_LOCALITY_ALIAS_psv"""
  
 );"""
                 self.sqlInsert = """INSERT INTO LOCALITY_ALIAS
-SELECT locality_alias_pid,date_created,date_retired,locality_pid,name,postcode,alias_type_code,state_pid
+SELECT locality_alias_pid,date_created,date_retired,locality_pid,name, printf('%04d', postcode) AS postcode,alias_type_code,state_pid
 FROM LOCALITY_ALIAS_SRC;"""
 
 
@@ -1217,6 +1217,27 @@ on Loc.state_pid = State.state_pid;
              
 class DataSets:
 
+    class gnaf_nov_2019:
+        """
+        ABS Australian Boundary
+        """  
+        ...
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath','PathToFiles','DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'gnaf_nov_2019'
+                self.Format = 'CSV'
+                self.PathToFiles = 'NOV19_GNAF_PipeSeparatedValue/G-NAF/G-NAF_NOVEMBER_2019/'
+                self.FilePath = 'NOV19_GNAF_PipeSeparatedValue{slash}G-NAF{slash}G-NAF_NOVEMBER_2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
+                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/4b084096-65e4-4c8e-abbe-5e54ff85f42f/download/nov19_gnaf_pipeseparatedvalue.zip'                
+                self.ZipDir = 'csv'
+                self.ZipPath ='nov19_gnaf_pipeseparatedvalue.zip'
+    
+    
+
+
     class gnaf_aug_2019:
         """
         ABS Australian Boundary
@@ -1224,24 +1245,26 @@ class DataSets:
         ...
         
         class CSVFormat:
-            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            __slots__= ('Description','Format','FilePath','PathToFiles','DownURL', 'ZipDir', 'ZipPath')
             
             def __init__(self):
-                self.Description = 'gnaf_feb_2019'
+                self.Description = 'gnaf_aug_2019'
                 self.Format = 'CSV'
+                self.PathToFiles = 'AUG19_GNAF_PipeSeparatedValue{slash}G-NAF_AUGUST_2019'
                 self.FilePath = 'AUG19_GNAF_PipeseparatedValue_20190218152308{slash}G-NAF{slash}G-NAF_AUG_2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
-                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/4b084096-65e4-4c8e-abbe-5e54ff85f42f/download/aug19_gnaf_pipeseparatedvalue.zip'                
+                self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/32be073c-338b-40df-9842-7cd91a25d960/download/aug19_gnaf_pipeseparatedvalue.zip'                
                 self.ZipDir = 'csv'
                 self.ZipPath ='aug_gnaf_pipeseparatedvalue.zip'
 
     class gnaf_may_2019:
         
         class CSVFormat:
-            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            __slots__= ('Description','Format','FilePath','PathToFiles','DownURL', 'ZipDir', 'ZipPath')
             
             def __init__(self):
                 self.Description = 'gnaf_may_2019'
                 self.Format = 'CSV'
+                self.PathToFiles = 'MAY19_GNAF_PipeSeparatedValue_20190521155815{slash}G-NAF{slash}G-NAF_MAY_2019'
                 self.FilePath = 'MAY19_GNAF_PipeSeparatedValue_20190521155815{slash}G-NAF{slash}G-NAF_MAY_2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
                 self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/6d481878-82ba-485c-9e01-d1d253383c77/download/may19_gnaf_pipeseparatedvalue_20190521155815.zip'                
                 self.ZipDir = 'csv'
@@ -1250,11 +1273,12 @@ class DataSets:
     class gnaf_feb_2019:
         
         class CSVFormat:
-            __slots__= ('Description','Format','FilePath', 'DownURL', 'ZipDir', 'ZipPath')
+            __slots__= ('Description','Format','FilePath','PathToFiles','DownURL', 'ZipDir', 'ZipPath')
             
             def __init__(self):
                 self.Description = 'gnaf_feb_2019'
                 self.Format = 'CSV'
+                self.PathToFiles = 'FEB19_GNAF_PipeSeparatedValue_20190218152308{slash}G-NAF{slash}G-NAF_FEBRUARY_2019'
                 self.FilePath = 'FEB19_GNAF_PipeSeparatedValue_20190218152308{slash}G-NAF{slash}G-NAF_FEBRUARY_2019{slash}G-NAF FEBRUARY 2019'
                 self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/4251f991-9541-46c2-9a87-5e27f8b0e32d/download/feb19_gnaf_pipeseparatedvalue_20190218152308.zip'                
                 self.ZipDir = 'csv'
