@@ -1284,7 +1284,7 @@ class DataSets:
             def __init__(self):
                 self.Description = 'gnaf_may_2019'
                 self.Format = 'CSV'
-                self.PathToFiles = 'MAY19_GNAF_PipeSeparatedValue_20190521155815{slash}G-NAF{slash}G-NAF_MAY_2019'
+                self.PathToFiles = 'MAY19_GNAF_PipeSeparatedValue_20190521155815/G-NAF/G-NAF_MAY_2019/'
                 self.FilePath = 'MAY19_GNAF_PipeSeparatedValue_20190521155815{slash}G-NAF{slash}G-NAF_MAY_2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
                 self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/6d481878-82ba-485c-9e01-d1d253383c77/download/may19_gnaf_pipeseparatedvalue_20190521155815.zip'                
                 self.ZipDir = 'csv'
@@ -1298,9 +1298,30 @@ class DataSets:
             def __init__(self):
                 self.Description = 'gnaf_feb_2019'
                 self.Format = 'CSV'
-                self.PathToFiles = 'FEB19_GNAF_PipeSeparatedValue_20190218152308{slash}G-NAF{slash}G-NAF_FEBRUARY_2019'
+                self.PathToFiles = 'FEB19_GNAF_PipeSeparatedValue_20190218152308/G-NAF/G-NAF_FEBRUARY_2019/'
                 self.FilePath = 'FEB19_GNAF_PipeSeparatedValue_20190218152308{slash}G-NAF{slash}G-NAF_FEBRUARY_2019{slash}G-NAF FEBRUARY 2019'
                 self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/4251f991-9541-46c2-9a87-5e27f8b0e32d/download/feb19_gnaf_pipeseparatedvalue_20190218152308.zip'                
                 self.ZipDir = 'csv'
                 self.ZipPath ='feb19_gnaf_pipeseparatedvalue_20190218152308.zip'
 
+
+class Scripts:
+    class address_view:
+        __slots__ = ('Content')
+        
+        def __init__(self):
+            self.Content = """.mode csv
+.headers on
+.output csv/{gnaf}_address_view.csv
+select * from ADDRESS_VIEW;
+"""
+            
+    class locality_view:
+        __slots__ = ('Content')
+        
+        def __init__(self):
+            self.Content = """.mode csv
+.headers on
+.output csv/{gnaf}_locality_view.csv
+select * from LOCALITY_VIEW;
+"""
