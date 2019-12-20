@@ -56,12 +56,10 @@ ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.NEIGHBOUR_LOCALITY
 ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.ALIAS_LOCALITY_VIEW()),dbname)
 ds.sql_to_db(Process.Collate.create_views_sql_st(Tables.Views.SECONDARY_VIEW()),dbname)
 
-
-
 print('extracting address view from database',d.Description)
 s = Scripts.address_view()
 ds.sql_to_db(s.Content.format(gnaf = d.Description),d.Description)
 
-print('locality  view from database',d.Description)
+print('locality view from database',d.Description)
 s = Scripts.locality_view()
 ds.sql_to_db(s.Content.format(gnaf = d.Description),d.Description)
