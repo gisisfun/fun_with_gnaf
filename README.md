@@ -258,7 +258,7 @@ get-content addresses_raw.txt | % {$_.ToUpper()} | % {$_.replace("/"," ")} |% {$
 ```
 *Let's Geocode addresses and record the output in another file*
 ```
-echo "" | Out-File -FilePath addresses_processed.txt;foreach($line in Get-Content .\addresses_cleaned.txt){ $text=""; $text=$line+",";echo $text| Out-File -FilePath addresses_processed.txt -Append; get-content gnaf_feb_2020_address_view.csv | select-string $line| select -first 1 | Out-File -FilePath addresses_processed.txt -Append}
+$line_ref = 0;echo "" | Out-File -FilePath addresses_processed.txt;foreach($line in Get-Content .\addresses_cleaned.txt){ $line_ref++;$text=""; $text="{0:0}" -f $line_ref+","+$line+",";echo $text| Out-File -FilePath addresses_processed.txt -Append; get-content gnaf_feb_2020_address_view.csv | select-string $line| select -first 1 | Out-File -FilePath addresses_processed.txt -Append}
 ```
 
 
