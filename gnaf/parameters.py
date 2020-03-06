@@ -1216,7 +1216,42 @@ on Loc.state_pid = State.state_pid;
 """
              
 class DataSets:
-    
+
+    class gnaf_feb_2020:
+        """
+        ABS Australian Boundary
+        """  
+        ...
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath','PathToFiles','DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'gnaf_feb_2020'
+                self.Format = 'CSV'
+                self.PathToFiles = 'FEB20_GNAF_PipeSeparatedValue/G-NAF/G-NAF_FEBRUARY_2020/'
+                self.FilePath = 'FEB20_GNAF_PipeSeparatedValue{slash}G-NAF{slash}G-NAF_FEBRUARY_2020{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
+                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/4b084096-65e4-4c8e-abbe-5e54ff85f42f/download/feb20_gnaf_pipeseparatedvalue.zip'
+                self.ZipDir = 'csv'
+                self.ZipPath ='feb20_gnaf_pipeseparatedvalue.zip'
+
+    class gnaf_feb_2020_gda2020:
+        """
+        ABS Australian Boundary
+        """  
+        ...
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath','PathToFiles','DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'gnaf_feb_2020_gda2020'
+                self.Format = 'CSV'
+                self.PathToFiles = 'FEB20_GNAF_PipeSeparatedValue_GDA2020/G-NAF/G-NAF_FEBRUARY_2020/'
+                self.FilePath = 'FEB20_GNAF_PipeSeparatedValue_GDA2020{slash}G-NAF{slash}G-NAF_FEBRUARY_2020{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
+                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/fdce090a-b356-4afe-91bb-c78fbf88082a/download/feb20_gnaf_pipeseparatedvalue_gda2020.zip'
+                self.ZipDir = 'csv'
+                self.ZipPath ='feb20_gnaf_pipeseparatedvalue_gda2020.zip'
 
     class gnaf_nov_2019_gda2020:
         """
@@ -1232,7 +1267,7 @@ class DataSets:
                 self.Format = 'CSV'
                 self.PathToFiles = 'NOV19_GNAF_PipeSeparatedValue_GDA2020/G-NAF/G-NAF_NOVEMBER_2019/'
                 self.FilePath = 'NOV19_GNAF_PipeSeparatedValue_GDA2020{slash}G-NAF{slash}G-NAF_NOVEMBER_2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
-                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/fdce090a-b356-4afe-91bb-c78fbf88082a/download/nov19_gnaf_pipeseparatedvalue_gda2020.zip'
+                self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/89e3d91f-c95a-4c70-b846-0c62cf2e6564/download/nov19_gnaf_pipeseparatedvalue_gda2020.zip'
                 self.ZipDir = 'csv'
                 self.ZipPath ='nov19_gnaf_pipeseparatedvalue_gda2020.zip'
 
@@ -1251,7 +1286,7 @@ class DataSets:
                 self.Format = 'CSV'
                 self.PathToFiles = 'NOV19_GNAF_PipeSeparatedValue/G-NAF/G-NAF_NOVEMBER_2019/'
                 self.FilePath = 'NOV19_GNAF_PipeSeparatedValue{slash}G-NAF{slash}G-NAF_NOVEMBER_2019{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
-                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/4b084096-65e4-4c8e-abbe-5e54ff85f42f/download/nov19_gnaf_pipeseparatedvalue.zip'                
+                self.DownURL = 'https://data.gov.au/data/dataset/e1a365fc-52f5-4798-8f0c-ed1d33d43b6d/resource/0d2ec5ce-9e10-4046-afe6-fe6311a81362/download/nov19_gnaf_pipeseparatedvalue.zip'                
                 self.ZipDir = 'csv'
                 self.ZipPath ='nov19_gnaf_pipeseparatedvalue.zip'
     
