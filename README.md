@@ -254,11 +254,11 @@ A DIY Powershell Address Geocoder
 
 *Let's clean the input file*
 ```
-get-content addresses_raw.txt | % {$_.ToUpper()} | % {$_.replace("/"," ")} |% {$_.replace("CRES ","CRESCENT ")} | % {$_.replace(","," ")} |% {$_.replace("ST ","STREET ")} |% {$_.replace("  " , " ")} | out-file addresses_cleaned.txt
+get-content addresses_raw.txt | % {$_.ToUpper()} | % {$_.replace("/"," ")} |% {$_.replace("CRES ","CRESCENT ")} | % {$_.replace(","," ")} |% {$_.replace("ST ","STREET ")} |% {$_.replace("PL ","PLACE ")} |% {$_.replace("CIR ","CIRCUIT ")} |% {$_.replace("  " , " ")} | out-file addresses_cleaned.txt
 ```
 *Let's Geocode addresses and record the output in another file*
 ```
-echo "" | Out-File -FilePath Process.txt;foreach($line in Get-Content .\addresses_cleaned.txt){ echo $line| Out-File -FilePath addresses_processed.txt -Append; get-content gnaf_feb_2019_address_view.csv | select-string $line| select -first 1 | Out-File -FilePath addresses_processed.txt -Append}
+echo "" | Out-File -FilePath addresses_processed.txt;foreach($line in Get-Content .\addresses_cleaned.txt){ $text=""; $text=$line+",";echo $text| Out-File -FilePath addresses_processed.txt -Append; get-content gnaf_feb_2020_address_view.csv | select-string $line| select -first 1 | Out-File -FilePath addresses_processed.txt -Append}
 ```
 
 
