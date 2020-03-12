@@ -307,21 +307,17 @@ https://stackoverflow.com/questions/33511772/read-file-line-by-line-in-powershel
 *in linux shell*
 
 ```
-cat res_street_locality.csv | grep "PARLIAMENT HOUSE" | grep "ACT"
-cat street_locality.csv | grep "CAPITAL HILL" 
-cat locality.csv | grep "CAPITAL HILL"
+cat gnaf_feb_2020_address_view.csv | grep "PARLIAMENT HOUSE" | grep "ACT"
+cat gnaf_feb_2020_locality_view.csv | grep "CAPITAL HILL" 
 ```
 *in R*
 
 ```
 library(readr)
-res_street_locality <- read_csv("res_street_locality.csv")
+res_street_locality <- read_csv("gnaf_feb_2020_address_view.csv")
 res_street_locality[grep('CAPTIAL HILL',res_street_locality$AddressText),]
 
-street_locality <- read_csv("street_locality.csv")
-street_locality[grep('CAPTIAL HILL',street_locality$AddressText),]
-
-locality <- read_csv("locality.csv")
+locality <- read_csv("gnaf_feb_2020_address_view.csv)
 locality[grep('CAPTIAL HILL',locality$AddressText),]
 ```
 Sea Also
