@@ -361,7 +361,8 @@ gnaf <- csvread("gnaf_feb_2020_address_view.csv",coltypes=c("string","string","s
                                                             "string","string","string","string",
                                                             "string","string","string","string",
                                                             "string","string","string","string",
-                                                            "string","string","string","string"),header = TRUE)
+                                                            "string","string","string","string"),
+                                                            header = TRUE)
 
 search <- dplyr::filter(gnaf, grepl('CAPITAL HILL', AddressText))
 
