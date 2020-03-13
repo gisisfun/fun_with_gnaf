@@ -356,13 +356,19 @@ done < "$cleaned"
 ```
 library(dplyr)
 library(csvread)
-gnaf <- csvread("gnaf_feb_2020_address_view.csv",coltypes=c("string","string","string","string",
-                                                            "string","string","string","string",
-                                                            "string","string","string","string",
-                                                            "string","string","string","string",
-                                                            "string","string","string","string",
-                                                            "string","string","string","string"),
-                                                            header = TRUE)
+gnaf <- csvread("gnaf_feb_2020_address_view.csv",coltypes=c("string","string",
+                                                            "string","string",
+                                                            "string","string",
+                                                            "string","string",
+                                                            "string","string",
+                                                            "string","string",
+                                                            "string","string",
+                                                            "integer","string",
+                                                            "string","string",
+                                                            "string","string",
+                                                            "integer","string",
+                                                            "double","double",
+                                                            "string"),header = TRUE)
 
 search <- dplyr::filter(gnaf, grepl('CAPITAL HILL', AddressText))
 
