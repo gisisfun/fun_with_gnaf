@@ -347,7 +347,16 @@ addresses_cleaned.txt
 *Let's Geocode addresses and record the output in another file*
 ```
 #!/bin/bash
-#TBA
+line_ref = 0;
+echo "" > addresses_processed.csv;
+for line in addresses_cleaned.txt;
+  do 
+    line_ref=$(($line_ref+1));
+    echo "$line_ref,$line," > tmp_line.txt;
+    cat gnaf_feb_2020_address_view.csv | grep "PARLIAMENT HOUSE" | head -n 1 >> tmp_line.txt;
+
+    cat tmp_line.txt >> addresses_cleaned.txt
+  done
 ```
 
 *in R*
