@@ -220,13 +220,9 @@ Lets Build an SqLite3 database with the PSMA G-NAF data set. The Python code sto
 python3 demo.py
 
 ```
-- res_street_locality.csv,
-- street_locality.csv,
-- locality.csv
-
-
-
-
+Creates 
+- gnaf_feb_2020_address_view.csv
+- gnaf_feb_2020_locality_view.csv
 
 **Accessing Data Output of Code**
 
