@@ -401,7 +401,7 @@ ftext[] <- lapply(ftext, function(x) gsub(" CCS "," CIRCUS ", x))
 ftext[] <- lapply(ftext, function(x) gsub(" CCL "," CIRCLE ", x))
 ftext[] <- lapply(ftext, function(x) gsub(" BVD "," BOULEVARD ", x))
 ftext[] <- lapply(ftext, function(x) gsub(" BLVD "," BOULEVARD ", x))
-write.csv(x=ftext,file=out_file,quote=FALSE,col.names=NA,row.names=FALSE)
+write.table(x=ftext,file=out_file,append=FALSE,row.names=FALSE, quote=FALSE)
 ```
 
 
