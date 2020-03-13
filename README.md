@@ -292,9 +292,6 @@ https://stackoverflow.com/questions/33511772/read-file-line-by-line-in-powershel
 ```
 cat gnaf_feb_2020_address_view.csv | grep "PARLIAMENT HOUSE" | grep "ACT"
 cat gnaf_feb_2020_locality_view.csv | grep "CAPITAL HILL" 
-
-
-
 ```
 
 A DIY BASH Shell Address Geocoder
@@ -342,14 +339,11 @@ addresses_cleaned.txt
 ```
 #!/bin/bash
 line_ref = 0;
-echo "" > addresses_processed.csv;
+echo "id,cleaned,$(cat gnaf_feb_2020_address_view.csv| head -n 1)" > tmp_line.txt > addresses_processed.csv;
 for line in addresses_cleaned.txt;
   do 
-    line_ref=$(($line_ref+1));
-    echo "$line_ref,$line," > tmp_line.txt;
-    cat gnaf_feb_2020_address_view.csv | grep "PARLIAMENT HOUSE" | head -n 1 >> tmp_line.txt;
-
-    cat tmp_line.txt >> addresses_cleaned.txt
+    line_ref=$(($line_ref+1))
+    echo "$line_ref,$line,$(cat gnaf_feb_2020_address_view.csv | grep $line | head -n 1)" >> addresses_cleaned.txt
   done
 ```
 
