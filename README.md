@@ -229,10 +229,8 @@ Creates
 *in powershell*
 
 ```
-get-content res_street_locality.csv | select-string "PARLIAMENT HOUSE" | select-string "ACT"
-get-content street_locality.csv | select-string "CAPITAL HILL"
-get-content locality.csv | select-string "CAPITAL HILL"
-
+get-content gnaf_feb_2020_address_view.csv | select-string "PARLIAMENT HOUSE" | select-string "ACT"
+get-content gnaf_feb_2020_locality_view.csv | select-string "CAPITAL HILL"
 ```
 
 A DIY Powershell Address Geocoder
