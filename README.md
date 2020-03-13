@@ -354,12 +354,18 @@ done < "$cleaned"
 *in R*
 
 ```
-library(readr)
-res_street_locality <- read_csv("gnaf_feb_2020_address_view.csv")
-res_street_locality[grep('CAPTIAL HILL',res_street_locality$AddressText),]
+library(dplyr)
+library(csvread)
+gnaf <- csvread("gnaf_feb_2020_address_view.csv",coltypes=c("string","string","string","string",
+                                                            "string","string","string","string",
+                                                            "string","string","string","string",
+                                                            "string","string","string","string",
+                                                            "string","string","string","string",
+                                                            "string","string","string","string"),header = TRUE)
 
-locality <- read_csv("gnaf_feb_2020_address_view.csv)
-locality[grep('CAPTIAL HILL',locality$AddressText),]
+search <- dplyr::filter(gnaf, grepl('CAPITAL HILL', AddressText))
+
+print(search[1,])
 ```
 A DIY R Address Geocoder
 
