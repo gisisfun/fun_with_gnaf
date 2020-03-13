@@ -361,6 +361,50 @@ res_street_locality[grep('CAPTIAL HILL',res_street_locality$AddressText),]
 locality <- read_csv("gnaf_feb_2020_address_view.csv)
 locality[grep('CAPTIAL HILL',locality$AddressText),]
 ```
+A DIY R Address Geocoder
+
+*Let's clean the input file*
+
+```
+in_file <- "addresses_raw.txt"
+out_file <- "addresses_cleaned.txt"
+ftext <- read.csv(file=in_file,header=FALSE,sep="~")
+#print(class(ftext))
+colnames(ftext) = c("Raw_Address")
+ftext[,1] <- toupper(ftext[,1])
+ftext[] <- lapply(ftext, function(x) gsub("\\s+", " ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" ST ", " STREET ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" LOOP ", " LOOP ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" RISE ", " RISE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" ARC "," ARCADE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" ESP "," ESPLANADE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CV "," COVE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CRES "," CRESCENT ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CR "," CRESCENT ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" RD "," ROAD ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" AVE "," AVENUE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" PL "," PLACE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CRT "," COURT ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CT "," COURT ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" DR "," DRIVE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" TCE "," TERRACE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" PDE "," PARADE ", x))
+ftext[] <- lapply(ftext, function(x) gsub("CCT "," CIRCUIT ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CRST "," CREST ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" LA "," LANE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" WAY "," WAY ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" GDN "," GARDENS ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" GDNS "," GARDENS ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CL "," CLOSE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" HWY "," HIGHWAY ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CCS "," CIRCUS ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" CCL "," CIRCLE ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" BVD "," BOULEVARD ", x))
+ftext[] <- lapply(ftext, function(x) gsub(" BLVD "," BOULEVARD ", x))
+write.csv(x=ftext,file=out_file,quote=FALSE,col.names=NA,row.names=FALSE)
+```
+
+
 Sea Also
 https://github.com/minus34/gnaf-loader/blob/master/load-gnaf.py
 https://github.com/Zeppelin-and-Pails/Albatros
