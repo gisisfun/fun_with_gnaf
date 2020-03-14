@@ -419,13 +419,17 @@ write.table(x=ftext,file=out_file,append=FALSE,row.names=FALSE, quote=FALSE)
 In Python
 
 ```
-import numpy as np
 import pandas as pd
 
-gnaf = pd.read_csv("gnaf_feb_2020_address_view.csv", low_memory=True, na_filter=True, keep_default_na=False)
-lines = gnaf[gnaf.AddressText.str.contains(pat = 'CAPITAL HILL')]
-lines.reset_index()
-print(lines.iloc[0])
+results = pd.DataFrame([])
+
+for chunk in iter(pd.read_csv("gnaf_feb_2020_address_view.csv", chunksize = 1000)):
+    print(chunk.head())
+    results = results.append(chunk[chunk.AddressText.str.contains(pat = 'CAPITAL HILL')])
+    if results.shape[0] > 0:
+        break    # break here
+    
+print(results.iloc[0])
 ```
 Sea Also
 - https://github.com/minus34/gnaf-loader/blob/master/load-gnaf.py
