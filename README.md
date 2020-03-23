@@ -239,6 +239,7 @@ A DIY Powershell Address Geocoder
 ```
 get-content addresses_raw.txt |
 % {$_.ToUpper()} |
+% {$_.replace("`t","")} |
 % {$_.replace("\s+"," ")} |
 % {$_.replace("/"," ")} |
 % {$_.replace(","," ")} |
@@ -270,6 +271,11 @@ get-content addresses_raw.txt |
 % {$_.replace(" CCL "," CIRCLE ")}|
 % {$_.replace(" BVD "," BOULEVARD ")}|
 % {$_.replace(" BLVD "," BOULEVARD ")}|
+% {$_.replace(" ST "," STREET ")}|
+% {$_.replace(" MT "," MOUNT ")}|
+% {$_.replace(" STREET KILDA "," ST KILDA ")}|
+% {$_.replace(" RD "," ROAD ")}|
+% {$_.replace(" HWY "," HIGHWAY ")}|
 % {$_.replace("  " , " ")} | 
 out-file addresses_cleaned.txt
 ```
