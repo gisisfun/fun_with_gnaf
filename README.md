@@ -241,6 +241,7 @@ get-content addresses_raw.txt |
 % {$_.ToUpper()} |
 % {$_.replace("\s+"," ")} |
 % {$_.replace("/"," ")} |
+% {$_.replace(","," ")} |
 % {$_.replace(" LOOP "," LOOP ")}|
 % {$_.replace(" RISE "," RISE ")}|
 % {$_.replace(" ARC "," ARCADE ")}|
@@ -304,6 +305,7 @@ cat addresses_raw.txt |
 grep -e 's:/:\\/:g' |
 tr a-z A-Z |
 grep -e 's/* / /g' |
+grep -e 's/,/ /g' |
 grep -e 's/ LOOP / LOOP /g' |
 grep -e 's/ RISE / RISE /g' |
 grep -e 's/ ARC / ARCADE /g' |
@@ -386,6 +388,7 @@ ftext <- read.csv(file=in_file,header=FALSE,sep="~")
 colnames(ftext) = c("Raw_Address")
 ftext[,1] <- toupper(ftext[,1])
 ftext[] <- lapply(ftext, function(x) gsub("\\s+", " ", x))
+ftext[] <- lapply(ftext, function(x) gsub(",", " ", x))
 ftext[] <- lapply(ftext, function(x) gsub(" ST ", " STREET ", x))
 ftext[] <- lapply(ftext, function(x) gsub(" LOOP ", " LOOP ", x))
 ftext[] <- lapply(ftext, function(x) gsub(" RISE ", " RISE ", x))
