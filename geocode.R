@@ -13,8 +13,8 @@
   
   
   find_address <- function(searchText,gnaf_df,id=1) {
-    search_result <- dplyr::filter(gnaf, grepl(searchText, AddressText))
-    result <- data.frame(c(id,searchText,search_result[i,]))
+    search_result <- dplyr::filter(gnaf_df, grepl(searchText, AddressText))
+    result <- data.frame(c(id,searchText,search_result[1,]))
     colnames(result)[1] <- "id"
     colnames(result)[2] <- "searchText"
     return(result)
@@ -33,12 +33,12 @@
       print(paste("processing address",i))
       search <- find_address(search_df[i,1],gnaf_df,i)
   
-      results_df <- rbind(results_df,find_address(search_df[i,],gnaf_df,i))
+      results_df <- rbind(results_df,search)
   
     }
     return(results_df[-1,])
   }
   
-processed <- batch_search(search_df,gnaf)
+processed <- batch_search(search_df,gnaf_df)
 write.csv(processed,"addresses_processed.csv", row.names=FALSE, quote=FALSE)
 
