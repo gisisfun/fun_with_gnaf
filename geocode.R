@@ -1,8 +1,8 @@
 library(dplyr)
 library(csvread)
   
-gnaf_df <- csvread("gnaf_feb_2020_address_view.csv",coltypes=c(rep("string",14), "integer",rep("string",5),
-                                                              "integer","string",  rep("double",2),
+gnaf_df <- csvread("gnaf_feb_2020_address_view.csv",coltypes=c(sprintf("string",1:14), "integer",sprintf("string",1:5),
+                                                              "integer","string",  sprintf("double",1:2),
                                                               "string"),header = TRUE)
 gnaf_df[,'AddressText']=trimws(gnaf_df[,'AddressText'])
 search_df <- read.csv("addresses_cleaned.txt",sep=",", stringsAsFactors=FALSE)
