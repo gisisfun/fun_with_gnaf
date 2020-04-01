@@ -8,7 +8,6 @@ col_list = list(col_character(),col_character(),col_character(),col_character(),
                 col_character(),col_double(),col_double(),col_character())
 
 gnaf_df <- read_csv("gnaf_feb_2020_address_view.csv", col_types = col_list)
-str(gnaf_df)
 
 search_df <- read.csv("addresses_cleaned.txt",sep=",", stringsAsFactors=FALSE)
   
@@ -41,6 +40,3 @@ batch_search <- function (search_df,gnaf_df) {
   
 process_df <- batch_search(search_df,gnaf_df)
 write.csv(process_df,"addresses_processed.csv", row.names=FALSE, quote=FALSE)
-
-#names(gnaf_df)
-#?read_csv
