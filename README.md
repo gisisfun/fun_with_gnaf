@@ -237,49 +237,55 @@ A DIY Powershell Address Geocoder
 
 *Let's clean the input file*
 ```
-get-content addresses_raw.txt |
-% {$_.ToUpper()} |
-% {$_.replace("`t","")} |
-% {$_.replace("\s+"," ")} |
-% {$_.replace("/"," ")} |
-% {$_.replace(","," ")} |
-% {$_.replace('"','')} |
-% {$_.replace('^[\d]+-','')} |
-% {$_.replace(" LOOP "," LOOP ")}|
-% {$_.replace(" RISE "," RISE ")}|
-% {$_.replace(" ARC "," ARCADE ")}|
-% {$_.replace(" ESP "," ESPLANADE ")}|
-% {$_.replace(" CV "," COVE ")}|
-% {$_.replace(" CRES "," CRESCENT ")}|
-% {$_.replace(" CR "," CRESCENT ")}|
-% {$_.replace(" ST "," STREET ")}|
-% {$_.replace(" RD "," ROAD ")}|
-% {$_.replace(" AVE "," AVENUE ")}|
-% {$_.replace(" PL "," PLACE ")}|
-% {$_.replace(" CRT "," COURT ")}|
-% {$_.replace(" CT "," COURT ")}|
-% {$_.replace(" DR "," DRIVE ")}|
-% {$_.replace(" TCE "," TERRACE ")}|
-% {$_.replace(" PDE "," PARADE ")}|
-% {$_.replace(" CCT "," CIRCUIT ")}|
-% {$_.replace(" CRST "," CREST ")}|
-% {$_.replace(" LA "," LANE ")}|
-% {$_.replace(" WAY "," WAY ")}|
-% {$_.replace(" GDN "," GARDENS ")}|
-% {$_.replace(" GDNS "," GARDENS ")}|
-% {$_.replace(" CL "," CLOSE ")}|
-% {$_.replace(" HWY "," HIGHWAY ")}|
-% {$_.replace(" CCS "," CIRCUS ")}|
-% {$_.replace(" CCL "," CIRCLE ")}|
-% {$_.replace(" BVD "," BOULEVARD ")}|
-% {$_.replace(" BLVD "," BOULEVARD ")}|
-% {$_.replace(" ST "," STREET ")}|
-% {$_.replace(" MT "," MOUNT ")}|
-% {$_.replace(" STREET KILDA "," ST KILDA ")}|
-% {$_.replace(" RD "," ROAD ")}|
-% {$_.replace(" HWY "," HIGHWAY ")}|
-% {$_.replace("  " , " ")} | 
-out-file addresses_cleaned.txt
+$line_ref = 0;echo "" | Out-File -FilePath addresses_cleaned.txt;
+foreach($line in Get-Content .\addresses_raw.txt){ 
+  $line = $line -replace "\s+"," "
+  $line = $line.ToUpper()
+  $line = $line -replace "LOT\s\d+\s",""
+  $line = $line.replace('"','')
+  $line = $line -replace "^\d+-",""
+  $line = $line -replace "^LEVEL\s\d+\s",""
+  $line = $line -replace "^UNIT\s\d+\s",""
+  $line = $line -replace "^U\s\d+\s",""
+  $line = $line -replace "^BUILDING",""
+  $line = $line -replace "[/,]",""
+  $line = $line.replace("`t","")
+  $line = $line -replace " LOOP "," LOOP "
+  $line = $line -replace " RISE "," RISE "
+  $line = $line -replace " ARC "," ARCADE "
+  $line = $line -replace " ESP "," ESPLANADE "
+  $line = $line -replace " CV "," COVE "
+  $line = $line -replace " CRES "," CRESCENT "
+  $line = $line -replace " CR "," CRESCENT "
+  $line = $line -replace " ST "," STREET "
+  $line = $line -replace " RD "," ROAD "
+  $line = $line -replace " AVE "," AVENUE "
+  $line = $line -replace " PL "," PLACE "
+  $line = $line -replace " CRT "," COURT "
+  $line = $line -replace " CT "," COURT "
+  $line = $line -replace " DR "," DRIVE "
+  $line = $line -replace " TCE "," TERRACE "
+  $line = $line -replace " PDE "," PARADE "
+  $line = $line -replace " CCT "," CIRCUIT "
+  $line = $line -replace " CRST "," CREST "
+  $line = $line -replace " LA "," LANE "
+  $line = $line -replace " WAY "," WAY "
+  $line = $line -replace " GDN "," GARDENS "
+  $line = $line -replace " GDNS "," GARDENS "
+  $line = $line -replace " CL "," CLOSE "
+  $line = $line -replace " HWY "," HIGHWAY "
+  $line = $line -replace " CCS "," CIRCUS "
+  $line = $line -replace " CCL "," CIRCLE "
+  $line = $line -replace " BVD "," BOULEVARD "
+  $line = $line -replace " BLVD "," BOULEVARD "
+  $line = $line -replace " ST "," STREET "
+  $line = $line -replace " MT "," MOUNT "
+  $line = $line -replace " STREET KILDA "," ST KILDA "
+  $line = $line -replace " RD "," ROAD "
+  $line = $line -replace " HWY "," HIGHWAY "
+  echo $line| Out-File -FilePath addresses_cleaned.txt -Append
+}
+
 ```
 *Let's Geocode addresses and record the output in another file*
 ```
