@@ -237,7 +237,7 @@ A DIY Powershell Address Geocoder
 
 *Let's clean the input file*
 ```
-New-Item -Name addresses_cleaned.txt -ItemType File;
+New-Item -Path . -Name "addresses_cleaned.txt" -ItemType "file" -Force;
 foreach($line in Get-Content .\addresses_raw.txt){ 
   $line = $line -replace "\s+"," "
   $line = $line.ToUpper()
@@ -247,7 +247,7 @@ foreach($line in Get-Content .\addresses_raw.txt){
   $line = $line -replace "^LEVEL\s\d+\s",""
   $line = $line -replace "^UNIT\s\d+\s",""
   $line = $line -replace "^U\s\d+\s",""
-  $line = $line -replace "^BUILDING",""
+  $line = $line -replace " BUILDING "," "
   $line = $line -replace "[/,]",""
   $line = $line.replace("`t","")
   $line = $line -replace " LOOP "," LOOP "
@@ -284,7 +284,9 @@ foreach($line in Get-Content .\addresses_raw.txt){
   $line = $line -replace " RD "," ROAD "
   $line = $line -replace " HWY "," HIGHWAY "
   echo $line| Out-File -FilePath addresses_cleaned.txt -Append
-}
+};
+$file="addresses_cleaned.txt";
+(Get-Content $file | Select-Object -Skip 1) | Set-Content $file
 
 ```
 *Let's Geocode addresses and record the output in another file*
