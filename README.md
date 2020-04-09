@@ -244,6 +244,7 @@ get-content addresses_raw.txt |
 % {$_.replace("/"," ")} |
 % {$_.replace(","," ")} |
 % {$_.replace('"','')} |
+% {$_.replace('^[\d]+-','')} |
 % {$_.replace(" LOOP "," LOOP ")}|
 % {$_.replace(" RISE "," RISE ")}|
 % {$_.replace(" ARC "," ARCADE ")}|
