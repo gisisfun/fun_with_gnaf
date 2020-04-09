@@ -237,7 +237,7 @@ A DIY Powershell Address Geocoder
 
 *Let's clean the input file*
 ```
-$line_ref = 0;echo "" | Out-File -FilePath addresses_cleaned.txt;
+New-Item -Name addresses_cleaned.txt -ItemType File;
 foreach($line in Get-Content .\addresses_raw.txt){ 
   $line = $line -replace "\s+"," "
   $line = $line.ToUpper()
