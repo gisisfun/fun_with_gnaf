@@ -245,6 +245,7 @@ foreach($line in Get-Content .\addresses_raw.txt){
   $line = $line.replace('"','')
   $line = $line -replace '^(\d+)-(\d+)','$1'
   $line = $line -replace "^LEVEL\s\d+\s",""
+  $line = $line -replace "^HOUSE\s",""
   $line = $line -replace "^UNIT\s\d+\s",""
   $line = $line -replace "^U\s\d+\s",""
   $line = $line -replace " BUILDING "," "
