@@ -1,3 +1,5 @@
+$full_addr_regex='(\d+?\w?)\s(\w+?\s?\w+?)\s(ROAD|STREET|BOULEVARD|CIRCLE|CIRCUS|CLOSE|GARDENS|LANE|CIRCUIT|PARADE|HIGHWAY|MALL|ESPLENADE|BROADWAY|TERRACE|DRIVE|COURT|PLACE|AVENUE|CRESCENT)\s(\w+?\s?\w+?)\s(NSW|QLD|SA|TAS|ACT|NT|VIC|WA)\s(\d{4})$';
+$no_res_num_regex='(\w+?)\s(ROAD|STREET|BOULEVARD|CIRCLE|CIRCUS|CLOSE|GARDENS|LANE|CIRCUIT|PARADE|HIGHWAY|MALL|BROADWAY|TERRACE|ESPLENADE|QUAYS|DRIVE|COURT|PLACE|AVENUE|CRESCENT)\s(\w+?\s?\w+?)\s(NSW|QLD|SA|TAS|ACT|NT|VIC|WA)\s(\d{4})$';
 New-Item -Path . -Name "addresses_cleaned.txt" -ItemType "file" -Force;
 foreach($line in Get-Content .\addresses_raw.txt){ 
   $line = $line -replace "\s+"," "
@@ -7,13 +9,15 @@ foreach($line in Get-Content .\addresses_raw.txt){
   $line = $line -replace '^(\d+)-(\d+)','$1'
   $line = $line -replace '(\d+)-(\d+)','$1'
   $line = $line -replace 'HOUSE\s\d+',''
+  $line = $line -replace '\sAND\s',' '
+  $line = $line -replace '\sOF\s',' '
   $line = $line -replace "^LEVEL\s\d+\s",""
   $line = $line -replace "IN FRONT OF THE ",""
   $line = $line -replace "^UNIT\s\d+\s",""
   $line = $line -replace "^U\s\d+\s",""
   $line = $line -replace "^ROOM\s\d+\s",""
   $line = $line -replace "\sBUILDING\s"," "
-  $line = $line -replace "[/,.]",""
+  $line = $line -replace '[/,.)(]',''
   $line = $line.replace("`t","")
   $line = $line -replace "\sARC\s"," ARCADE "
   $line = $line -replace "\sESP\s"," ESPLANADE "
@@ -45,41 +49,55 @@ foreach($line in Get-Content .\addresses_raw.txt){
   $line = $line -replace "\sRD\s"," ROAD "
   $line = $line -replace "\sHWY\s"," HIGHWAY "
   
-  $address = [regex]::Match($line,'(\d*\w*)\s(\w*\s*\w*).(ROAD|STREET|BOULEVARD|CIRCLE|CIRCUS|CLOSE|GARDENS|LANE|CIRCUIT|PARADE|HIGHWAY|MALL|BROADWAY|TERRACE|DRIVE|COURT|PLACE|AVENUE|CRESCENT)(.*)(NSW|QLD|SA|TAS|ACT|NT|VIC|WA).(\d{4})$').captures.groups
+  $address = [regex]::Match($line,'(\d+?\w?)\s(\w+?\s?\w+?)\s(ROAD|STREET|BOULEVARD|CIRCLE|CIRCUS|CLOSE|GARDENS|LANE|CIRCUIT|PARADE|HIGHWAY|MALL|ESPLENADE|BROADWAY|TERRACE|DRIVE|COURT|PLACE|AVENUE|CRESCENT)\s(\w+?\s?\w+?)\s(NSW|QLD|SA|TAS|ACT|NT|VIC|WA)\s(\d{4})$').captures.groups
   if ($address.value.length -gt 0)
   {
     write-host("ok")
-    $st_num = 
-    if ($st_num-is [int]) {$st_num=''}
-    write-host("1- "+$address[1].value)
-    write-host("2- "+$address[2].value)
-    write-host("3- "+$address[3].value)
-    write-host("4- "+$address[4].value)
-    write-host("5- "+$address[5].value)
-    write-host("6- "+$address[6].value)
-    $line=$address[1].value.Trim() + " " + $address[2].value.Trim() + " " + $address[3].value.Trim() + " " + $address[4].value.Trim()+ " " + $address[5].value.Trim()+ " " + $address[6].value.Trim()
+    $last_v = $address[7].value
+    if ($last_v.length -eq 1)
+      {
+        $first = $address[1].value
+        $out_first = $first -replace '[A-Z]*',''
+        write-host("1- "+$out_first)
+        write-host("2- "+$address[2].value)
+        write-host("3- "+$address[3].value)
+        write-host("4- "+$address[4].value)
+        write-host("5- "+$address[5].value)
+        write-host("6- "+$address[6].value)
+        $line=$out_first + " " + $address[2].value.Trim() + " " + $address[3].value.Trim() + " " + $address[4].value.Trim()+ " " + $address[5].value.Trim()+ " " + $address[6].value.Trim()
+      }
+    Else
+      {
+        write-host("2- "+$address[2].value)
+        write-host("3- "+$address[3].value)
+        write-host("4- "+$address[4].value)
+        write-host("5- "+$address[5].value)
+        write-host("6- "+$address[6].value)
+        $line=$address[2].value.Trim() + " " + $address[3].value.Trim() + " " + $address[4].value.Trim()+ " " + $address[5].value.Trim()+ " " + $address[6].value.Trim()
+      }
   }
   Else
     {
      $line = $line.Trim();
-     $address = [regex]::Match($line,'(\w+)\s(ROAD|STREET|BOULEVARD|CIRCLE|CIRCUS|CLOSE|GARDENS|LANE|CIRCUIT|PARADE|HIGHWAY|MALL|BROADWAY|TERRACE|QUAYS|DRIVE|COURT|PLACE|AVENUE|CRESCENT)(.*)(NSW|QLD|SA|TAS|ACT|NT|VIC|WA).(\d{4})$').captures.groups;
+     $address = [regex]::Match($line,'(\w+?)\s(ROAD|STREET|BOULEVARD|CIRCLE|CIRCUS|CLOSE|GARDENS|LANE|CIRCUIT|PARADE|HIGHWAY|MALL|BROADWAY|TERRACE|ESPLENADE|QUAYS|DRIVE|COURT|PLACE|AVENUE|CRESCENT)\s(\w+?\s?\w+?)\s(NSW|QLD|SA|TAS|ACT|NT|VIC|WA)\s(\d{4})$').captures.groups;
     if ($address.value.length -gt 0)
        {
           write-host('no street no');
 	  write-host($line)
-          write-host("1- " + $address[1].value)
-          write-host("2- " + $address[2].value)
-          write-host("3- " +$address[3].value)
-          write-host("4- " +$address[4].value)
-          write-host("5- " +$address[5].value)
-          $line=$address[1].value.Trim() + " " + $address[2].value.Trim() + " " + $address[3].value.Trim() + " " + $address[4].value.Trim() + " " + $address[5].value.Trim()
+
+              write-host("1- " + $address[1].value)
+              write-host("2- " + $address[2].value)
+              write-host("3- " +$address[3].value)
+              write-host("4- " +$address[4].value)
+              write-host("5- " +$address[5].value)
+              $line=$address[1].value.Trim() + " " + $address[2].value.Trim() + " " + $address[3].value.Trim() + " " + $address[4].value.Trim() + " " + $address[5].value.Trim()
        }
      Else
        { 
           if ($address.value.length -gt 0) 
              {
-                $address = [regex]::Match($line,'(\w+)(\s)(NSW|QLD|SA|TAS|ACT|NT|VIC|WA).(\d{4})$').captures.groups;
-                write-host('no street name')
+                $address = [regex]::Match($line,'(\w+?)\s(NSW|QLD|SA|TAS|ACT|NT|VIC|WA)\s(\d{4})$').captures.groups;
+                write-host('no street no and name')
                 write-host($line)
                 write-host("1- " + $address[1].value)
                 write-host("2- " + $address[2].value)
