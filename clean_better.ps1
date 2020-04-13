@@ -1,5 +1,6 @@
 $full_addr_regex='(\d+?\w?)\s(\w+?\s?\w+?)\s(ROAD|STREET|BOULEVARD|CIRCLE|CIRCUS|CLOSE|GARDENS|LANE|CIRCUIT|PARADE|HIGHWAY|MALL|ESPLENADE|BROADWAY|TERRACE|DRIVE|COURT|PLACE|AVENUE|CRESCENT)\s(\w+?\s?\w+?)\s(NSW|QLD|SA|TAS|ACT|NT|VIC|WA)\s(\d{4})$';
 $no_res_num_regex='(\w+?)\s(ROAD|STREET|BOULEVARD|CIRCLE|CIRCUS|CLOSE|GARDENS|LANE|CIRCUIT|PARADE|HIGHWAY|MALL|BROADWAY|TERRACE|ESPLENADE|QUAYS|DRIVE|COURT|PLACE|AVENUE|CRESCENT)\s(\w+?\s?\w+?)\s(NSW|QLD|SA|TAS|ACT|NT|VIC|WA)\s(\d{4})$';
+$locality_regex='(\w+?)\s(NSW|QLD|SA|TAS|ACT|NT|VIC|WA)';
 New-Item -Path . -Name "addresses_cleaned.txt" -ItemType "file" -Force;
 foreach($line in Get-Content .\addresses_raw.txt){ 
   $line = $line -replace "\s+"," "
