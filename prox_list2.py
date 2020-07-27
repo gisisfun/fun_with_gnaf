@@ -2,21 +2,22 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jul  8 13:56:51 2020
-
 @author: pi
 """
 #import geopandas as gpd
 #from shapely.geometry import Point
 from geopy.distance import geodesic
 import pandas as pd
-from sqlalchemy import create_engine, MetaData,Table, select,and_,between
+from sqlalchemy import create_engine, MetaData,Table, select,and_
 
 engine = create_engine('sqlite:///spatialite_db/gnaf_may_2020.sqlite')
 print(engine.table_names())
 connection = engine.connect()
 #tables
 metadata = MetaData()
-
+#ADDRESS_DETAIL ->  ADDRESS_DETAIL_PID (in v_address_view)
+#ADDRESS_MESH_BLOCK_2016 -> ADDRESS_MESH_BLOCK_2016_PID,ADDRESS_DETAIL_PID,MB_2016_PID
+#MB_2016 -> MB_2016_PID,MB_2016_CODE
 t_locality = Table('LOCALITY', metadata, autoload=True, 
                      autoload_with=engine)
 t_locality_point = Table('LOCALITY_POINT', metadata, autoload=True, 
@@ -61,10 +62,10 @@ v_address_view.columns.AddressText])
 for index,row in df.iterrows():
     #limit by bounding box
     v_stmt_loop = v_stmt.where(
-            and_(v_address_view.columns.Longitude.between(int(row.longitude)-2,
-                                                          int(row.longitude)+2),
-    v_address_view.columns.Latitude.between(int(row.latitude)-2,
-                                            int(row.latitude)+2)))
+            and_(v_address_view.columns.Longitude.between(int(row.longitude)-3,
+                                                          int(row.longitude)+3),
+    v_address_view.columns.Latitude.between(int(row.latitude)-3,
+                                            int(row.latitude)+3)))
     smallest=99999
     small_data=[0,0,0, 0,row.locality_pid,
                         row.locality_name,row.latitude, row.longitude,0]
@@ -75,7 +76,7 @@ for index,row in df.iterrows():
 
         if distance_km < smallest:
             smallest=distance_km
-            small_data=[result.Address_Detail_PID,result.AddressText,
+            small_data=[result.Address_Detail_PID,result.AddressText.str.strip(),
                         result.Latitude,result.Longitude, row.locality_pid,
                         row.locality_name,row.latitude, row.longitude,
                         distance_km]
@@ -92,5 +93,63 @@ df_closest=pd.DataFrame(closest,columns=['Address_Detail_PID','AddressText',
                                          'locality_latitude',
                                          'locality_longitude','distance_km'])
 df_closest.to_csv('closest3.csv')
-#geom=[Point(xy) for xy in zip([117.454361,117.459880],[38.8459879,38.846255])]
-#gdf=gpd.GeoDataFrame(geometry=geom,crs={'init':'epsg:4326'})
+
+import pandas as pd
+import geopandas as gpd
+from shapely.geometry import Point
+
+# finished sql processing from GNAF Tables
+#df_closest = pd.read_csv('closest3.csv')
+agil_names_url="https://data.gov.au/data/dataset/34b1c164-fbe8-44a0-84fd-467dba645aa7/resource/6947c036-6383-44f3-a867-0fa0c2a48d6b/download/agil_names20190208.csv"
+agil_locations_url="https://data.gov.au/data/dataset/34b1c164-fbe8-44a0-84fd-467dba645aa7/resource/625e0a41-6a30-4c11-9a20-ac64ba5a1d1f/download/agil_locations20190208.csv"
+
+
+
+agil_names = pd.read_csv(agil_names_url)
+agil_locations = pd.read_csv(agil_locations_url)
+agil_joined = pd.merge(agil_locations,agil_names,on='LCODE')
+geom=[Point(xy) for xy in zip(agil_joined.LONGITUDE, agil_joined.LATITUDE)]
+agil_joined_gdf=gpd.GeoDataFrame(agil_joined,geometry=geom,crs="EPSG:4283")
+rafile = gpd.read_file('shape/RA_2016_AUST.shp')
+agil_remote_gdf = gpd.sjoin(agil_joined_gdf, rafile[['RA_NAME16','geometry']][rafile.geometry!=None], how='left', op='within')
+p_agil = agil_remote_gdf.loc[agil_remote_gdf['NFLAG']=='P',['LCODE','NAME','STATE','LONGITUDE','LATITUDE','RA_NAME16']]
+a_agil = agil_remote_gdf[agil_remote_gdf.NFLAG=='A']
+
+
+# stages 1 and 2 - convert to inputs to geospatial and base process
+ref_agil= pd.merge(df_closest, p_agil, left_on='locality_name', right_on='NAME', 
+                   how='left')
+ref_agil['locality_longlat_RA16'] = ref_agil.RA_NAME16.str.replace('.\(.*\)','')
+process_dataset_1 = ref_agil[['LCODE','locality_pid','locality_name','locality_latitude',
+                     'locality_longitude','locality_longlat_RA16','distance_km',
+                     'Address_Detail_PID','AddressText','address_latitude',
+                     'address_longitude']]
+
+geom=[Point(xy) for xy in zip(process_dataset_1.address_longitude, 
+      process_dataset_1.address_latitude)]
+process_dataset_1_gdf = gpd.GeoDataFrame(process_dataset_1,geometry=geom,
+                                  crs="EPSG:4283")
+process_dataset_2_gdf = gpd.sjoin(process_dataset_1_gdf, 
+                            rafile[['RA_NAME16','geometry']][rafile.geometry!=None], 
+                            how='left', op='within')
+process_dataset_2_gdf['AddressText'] = process_dataset_2_gdf.AddressText.str.strip()
+process_dataset_2_gdf['address_longlat_RA16'] = process_dataset_2_gdf.RA_NAME16.str.replace('.\(.*\)','')
+
+
+process_dataset_2_gdf['RA16_Diff_Flag'] = process_dataset_2_gdf['address_longlat_RA16'] != process_dataset_2_gdf['locality_longlat_RA16']
+process_dataset_2_gdf['RA16_Diff_Flag'] = process_dataset_2_gdf.RA16_Diff_Flag.apply(lambda x:int(x))
+
+#stage 3 - drop working columns and output primary list
+process_dataset_3 = process_dataset_2_gdf.drop(['geometry','index_right','RA_NAME16'], axis = 1)
+
+process_dataset_3.to_csv('csv/new_closest_wout_alts.csv')
+agil_joined_ref = agil_joined[['LCODE','NCODE','NAME','NFLAG']]
+
+#stage 4 and 5 - replace with alternate name references and output complete list
+process_dataset_4 = pd.merge(process_dataset_3, agil_joined_ref, on='LCODE', 
+                   how='left')
+process_dataset_4['locality_name'] = process_dataset_4.NAME
+process_dataset_5 = process_dataset_4.drop(['NCODE','NFLAG','NAME'],axis=1)
+
+
+process_dataset_5.to_csv('csv/new_closest_w_alts.csv')
