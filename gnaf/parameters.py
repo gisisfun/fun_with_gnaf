@@ -1216,6 +1216,45 @@ on Loc.state_pid = State.state_pid;
 """
              
 class DataSets:
+    class gnaf_feb_2021:
+        """
+        G-NAF DataSet February 2021
+        """  
+        ...
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath','PathToFiles','DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'gnaf_nov_2020'
+                self.Format = 'CSV'
+                self.PathToFiles = 'FEB21_GNAF_PipeSeparatedValue/G-NAF/G-NAF_FEBRUARY_2021/'
+                self.FilePath = 'EB21_GNAF_PipeSeparatedValue{slash}G-NAF{slash}G-NAF_FEBRUARY_2021{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
+                # update
+                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/4b084096-65e4-4c8e-abbe-5e54ff85f42f/download/nov20_gnaf_pipeseparatedvalue.zip'
+                self.ZipDir = 'csv'
+                self.ZipPath ='feb_21_gnaf_pipeseparatedvalue.zip'
+
+    class gnaf_feb_2021_gda2020:
+        """
+        G-NAF DataSet February 2021 GDA 2020
+        """  
+        ...
+        
+        class CSVFormat:
+            __slots__= ('Description','Format','FilePath','PathToFiles','DownURL', 'ZipDir', 'ZipPath')
+            
+            def __init__(self):
+                self.Description = 'gnaf_aug_2020_gda2020'
+                self.Format = 'CSV'
+                self.PathToFiles = 'FEB21_GNAF_PipeSeparatedValue_GDA2020/G-NAF/G-NAF_NOVEMBER_2021/'
+                self.FilePath = 'FEB21_GNAF_PipeSeparatedValue_GDA2020{slash}G-NAF{slash}G-NAF_FEBRUARY_2021{slash}Standard{slash}ACT_ADDRESS_ALIAS_psv.psv'
+                # update
+                self.DownURL = 'https://data.gov.au/data/dataset/19432f89-dc3a-4ef3-b943-5326ef1dbecc/resource/fdce090a-b356-4afe-91bb-c78fbf88082a/download/nov20_gnaf_pipeseparatedvalue_gda2020.zip'
+                self.ZipDir = 'csv'
+                self.ZipPath ='feb21_gnaf_pipeseparatedvalue_gda2020.zip' 
+    
+    
     class gnaf_nov_2020:
         """
         G-NAF DataSet November 2020 
